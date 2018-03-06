@@ -1,0 +1,54 @@
+% Each student should work in such a file! In that case you have to add all this documents text into the MainPart.tex file to compile it. Each student should work with this header and shouldn't add any packages, otherwise it might not work in the end by connecting all parts.
+% The header has to be deleted in all ReportPart.tex files, before connecting!
+
+%%%%%%%%%%%%%%%%%%%%% Write your name here!! %%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\chapterauthor}{Again Your Name}
+\chapter{Atmospheric profiles}
+\label{student1:report}
+
+%--------------- Abstract ----------------------
+\begin{abstract}
+
+That's gonna be the abstract...
+
+\end{abstract}
+%-----------------------------------------------
+
+%-------------- Introduction -------------------
+
+\section{Introduction}
+
+Want to structure your text? You can choose sections, subsections and even subsubsections.
+
+Here is some text  with a citation \citet{ref1to1bibfile}. (The point is after the citation!!)
+
+If you want, you CAN (not must) use this little command for a deg C unit INSIDE an equation environment:
+
+$1 \edegc$
+
+And this command can be used for deg C unis OUTSIDE equation environments:
+
+1 \degc
+
+This is, how we reference within the text:
+
+\autoref{fig.LRP:figurename}
+
+fig denotes a figure. use 'sec' for sections, 'tab' for tables, 'eq' for equations and so on...
+
+That's an example for figures. Just copy-paste it, whenever you want to put in a figure and replace the name of the image file. If necessary, you can play with width and trim. The label defines, what autoref will refer to later.
+
+\begin{figure}[h]
+\centering
+\includegraphics[trim = 0mm 0mm 0mm 2mm, width=0.8\textwidth]{image.png}
+\caption{Here comes the caption}
+\label{fig.LRP:figurename}
+\end{figure}
+
+
+%-------------- References ---------------------
+\section*{References}
+\begin{btSect}{literature}
+\btPrintAll
+\end{btSect}

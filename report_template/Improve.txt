@@ -1,0 +1,3 @@
+- grammer and spelling
+- skip the definitions of potential temperature, specific humidity and other, well-known quantities
+-  include Figure infront of latex code

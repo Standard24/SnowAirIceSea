@@ -1,0 +1,88 @@
+\documentclass[12pt,a4paper,notitlepage,twoside]{scrreprt}
+\usepackage{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{floatpag}
+\usepackage{amsmath}
+\usepackage{booktabs} %Wird benötigt für \toprule etc. bei tabellen
+\usepackage{array}
+\usepackage{setspace}
+\usepackage{cancel}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[bottom=3cm, top=2.5cm, left=2cm, right=2cm, bindingoffset=10mm]{geometry}
+\usepackage{tikz}
+\usepackage{amsfonts}
+\usepackage[cc]{titlepic}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pifont}
+\usepackage{natbib}
+%\usepackage{cite}
+\usepackage[automark]{scrpage2}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[sub]{justification=centering}
+%\usepackage{makeplot}
+\usepackage[toc,page]{appendix} %for making an appendix
+\usepackage[hyphens]{url} %prints urls like they should be in bibtex
+\usepackage{wrapfig}
+\usepackage{abstract} %adds the word "Abstract" and modifications can be made
+\usepackage{bibtopic} %is needed for several bib files within one document
+\usepackage[labelfont={color=brown,bf},singlelinecheck=false,format=plain,justification=justified,indention=0cm]{caption}
+\usepackage{hyperref}
+
+\begin{document}
+\begin{titlepage}
+\title{Field Report 2014}
+\subtitle{Polar Ocean and Climate AGF-214}
+\vfill
+%\titlepic{\includegraphics[width=0.6\textwidth]{./RF/Cover/Cover_group1.png}}
+\vfill
+\vfill
+\author{Bonnie Raffel, Hauke Schulz...}
+\date{\today}
+\vfill
+\vfill
+%\maketitle
+\end{titlepage}
+\begin{titlepage}
+
+\begin{center}
+
+
+% Upper part of the page
+
+\textsc{\Large Polar Ocean and Climate AGF-214}\\[0.5cm]
+
+
+% Title
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\HRule \\[0.4cm]
+{ \huge \bfseries Field Report 2014}\\[0.4cm]
+
+\HRule \\[1.5cm]
+\includegraphics[width=0.6\textwidth]{./RF/Cover/Cover_group1.png} % if there are more than just one image, they should be merged in a graphic program like GIMP beforehand.
+
+
+% Author and supervisor
+\begin{minipage}{\textwidth}
+\begin{flushleft} \large
+\emph{Authors:}\\
+Bonnie Raffel, Hauke Schulz...
+\end{flushleft}
+\end{minipage}
+\hfill
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+
+\end{titlepage}
+ \newpage \thispagestyle{empty} \mbox{}
+\end{document}

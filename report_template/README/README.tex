@@ -1,0 +1,220 @@
+\documentclass[12pt,a4paper,notitlepage]{scrreprt}
+\usepackage{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{floatpag}				% Different pagestyles
+\usepackage{amsmath}
+\usepackage{booktabs} 				% Is needed for \toprule f.e. in tables
+\usepackage{array}					% Extending the array and tabular environments
+\usepackage{setspace}				% Set space between lines (\onehalfspacing, \doublespacing)
+\usepackage{cancel}					% Strike out things with \cancel{tostrikeout}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[bottom=3cm, top=2.5cm, left=2cm, right=2cm, bindingoffset=10mm]{geometry}
+									% Set the page differently to the default settings
+\usepackage{amsfonts}
+%\usepackage[cc]{titlepic}			% Enables ONE picture on titlepage
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pifont}
+\usepackage{natbib}
+%\usepackage{cite}
+\usepackage[automark]{scrpage2}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[sub]{justification=centering}
+%\usepackage{makeplot}
+\usepackage[toc,page]{appendix} 	% for making an appendix
+\usepackage[hyphens]{url} 	 		% prints URLs like they should be in bibtex
+\usepackage{wrapfig}				% Floating figures
+% \usepackage{abstract} 				% adds the word "Abstract" and modifications can be made
+\usepackage{bibtopic} 				% Several bibtex files within one document
+\usepackage{hyperref}				% Makes active (on click) references in the final pdf
+\usepackage{afterpage}				% Execute command after the next page break
+\usepackage{placeins}				% Control float placement with /FloatBarrier
+\pagestyle{scrheadings}
+\setheadsepline{1pt}
+\usepackage{verbatim}
+\setlength{\parindent}{0pt}
+
+% \newcommand{\chapterauthor}{}
+% \usepackage{titlesec}
+% \titleformat{\chapter}					% command to format the chapter titles
+%         [hang]							% shape/type of title
+%         {\LARGE\bfseries}
+%         {\makebox[0.5in][l]{\thechapter}}
+%         {0em}
+%         {}
+%         [
+%             \normalsize\normalfont		% reset font formatting
+%             \vspace{0.5\baselineskip}
+%             \hspace*{0.5in}				% indent author name width of chapter number box
+%             \large						% make text that follows large
+%             \thispagestyle{empty}		% suppress page numbers
+%             \textit{\chapterauthor}
+%         ]								% end of what comes after title
+% \titlespacing*{\chapter}
+%      {0em}								% spacing to left of chapter title
+%      {0ex}								% vertical space before title
+%      {3\baselineskip}					% vertical spacing after title; here set to 3 lines 
+
+
+\usepackage{sistyle}					% Package to typeset SI units
+% \usepackage{subfigure}
+
+\newcommand{\nn}{\ensuremath{\mathrel{\nonumber}}}
+
+\begin{document}
+\setcounter{tocdepth}{2}
+\bibliographystyle{AGFstyle}
+
+\chapter{General}
+\textit{Author: Hauke Schulz}
+\section{Compiling}
+The \verb#MainPart.tex# file included in this package is for the person who will connect all the single reports in the end. The \verb#ReportPart.tex# file is for every report. Each student write into his own copy of this file and adds the header, so that it is usable even without the \verb#MainPart#. To compile this document in the end I used the following steps on a Linux machine:
+\begin{enumerate}
+\item \verb#pdflatex MainPart.tex# 
+\item you might get then this information:\\
+\begin{tabular}{l l}
+\verb#Package rerunfilecheck Warning:#&\verb#File `MainPart.out' has changed.#\\
+\verb#(rerunfilecheck)#&\verb#Rerun to get outlines right#
+\end{tabular}\\
+so you have to do step 1 again.
+\item you should also get this information:\\
+\begin{tabular}{l l}
+\verb#Package bibtopic Warning:#&\verb#Please (re)run BibTeX on the file(s):#\\
+\verb#(bibtopic)#&\verb#MainPart1#\\
+\verb#(bibtopic)#&\verb#and after that rerun LaTeX.#
+\end{tabular}\\
+So you have to run \verb#bibtex MainPart1.aux# for every file. There should be such a file for all files with an own bibliography!
+\item After that you rerun \verb#pdflatex# and the final file is nearly ready!!
+\item The only thing left is to merge the cover with the just produced content.
+Further suggestions can be found in the following topics
+\end{enumerate}
+\section{Figures}
+If you include figures in your report, please do it relatively, like
+\begin{verbatim}
+\begin{figure}
+\includegraphics{TSdiagram.eps}
+\end{figure}
+\end{verbatim}
+end not like:
+\begin{verbatim}
+\begin{figure}
+\includegraphics{C:/MyDocuments/UNIS/FieldReport/TSdiagram.eps}
+\end{figure}
+\end{verbatim}
+So it would be perfect, if all the documents (bibtex file, figures, latex file) are in the same directory WITHOUT any subdirectories.
+\section{References}
+As you might reference to your figures with the \verb#\ref{myfigure}# command, it would be nice if you could use your name as a prefix like \verb#\ref{Hauke:myfigure}#.
+
+\section{Reference list}
+If you've worked already a lot with latex, you might/should use bibtex for your references. Cause I know, that people often have problems with it, I'd like to share my appearance with you and give you some advise for this report.
+
+Bibtex is kind of the latex for reference lists. You have to make an extra bibtex file, which could look like this:
+\begin{verbatim}
+@article {cottier,
+author = {Cottier, Finlo and Tverberg, Vigdis},
+title = {Water mass modification in an Arctic fjord},
+journal = {Journal of Geophysical Research: Oceans},
+volume = {110},
+number = {C12},
+issn = {2156-2202},
+doi = {10.1029/2004JC002757},
+keywords = {Arctic, fjord, exchange},
+year = {2005},
+}
+@INPROCEEDINGS{harms,
+author={Harms, A.A.P. and Tverberg, V. and Svendsen, H.},
+booktitle={OCEANS 2007 - Europe},
+title={Physical Qualification and Quantification of the Water Masses},
+year={2007},
+pages={1-6},
+doi={10.1109/OCEANSE.2007.4302332},
+}
+\end{verbatim}
+This code can be easily made on several internet pages. Just google for your references and you will have the possibility to export them to a bibtex file.
+This file can be than included easily into your latex file, like:
+\begin{verbatim}
+\bibliography{literatur} %this is your bibtex file
+\bibliographystyle{AGF214style} %this styles the references
+\nocite{*} %shows all references, even if they are not cited in the text
+\end{verbatim}
+For the attached stylefile(which I will use and is attached) you need also the \verb#\usepackage{natbib}#.
+In the text you're than able to do citations with the commands \verb#\citep{cottier}# which would you give you the citation in brackets, like
+\begin{center}
+.....blabla (Cottier et al.,(2005)).
+\end{center}
+Or with \verb#\citet{cottier}# which you would give you:
+\begin{center}
+...blabla according to Cottier et al., (2005) ...blabla..
+\end{center}
+If you want to do your own style for an OTHER report, than this site might be of interest:
+\begin{center}
+\url{http://www.podoblaz.net/cml/?id=39}
+\end{center}
+Here you are questioned how your reference list should look like, and get a bibtex style file as output. If you have problems with that ask me, or just do the reference list also with latex, but make sure that your style looks the same to this.
+
+\chapter{AGF-214 Report Style}
+\textit{Author: Markus Richter}\\\ \\
+This is a small additional compendium on the style which is used in last the AGF-214 report.
+
+\section*{Tables}
+Write tables with a border like this:
+\begin{table}[h!]
+\centering
+\caption{This is a table.\label{Name:tab:example}}
+\begin{tabular}{|c||c|c|}\hline
+&Column1&Column2\\\hline\hline
+Row1&Data1&Data2\\\hline
+Row2&Data3&Data4\\\hline
+\end{tabular}\\
+Table explanation.
+\end{table}\\
+The corresponding Latex code looks like this:
+\begin{verbatim}
+\begin{table}[h!]
+\centering
+\caption{This is a table.\label{Name:tab:example}}
+\begin{tabular}{|c|c|c|}\hline
+&Column1&Column2\\\hline
+Row1&Data1&Data2\\\hline
+Row2&Data3&Data4\\\hline
+\end{tabular}\\
+Table explanation.
+\end{table}
+\end{verbatim}
+
+\section*{Units and variables}
+Write variables in italic and functions and Units in non italic:
+\begin{itemize}
+\item Energy: $E_{total}$\,[N\,m] (\verb#Energy: $E_{total}$\,[N\,m]#)
+\item $E=\SI{15}{N\,m}$ (\verb#$E=\SI{15}{N\,m}$#)
+\item $f(x) = \sin x$ (\verb#$f(x) = \sin x$#)
+\end{itemize}
+In Latex use \texttt{\textbackslash,} as a space between variables and units or in between units. You can also use the sistyle package in Latex: \url{http://ctan.uib.no/macros/latex/contrib/SIstyle/SIstyle-2.3a.pdf}
+
+
+\section*{GPS coordinates}
+
+Write GPS coordinates with the angle in minutes:
+\begin{center}
+Longyearbyen: 78$^\circ$13'\,N 15$^\circ$33'\,E
+\end{center}
+Which is written with \verb#78$^\circ$13'\,N 15$^\circ$33'\,E#
+\section*{Dates}
+Write dates with the month as a written word. E.g.:
+\begin{itemize}
+\item AGF-213 Exam: 05.December 2014
+\item Course begin: August 2014
+\end{itemize}
+
+\section*{Titles \& legends}
+Wright only the begin of the sentence (and names) with capital letters. Remember to start Legends (e.g. in figures and tables) with capital letters too.
+
+\section*{URLs}
+Wright URLS with \verb#\url{}#. E.g. \url{http://www.unis.no/}.
+
+\end{document}
