@@ -11,13 +11,21 @@ def plotOpts(ax):
 
 
 # list of all the years we have data from
-time = [2015, 2016, 2017]
+time = [2009, 2010, 2013, 2015, 2016, 2017]
 # make a dictionary which assigns a number from 0-N to each year
 t_d = dict(zip(time, range(len(time))))
 
+
+filenames = ['2009_stake_coordinates',
+             '2010_stake_coord_deg2utm',
+             '2013_post-processed_UTM',
+             '2015_stake_coordinates_deg2utm',
+             '2016_stake_coordinates',
+             '2017_stake_coordinates']
+
 # import all csv files: Create a list of pandas data frames
-data = [pd.read_csv('../data/stake_coordinates/' + str(y)
-        + '_stake_coordinates.csv', sep=' ') for y in time]
+data = [pd.read_csv('../data/stake_coordinates/' + filename
+        + '.csv', sep=' ') for filename in filenames]
 
 # print imported data
 for i, t in enumerate(time):
@@ -31,14 +39,14 @@ err = .2
 # choose one title for each stake and make lists which contains the
 # different names of the stake and the different years
 
-titles = {'t1': [['t1_2015', 't1_2015', 't1-2016', 't1-2016', 't1-2017'],
+titles = {'T1': [['T1-2015', 'T1-2015', 'T1-2016', 'T1-2016', 'T1-2017'],
                  [2015, 2016, 2016, 2017, 2017]],
-          't2': [['t2_2015', 't2_2015', 't2-2016', 't2-2016', 't2-2017'],
+          'T2': [['T2-2015', 'T2-2015', 'T2-2016', 'T2-2016', 'T2-2017'],
                  [2015, 2016, 2016, 2017, 2017]],
-          't7': [['t7_2015', 't7_2015', 't7-2015', 't7-2017'],
+          'T7': [['T7-2015', 'T7-2015', 'T7-2015', 'T7-2017'],
                  [2015, 2016, 2017, 2017]]}
 
-stakes = ['t1', 't2', 't7']
+stakes = ['T1', 'T2', 'T7']
 
 
 ###############################################################################
@@ -77,7 +85,7 @@ plt.savefig('../fig/all_Easting.pdf')
 # plot all stake positions 2d
 ###
 f3 = plt.figure(figsize=(8, 6), dpi=80)
-markers = ['v', '^', '.']
+markers = [',', ',', ',', 'v', '^', '.']
 for i, d in enumerate(data):
     plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i])
 
