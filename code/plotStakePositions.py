@@ -11,10 +11,11 @@ def plotOpts(ax):
     ax.tick_params(axis='both', which='both', direction='in', right=True,
                    top=True)
 
+# list of matplotlibs default colors
 defcol = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 # list of all the years we have data from
-time = [2009, 2010, 2013, 2015, 2016, 2017]
+time = [2009, 2010, 2013, 2014, 2015, 2016, 2017]
 # make a dictionary which assigns a number from 0-N to each year
 t_d = dict(zip(time, range(len(time))))
 
@@ -22,6 +23,7 @@ t_d = dict(zip(time, range(len(time))))
 filenames = ['2009_stake_coordinates',
              '2010_stake_coord_deg2utm',
              '2013_post-processed_UTM',
+             '2014_stake_coordinates_corrected',
              '2015_stake_coordinates_deg2utm',
              '2016_stake_coordinates',
              '2017_stake_coordinates']
@@ -41,27 +43,26 @@ err = .2
 
 # choose one title for each stake and make lists which contains the
 # different names of the stake and the different years
-
-titles = {'T1': [['T1-2009', 'T1-2009', 'T1-2014', 'T1-2015',
-                  'T1-2015', 'T1-2016', 'T1-2016', 'T1-2017'],
-                 [2013, 2015, 2015, 2015, 2016, 2016, 2017, 2017]],
-          'T2': [['T2-2009', 'T2-2009', 'T2-2015', 'T2-2015', 'T2-2016',
-                  'T2-2016', 'T2-2017'],
-                 [2013, 2015, 2015, 2016, 2016, 2017, 2017]],
-          'T3': [['T3-2012', 'T3-2012', 'T3-2015', 'T3-2015', 'T3-2017'],
-                 [2013, 2015, 2015, 2016, 2017]],
-          'T4': [['T4-2009', 'T4-2014', 'T4-2016', 'T4-2016'],
-                 [2013, 2015, 2016, 2017]],
-          'T5': [['T5-2009', 'T5-2009', 'T5-2016', 'T5-2016'],
-                 [2013, 2015, 2016, 2017]],
-          'T6': [['T6-2013', 'T6-2013', 'T6-2016', 'T6-2016'],
-                 [2013, 2015, 2016, 2017]],
-          'T7': [['T7-2009', 'T7-2009', 'T7-2015', 'T7-2015', 'T7-2015',
-                  'T7-2017'],
-                 [2013, 2015, 2015, 2016, 2017, 2017]],
-          'T8': [['T8-2009', 'T8-2009', 'T8-2015', 'T8-2015', 'T8-2016',
-                  'T8-2016', 'T8-2017'],
-                 [2013, 2015, 2015, 2016, 2016, 2017, 2017]]}
+titles = {'T1': [[2013, 'T1-2009'], [2014, 'T1-2012'], [2014, 'T1-2014'],
+                 [2015, 'T1-2009'], [2015, 'T1-2014'],
+                 [2015, 'T1-2015'], [2016, 'T1-2015'], [2016, 'T1-2016'],
+                 [2017, 'T1-2016'], [2017, 'T1-2017']],
+          'T2': [[2013, 'T2-2009'], [2015, 'T2-2009'], [2015, 'T2-2015'],
+                 [2016, 'T2-2015'], [2016, 'T2-2016'], [2017, 'T2-2016'],
+                 [2017, 'T2-2017']],
+          'T3': [[2013, 'T3-2012'], [2015, 'T3-2012'], [2015, 'T3-2015'],
+                 [2016, 'T3-2015'], [2017, 'T3-2017']],
+          'T4': [[2013, 'T4-2009'], [2015, 'T4-2014'], [2016, 'T4-2016'],
+                 [2017, 'T4-2016']],
+          'T5': [[2013, 'T5-2009'], [2015, 'T5-2009'], [2016, 'T5-2016'],
+                 [2017, 'T5-2016']],
+          'T6': [[2013, 'T6-2013'], [2015, 'T6-2013'], [2016, 'T6-2016'],
+                 [2017, 'T6-2016']],
+          'T7': [[2013, 'T7-2009'], [2015, 'T7-2009'], [2015, 'T7-2015'],
+                 [2016, 'T7-2015'], [2017, 'T7-2015'], [2017, 'T7-2017']],
+          'T8': [[2013, 'T8-2009'], [2015, 'T8-2009'], [2015, 'T8-2015'],
+                 [2016, 'T8-2015'], [2016, 'T8-2016'], [2017, 'T8-2016'],
+                 [2017, 'T8-2017']]}
 
 stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8']
 colordict = {'2009':defcol[3], '2010':defcol[4], '2011':defcol[5],
@@ -110,10 +111,11 @@ plt.savefig('../fig/all_Easting.pdf')
 # plot all stake positions 2d
 ###
 f3 = plt.figure(figsize=(8, 6), dpi=80)
-markers = ['+', 'x', '+', 'v', '^', '.']
 
-colors = defcol[3:6] + defcol[:3]
-markersizes = [10, 8, 8, 5, 5, 5]
+markers = ['+', 'x', '+', ',', 'v', '^', '.']
+colors = defcol[3:7] + defcol[:3]
+markersizes = [10, 8, 8, 5, 5, 5, 5]
+
 for i, d in enumerate(data):
     plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i],
              color=colors[i], markersize=markersizes[i])
@@ -152,9 +154,9 @@ class stake(object):
         """
         self.title = title
         # get the different names of the different years
-        self.names = titles[title][0]
+        self.names = list(zip(*titles[title]))[1]
         # get the years of the measurements
-        self.dates = titles[title][1]
+        self.dates = list(zip(*titles[title]))[0]
         # read the particular row(s) for the stake from each data frame
         self.data = [data[t_d[date]].loc[data[t_d[date]]['Name'] == name]
                      for date, name in zip(self.dates, self.names)]
