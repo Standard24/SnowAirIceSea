@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 import pandas as pd
 import numpy as np
 
@@ -10,6 +11,7 @@ def plotOpts(ax):
     ax.tick_params(axis='both', which='both', direction='in', right=True,
                    top=True)
 
+defcol = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 # list of all the years we have data from
 time = [2009, 2010, 2013, 2015, 2016, 2017]
@@ -62,6 +64,14 @@ titles = {'T1': [['T1-2009', 'T1-2009', 'T1-2014', 'T1-2015',
                  [2013, 2015, 2015, 2016, 2016, 2017, 2017]]}
 
 stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8']
+colordict = {'2009':defcol[3], '2010':defcol[4], '2011':defcol[5],
+             '2012':defcol[6], '2013':defcol[7], '2014':defcol[8],
+             '2015':defcol[0], '2016':defcol[1], '2017':defcol[2]}
+keys = list(colordict.keys())
+values= list(colordict.values())
+
+patches = [mpatches.Patch(color=c, label=y) for c, y in zip(values, keys)]
+#red_patch = mpatches.Patch(color='red', label='The red data')
 
 
 ###############################################################################
@@ -101,8 +111,8 @@ plt.savefig('../fig/all_Easting.pdf')
 ###
 f3 = plt.figure(figsize=(8, 6), dpi=80)
 markers = ['+', 'x', '+', 'v', '^', '.']
-colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
-colors = colors[3:6] + colors[:3]
+
+colors = defcol[3:6] + defcol[:3]
 markersizes = [10, 8, 8, 5, 5, 5]
 for i, d in enumerate(data):
     plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i],
@@ -186,7 +196,10 @@ class stake(object):
         plt.figure(figsize=(8, 6), dpi=80)
         plt.gca().set_aspect('equal')
 
-        plt.errorbar(self.easting, self.northing, yerr=err, xerr=err, fmt='.')
+        
+        colors = [colordict[date[-4:]] for date in self.names]
+        for x, y, c in zip(self.easting, self.northing, colors):
+            plt.errorbar(x, y, yerr=err, xerr=err, fmt='.', color=c)
         plt.plot(self.easting, self.northing, color='k', linewidth=.5)
 
         plt.xlabel('Easting / m')
@@ -197,6 +210,7 @@ class stake(object):
             plt.annotate(year, (x + .05, y + .05))
 
         plotOpts(plt.gca())
+        plt.legend(handles=patches)
         plt.savefig('../fig/' + self.title + '_2d.pdf')
 
 
@@ -219,11 +233,21 @@ for i, s in enumerate(ss):
     plotdata = np.array([[d,e] for d,e in zip(s.dates, s.elevation) if e==e]).T
     axarr[i].plot(plotdata[0], plotdata[1], '.')
     axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
+    plotOpts(axarr[i])
     axarr[i].set_ylabel(stakes[i])
+    ylimsmean = np.mean(axarr[i].get_ylim())
+    axarr[i].yaxis.set_label_position("right")
+    axarr[i].set_yticks(np.arange(0,1000,5))
+    axarr[i].grid(axis='y')
+    
 
+    
     # make more space on top and bottom: shift ylims by 1.5
-    ylims = axarr[i].get_ylim()
-    axarr[i].set_ylim([ylims[0] - 1.5, ylims[1] + 1.5])
+    #ylims = axarr[i].get_ylim()
+    #axarr[i].set_ylim([ylims[0] - 1.5, ylims[1] + 1.5])
+
+    axarr[i].set_ylim([ylimsmean - 8, ylimsmean + 8])
+
 
 axarr[0].set_xlim([2012.5, 2017.5])
 axarr[0].set_xticks(range(2013, 2018))
