@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 import pandas as pd
+import numpy as np
 
 
 # define plot options
@@ -39,14 +40,28 @@ err = .2
 # choose one title for each stake and make lists which contains the
 # different names of the stake and the different years
 
-titles = {'T1': [['T1-2015', 'T1-2015', 'T1-2016', 'T1-2016', 'T1-2017'],
-                 [2015, 2016, 2016, 2017, 2017]],
-          'T2': [['T2-2015', 'T2-2015', 'T2-2016', 'T2-2016', 'T2-2017'],
-                 [2015, 2016, 2016, 2017, 2017]],
-          'T7': [['T7-2015', 'T7-2015', 'T7-2015', 'T7-2017'],
-                 [2015, 2016, 2017, 2017]]}
+titles = {'T1': [['T1-2009', 'T1-2009', 'T1-2014', 'T1-2015',
+                  'T1-2015', 'T1-2016', 'T1-2016', 'T1-2017'],
+                 [2013, 2015, 2015, 2015, 2016, 2016, 2017, 2017]],
+          'T2': [['T2-2009', 'T2-2009', 'T2-2015', 'T2-2015', 'T2-2016',
+                  'T2-2016', 'T2-2017'],
+                 [2013, 2015, 2015, 2016, 2016, 2017, 2017]],
+          'T3': [['T3-2012', 'T3-2012', 'T3-2015', 'T3-2015', 'T3-2017'],
+                 [2013, 2015, 2015, 2016, 2017]],
+          'T4': [['T4-2009', 'T4-2014', 'T4-2016', 'T4-2016'],
+                 [2013, 2015, 2016, 2017]],
+          'T5': [['T5-2009', 'T5-2009', 'T5-2016', 'T5-2016'],
+                 [2013, 2015, 2016, 2017]],
+          'T6': [['T6-2013', 'T6-2013', 'T6-2016', 'T6-2016'],
+                 [2013, 2015, 2016, 2017]],
+          'T7': [['T7-2009', 'T7-2009', 'T7-2015', 'T7-2015', 'T7-2015',
+                  'T7-2017'],
+                 [2013, 2015, 2015, 2016, 2017, 2017]],
+          'T8': [['T8-2009', 'T8-2009', 'T8-2015', 'T8-2015', 'T8-2016',
+                  'T8-2016', 'T8-2017'],
+                 [2013, 2015, 2015, 2016, 2016, 2017, 2017]]}
 
-stakes = ['T1', 'T2', 'T7']
+stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8']
 
 
 ###############################################################################
@@ -85,14 +100,18 @@ plt.savefig('../fig/all_Easting.pdf')
 # plot all stake positions 2d
 ###
 f3 = plt.figure(figsize=(8, 6), dpi=80)
-markers = [',', ',', ',', 'v', '^', '.']
+markers = ['+', 'x', '+', 'v', '^', '.']
+colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+colors = colors[3:6] + colors[:3]
+markersizes = [10, 8, 8, 5, 5, 5]
 for i, d in enumerate(data):
-    plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i])
+    plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i],
+             color=colors[i], markersize=markersizes[i])
 
 # write names of the stakes to some stakes
-pos = [0, 1, 5]  # position of the stakes to be labelled in the 2017 data
+pos = [0, 1, 14, 2, 3, 4, 5, 6]  # position of the stakes to be labelled in the 2017 data
 for row, name in zip([data[-1].iloc[i] for i in pos], stakes):
-    plt.annotate(name, (row['Easting'] + 50, row['Northing'] + 50))
+    plt.annotate(name, (row['Easting'] + 80, row['Northing']))
 
 plt.gca().set_aspect('equal')
 plt.xlim([522100, 528900])
@@ -124,14 +143,15 @@ class stake(object):
         self.title = title
         # get the different names of the different years
         self.names = titles[title][0]
-        # get the of the measurements
+        # get the years of the measurements
         self.dates = titles[title][1]
         # read the particular row(s) for the stake from each data frame
         self.data = [data[t_d[date]].loc[data[t_d[date]]['Name'] == name]
                      for date, name in zip(self.dates, self.names)]
         # read northing and easting from the row
-        self.northing = [year['Northing'].values[0] for year in self.data]
-        self.easting  = [year['Easting'].values[0]  for year in self.data]
+        self.northing  = [year['Northing'].values[0]  for year in self.data]
+        self.easting   = [year['Easting'].values[0]   for year in self.data]
+        self.elevation = [year['Elevation'].values[0] for year in self.data]
 
 
     def makePlots(self):
@@ -155,7 +175,7 @@ class stake(object):
         ax2.errorbar(self.dates, self.easting, yerr=err, fmt='.', capsize=3)
         ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
         ax2.set_ylabel('Easting / m')
-        ax2.set_xticks(time)
+        ax2.set_xticks([2015, 2016, 2017])
         plotOpts(ax2)
 
         plt.savefig('../fig/' + self.title + '_timeEvolution.pdf')
@@ -172,16 +192,41 @@ class stake(object):
         plt.xlabel('Easting / m')
         plt.ylabel('Northing / m')
 
-        # write year next to first and last data point
-        plt.annotate(time[0], (self.easting[0] + .05,
-                     self.northing[0] + .05))
-        plt.annotate(time[-1], (self.easting[-1] + .05,
-                     self.northing[-1] + .05))
+        # write year next to stake positions    
+        for year, x, y in zip(self.dates, self.easting, self.northing):
+            plt.annotate(year, (x + .05, y + .05))
 
         plotOpts(plt.gca())
         plt.savefig('../fig/' + self.title + '_2d.pdf')
 
 
-# make and save plots for stakes in list
-for s in stakes:
-    stake(s).makePlots()
+
+
+###############################################################################
+# make a list of all stake objects
+ss = [stake(s) for s in stakes]
+
+# make the plots of the class method
+for s in ss:
+    s.makePlots()
+
+# make a plot of the elevation of all stakes on tellbreen
+f, axarr = plt.subplots(8, sharex=True)
+
+for i, s in enumerate(ss):
+    # make plotdata: drop nan from elevation, also drop matching year numbers,
+    # and do some funny transposing... nan==nan -> False
+    plotdata = np.array([[d,e] for d,e in zip(s.dates, s.elevation) if e==e]).T
+    axarr[i].plot(plotdata[0], plotdata[1], '.')
+    axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
+    axarr[i].set_ylabel(stakes[i])
+
+    # make more space on top and bottom: shift ylims by 1.5
+    ylims = axarr[i].get_ylim()
+    axarr[i].set_ylim([ylims[0] - 1.5, ylims[1] + 1.5])
+
+axarr[0].set_xlim([2012.5, 2017.5])
+axarr[0].set_xticks(range(2013, 2018))
+
+f.savefig('../fig/all_Elevation.pdf')
+
