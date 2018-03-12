@@ -2,6 +2,7 @@
 
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+import matplotlib.transforms as mtransforms
 import pandas as pd
 import numpy as np
 
@@ -15,13 +16,15 @@ def plotOpts(ax):
 defcol = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 # list of all the years we have data from
-time = [2009, 2010, 2013, 2014, 2015, 2016, 2017]
+time = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
 # make a dictionary which assigns a number from 0-N to each year
 t_d = dict(zip(time, range(len(time))))
 
 
 filenames = ['2009_stake_coordinates',
              '2010_stake_coord_deg2utm',
+             '2011_stake_coord_deg2utm',
+             '2012_stake_coordinates_deg2utm',
              '2013_post-processed_UTM',
              '2014_stake_coordinates_corrected',
              '2015_stake_coordinates_deg2utm',
@@ -43,78 +46,79 @@ err = .2
 
 # choose one title for each stake and make lists which contains the
 # different names of the stake and the different years
-titles = {'T1': [[2013, 'T1-2009'], [2014, 'T1-2012'], [2014, 'T1-2014'],
-                 [2015, 'T1-2009'], [2015, 'T1-2014'],
-                 [2015, 'T1-2015'], [2016, 'T1-2015'], [2016, 'T1-2016'],
+titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
+                 [2014, 'T1-2012'], [2014, 'T1-2014'],
+                 [2015, 'T1-2009'], [2015, 'T1-2014'], [2015, 'T1-2015'],
+                 [2016, 'T1-2015'], [2016, 'T1-2016'],
                  [2017, 'T1-2016'], [2017, 'T1-2017']],
-          'T2': [[2013, 'T2-2009'], [2015, 'T2-2009'], [2015, 'T2-2015'],
-                 [2016, 'T2-2015'], [2016, 'T2-2016'], [2017, 'T2-2016'],
-                 [2017, 'T2-2017']],
-          'T3': [[2013, 'T3-2012'], [2015, 'T3-2012'], [2015, 'T3-2015'],
+          'T2': [[2011, 'T2-2009'], [2012, 'T2-2009'],
+                 [2013, 'T2-2009'], [2014, 'T2-2009'],
+                 [2015, 'T2-2009'], [2015, 'T2-2015'],
+                 [2016, 'T2-2015'], [2016, 'T2-2016'],
+                 [2017, 'T2-2016']],
+          'T3': [[2011, 'T3-2009'], [2012, 'T3-2009'],
+                 [2013, 'T3-2012'], [2014, 'T3-2012'],
+                 [2015, 'T3-2012'], [2015, 'T3-2015'],
                  [2016, 'T3-2015'], [2017, 'T3-2017']],
-          'T4': [[2013, 'T4-2009'], [2015, 'T4-2014'], [2016, 'T4-2016'],
+          'T4': [[2011, 'T4-2009'], [2012, 'T4-a2009'],
+                 [2013, 'T4-2009'], [2014, 'T4-2014'], 
+                 [2015, 'T4-2014'], [2016, 'T4-2016'],
                  [2017, 'T4-2016']],
-          'T5': [[2013, 'T5-2009'], [2015, 'T5-2009'], [2016, 'T5-2016'],
+          'T5': [[2011, 'T5-2009'], [2012, 'T5-b2009'],
+                 [2013, 'T5-2009'], [2014, 'T5-2012'],
+                 [2015, 'T5-2009'], [2016, 'T5-2016'],
                  [2017, 'T5-2016']],
-          'T6': [[2013, 'T6-2013'], [2015, 'T6-2013'], [2016, 'T6-2016'],
+          'T6': [[2011, 'T6-2009'],#[2012, 'T6-2009'], [2013, 'T6-2009'],
+                 [2013, 'T6-2013'],
+                 [2015, 'T6-2013'], [2016, 'T6-2016'],
                  [2017, 'T6-2016']],
-          'T7': [[2013, 'T7-2009'], [2015, 'T7-2009'], [2015, 'T7-2015'],
+          'T7': [[2011, 'T7-2009'], [2012, 'T7-2009'], 
+                 [2013, 'T7-2009'], [2014, 'T7-2009'],
+                 [2015, 'T7-2009'], [2015, 'T7-2015'],
                  [2016, 'T7-2015'], [2017, 'T7-2015'], [2017, 'T7-2017']],
-          'T8': [[2013, 'T8-2009'], [2015, 'T8-2009'], [2015, 'T8-2015'],
-                 [2016, 'T8-2015'], [2016, 'T8-2016'], [2017, 'T8-2016'],
-                 [2017, 'T8-2017']]}
+          'T8': [[2011, 'T8-2009'], [2012, 'T8-2009'],
+                 [2013, 'T8-2009'], [2014, 'T8-2009'],
+                 [2015, 'T8-2009'], [2015, 'T8-2015'],
+                 [2016, 'T8-2015'], [2016, 'T8-2016'],
+                 [2017, 'T8-2016'], [2017, 'T8-2017']],
+         'BL2': [[2012, 'BL2-2011'], [2013, 'BL2-2012'], [2014, 'BL2-2012'],
+                 #[2015, 'BL2-2011'],
+                 [2016, 'BL2-2016'], [2017, 'BL2-2016']],
+         'BL3': [[2012, 'BL3-2011'], [2013, 'BL3-2011'], [2014, 'BL3-2011'],
+                 [2015, 'BL3-2011'], [2015, 'BL3-2015'],
+                 [2016, 'BL3-2015'], [2016, 'BL3-2016'],
+                 [2017, 'BL3-2015'], [2017, 'BL3-2016']],
+         'BL4': [[2012, 'BL4-2011'], [2013, 'BL4-2012'], [2014, 'BL4-2012'],
+                 [2015, 'BL4-2012'], [2016, 'BL4-2016'], [2017, 'BL4-2016']],
+         'BL5': [[2012, 'BL5-2011'], [2013, 'BL5-2011'], [2014, 'BL5-2011'],
+                 [2015, 'BL5-2012'], [2016, 'BL5-2011'], [2017, 'BL5-2011'],
+                 [2017, 'BL5-2017']]         
+         }
 
-stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8']
+
+stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
+          'BL2', 'BL3', 'BL4', 'BL5']
 colordict = {'2009':defcol[3], '2010':defcol[4], '2011':defcol[5],
              '2012':defcol[6], '2013':defcol[7], '2014':defcol[8],
              '2015':defcol[0], '2016':defcol[1], '2017':defcol[2]}
 keys = list(colordict.keys())
 values= list(colordict.values())
 
-patches = [mpatches.Patch(color=c, label=y) for c, y in zip(values, keys)]
+patches = [mpatches.Patch(color=c, label=y, clip_box=mtransforms.Bbox([[0,.01],[0,.01]])) for c, y in zip(values, keys)]
 #red_patch = mpatches.Patch(color='red', label='The red data')
 
 
 ###############################################################################
 
-###
-# plot northings of all stakes for every year
-###
-f1 = plt.figure(figsize=(8, 6), dpi=80)
-for i, d in enumerate(data):
-    plt.plot(d['Northing'] + 20*i, '.', label=time[i])
-    plt.plot(d['Northing'] + 20*i, color='k', linewidth=.5, label='')
-
-plt.xlabel('Stake')
-plt.ylabel('Northing / m')
-plt.xticks(range(max([len(d) for d in data])))
-plotOpts(f1.gca())
-plt.legend()
-plt.savefig('../fig/all_Northing.pdf')
-
-###
-# plot eastings of all stakes for every year
-###
-f2 = plt.figure(figsize=(8, 6), dpi=80)
-for i, d in enumerate(data):
-    plt.plot(d['Easting'] + 50*i, '.', label=time[i])
-    plt.plot(d['Easting'] + 50*i, color='k', linewidth=.5, label='')
-
-plt.xlabel('Stake')
-plt.ylabel('Easting / m')
-plt.xticks(range(max([len(d) for d in data])))
-plotOpts(f2.gca())
-plt.legend()
-plt.savefig('../fig/all_Easting.pdf')
 
 ###
 # plot all stake positions 2d
 ###
 f3 = plt.figure(figsize=(8, 6), dpi=80)
 
-markers = ['+', 'x', '+', ',', 'v', '^', '.']
-colors = defcol[3:7] + defcol[:3]
-markersizes = [10, 8, 8, 5, 5, 5, 5]
+markers = ['+', 'x', ',', ',', '+', ',', 'v', '^', '.']
+colors = defcol[3:9] + defcol[:3]
+markersizes = [10, 8, 8, 8, 8, 5, 5, 5, 5]
 
 for i, d in enumerate(data):
     plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i],
@@ -130,7 +134,7 @@ plt.xlim([522100, 528900])
 plt.ylim([8685100, 8688400])
 plt.xlabel('Easting / m')
 plt.ylabel('Northing / m')
-plt.legend()
+plt.legend(ncol=2)
 plotOpts(f3.gca())
 
 plt.savefig('../fig/stakePositions.pdf')
@@ -174,28 +178,32 @@ class stake(object):
         ###
         # plot time evaluation
         ###
-        f, (ax1, ax2) = plt.subplots(2, sharex=True, figsize=(8, 6), dpi=80)
+        f, (ax1, ax2) = plt.subplots(2, figsize=(8, 6), dpi=80)
 
         # subplot of northing
         ax1.set_title('Time evolution of movement of ' + self.title)
         ax1.errorbar(self.dates, self.northing, yerr=err, fmt='.', capsize=3)
         ax1.plot(self.dates, self.northing, color='k', linewidth=.5)
-        plotOpts(ax1)
         ax1.set_ylabel('Northing / m')
+        ax1.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
+        ax1.set_xlim([2010.7, 2017.3])
+        plotOpts(ax1)
 
         # subplot of easting
         ax2.errorbar(self.dates, self.easting, yerr=err, fmt='.', capsize=3)
         ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
         ax2.set_ylabel('Easting / m')
-        ax2.set_xticks([2015, 2016, 2017])
+        ax2.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
+        ax2.set_xlim([2010.7, 2017.3])
         plotOpts(ax2)
 
         plt.savefig('../fig/' + self.title + '_timeEvolution.pdf')
+        plt.close(f)
 
         ###
         # plot 2d movement
         ###
-        plt.figure(figsize=(8, 6), dpi=80)
+        f = plt.figure(figsize=(8, 6), dpi=80)
         plt.gca().set_aspect('equal')
 
         
@@ -214,7 +222,7 @@ class stake(object):
         plotOpts(plt.gca())
         plt.legend(handles=patches)
         plt.savefig('../fig/' + self.title + '_2d.pdf')
-
+        plt.close(f)
 
 
 
@@ -229,7 +237,7 @@ for s in ss:
 # make a plot of the elevation of all stakes on tellbreen
 f, axarr = plt.subplots(8, sharex=True)
 
-for i, s in enumerate(ss):
+for i, s in enumerate(ss[:8]):
     # make plotdata: drop nan from elevation, also drop matching year numbers,
     # and do some funny transposing... nan==nan -> False
     plotdata = np.array([[d,e] for d,e in zip(s.dates, s.elevation) if e==e]).T
@@ -239,7 +247,7 @@ for i, s in enumerate(ss):
     axarr[i].set_ylabel(stakes[i])
     ylimsmean = np.mean(axarr[i].get_ylim())
     axarr[i].yaxis.set_label_position("right")
-    axarr[i].set_yticks(np.arange(0,1000,5))
+    axarr[i].set_yticks(np.arange(0, 1000, 10))
     axarr[i].grid(axis='y')
     
 
@@ -248,11 +256,11 @@ for i, s in enumerate(ss):
     #ylims = axarr[i].get_ylim()
     #axarr[i].set_ylim([ylims[0] - 1.5, ylims[1] + 1.5])
 
-    axarr[i].set_ylim([ylimsmean - 8, ylimsmean + 8])
+    axarr[i].set_ylim([ylimsmean - 10, ylimsmean + 10])
 
 
-axarr[0].set_xlim([2012.5, 2017.5])
-axarr[0].set_xticks(range(2013, 2018))
+axarr[0].set_xlim([2010.5, 2017.5])
+axarr[0].set_xticks(range(2011, 2018))
 
-f.savefig('../fig/all_Elevation.pdf')
+f.savefig('../fig/Tellbreen_all_Elevation.pdf')
 
