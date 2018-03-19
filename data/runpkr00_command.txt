@@ -1,0 +1,2 @@
+runpkr00 -g -d /2018031x_field_data/xxxxxxxx.t02
+
