@@ -16,7 +16,7 @@ def plotOpts(ax):
 defcol = plt.rcParams['axes.prop_cycle'].by_key()['color']
 
 # list of all the years we have data from
-time = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017]
+time = [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018]
 # make a dictionary which assigns a number from 0-N to each year
 t_d = dict(zip(time, range(len(time))))
 
@@ -29,7 +29,8 @@ filenames = ['2009_stake_coordinates',
              '2014_stake_coordinates_corrected',
              '2015_stake_coordinates_deg2utm',
              '2016_stake_coordinates',
-             '2017_stake_coordinates']
+             '2017_stake_coordinates',
+             '2018_stake_coordinates']
 
 # import all csv files: Create a list of pandas data frames
 data = [pd.read_csv('../data/stake_coordinates/' + filename
@@ -50,16 +51,19 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
                  [2014, 'T1-2012'], [2014, 'T1-2014'],
                  [2015, 'T1-2009'], [2015, 'T1-2014'], [2015, 'T1-2015'],
                  [2016, 'T1-2015'], [2016, 'T1-2016'],
-                 [2017, 'T1-2016'], [2017, 'T1-2017']],
+                 [2017, 'T1-2016'], [2017, 'T1-2017'],
+                 [2018, 'T1-2017'], [2018, 'T1-2018']],
           'T2': [[2011, 'T2-2009'], [2012, 'T2-2009'],
                  [2013, 'T2-2009'], [2014, 'T2-2009'],
                  [2015, 'T2-2009'], [2015, 'T2-2015'],
                  [2016, 'T2-2015'], [2016, 'T2-2016'],
-                 [2017, 'T2-2016']],
+                 [2017, 'T2-2016'],
+                 [2018, 'T2-2016']],
           'T3': [[2011, 'T3-2009'], [2012, 'T3-2009'],
                  [2013, 'T3-2012'], [2014, 'T3-2012'],
                  [2015, 'T3-2012'], [2015, 'T3-2015'],
-                 [2016, 'T3-2015'], [2017, 'T3-2017']],
+                 [2016, 'T3-2015'], [2017, 'T3-2017'],
+                 [2018, 'T3-2017'], [2018, 'T3-2018']],
           'T4': [[2011, 'T4-2009'], [2012, 'T4-a2009'],
                  [2013, 'T4-2009'], [2014, 'T4-2014'], 
                  [2015, 'T4-2014'], [2016, 'T4-2016'],
@@ -100,7 +104,8 @@ stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
           'BL2', 'BL3', 'BL4', 'BL5']
 colordict = {'2009':defcol[3], '2010':defcol[4], '2011':defcol[5],
              '2012':defcol[6], '2013':defcol[7], '2014':defcol[8],
-             '2015':defcol[0], '2016':defcol[1], '2017':defcol[2]}
+             '2015':defcol[0], '2016':defcol[1], '2017':defcol[2],
+             '2018':defcol[9]}
 keys = list(colordict.keys())
 values= list(colordict.values())
 
@@ -116,9 +121,9 @@ patches = [mpatches.Patch(color=c, label=y, clip_box=mtransforms.Bbox([[0,.01],[
 ###
 f3 = plt.figure(figsize=(8, 6), dpi=80)
 
-markers = ['+', 'x', ',', ',', '+', ',', 'v', '^', '.']
-colors = defcol[3:9] + defcol[:3]
-markersizes = [10, 8, 8, 8, 8, 5, 5, 5, 5]
+markers = ['+', 'x', ',', ',', '+', ',', 'v', '^', '.', '+']
+colors = defcol[3:10] + defcol[:3]
+markersizes = [10, 8, 8, 8, 8, 5, 5, 5, 5, 10]
 
 for i, d in enumerate(data):
     plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i],
@@ -126,7 +131,7 @@ for i, d in enumerate(data):
 
 # write names of the stakes to some stakes
 pos = [0, 1, 14, 2, 3, 4, 5, 6]  # position of the stakes to be labelled in the 2017 data
-for row, name in zip([data[-1].iloc[i] for i in pos], stakes):
+for row, name in zip([data[-2].iloc[i] for i in pos], stakes):
     plt.annotate(name, (row['Easting'] + 80, row['Northing']))
 
 plt.gca().set_aspect('equal')
@@ -186,7 +191,7 @@ class stake(object):
         ax1.plot(self.dates, self.northing, color='k', linewidth=.5)
         ax1.set_ylabel('Northing / m')
         ax1.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
-        ax1.set_xlim([2010.7, 2017.3])
+        ax1.set_xlim([2010.7, 2018.3])
         plotOpts(ax1)
 
         # subplot of easting
@@ -194,7 +199,7 @@ class stake(object):
         ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
         ax2.set_ylabel('Easting / m')
         ax2.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
-        ax2.set_xlim([2010.7, 2017.3])
+        ax2.set_xlim([2010.7, 2018.3])
         plotOpts(ax2)
 
         plt.savefig('../fig/' + self.title + '_timeEvolution.pdf')
