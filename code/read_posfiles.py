@@ -7,7 +7,7 @@ import numpy as np
 from coordinate_transformation2 import from_latlon
 
 
-filenames =  ['46250700', '46250700_corr', '46250701', '46250703', '46250704', '46250705']
+filenames =  ['46250700_org', '46250700_corr', '46250701_org', '46250703_org', '46250704_org', '46250705_org']
 stakenames = ['T1-2017',  'T1c-2017',      'T1-2018',  'T2-2016',  'T3-2017',  'T3-2018' ]
 
 # read data from all pos files

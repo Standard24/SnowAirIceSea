@@ -7,7 +7,7 @@ import numpy as np
 from coordinate_transformation2 import from_latlon
 from read_posfiles import data_imp
 
-dat = data_imp[1]
+dat = data_imp[0]
 
 print(dat.describe())
 utm = np.array([from_latlon(lat, lon) for lat, lon in zip(dat['latitude(deg)'], dat['longitude(deg)']) ]).T
@@ -31,14 +31,14 @@ for ax, y in [(ax1, east), (ax2, north), (ax3, height)]:
         ax.plot(x[int(N/2-1):-int(N/2)], np.convolve(y, np.ones((N,))/N, mode='valid'))
 
    
-plt.savefig('f1.pdf')
+plt.savefig('../fig/00_Timeseries-east-north-elev.pdf')
 
 
 
 f2, (ax1, ax2, ax3) = plt.subplots(3, figsize=(11.5,6))
 for ax, dat in [[ax1, east], [ax2, north], [ax3, height]]:
     ax.hist(dat, 50)
-plt.savefig('f2.pdf')
+plt.savefig('../fig/00_Histogram-east-north-elev.pdf')
 
 
 f3, (ax1, ax2, ax3) = plt.subplots(3, figsize=(11.5,6))
@@ -54,4 +54,4 @@ for ax, dat in [[ax1, east], [ax2, north], [ax3, height]]:
         print(p)
 
 
-plt.savefig('f3.pdf')
+plt.savefig('../fig/00_Spectrum-east-north-elev.pdf')
