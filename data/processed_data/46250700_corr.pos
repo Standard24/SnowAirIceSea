@@ -1,7 +1,7 @@
 % program   : RTKPOST ver.2.4.2
-% inp file  : C:\users\linda\My Documents\Documents\Spring18\GitHub_Unis\data\processed_data\46250700.obs
-% inp file  : C:\users\linda\My Documents\Documents\Spring18\GitHub_Unis\data\20180311_base_data\lyrs0700.18o
-% inp file  : C:\users\linda\My Documents\Documents\Spring18\GitHub_Unis\data\processed_data\46250700.nav
+% inp file  : Z:\home\linda\Documents\Spring18\GitHub_Unis\data\processed_data\46250700.obs
+% inp file  : Z:\home\linda\Documents\Spring18\GitHub_Unis\data\base_station_data\lyrs0700.18o
+% inp file  : Z:\home\linda\Documents\Spring18\GitHub_Unis\data\processed_data\46250700.nav
 % obs start : 2018/03/11 10:25:17.0 GPST (week1992  37517.0s)
 % obs end   : 2018/03/11 10:43:41.0 GPST (week1992  38621.0s)
 % pos mode  : static
