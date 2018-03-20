@@ -7,17 +7,20 @@ import numpy as np
 from coordinate_transformation2 import from_latlon
 
 
-filenames =  ['46250700', '46250701', '46250703', '46250704', '46250705']
-stakenames = ['T1-2017',  'T1-2018',  'T2-2016',  'T3-2017',  'T3-2018' ]
+filenames =  ['46250700', '46250700_corr', '46250701', '46250703', '46250704', '46250705']
+stakenames = ['T1-2017',  'T1c-2017',      'T1-2018',  'T2-2016',  'T3-2017',  'T3-2018' ]
 
 # read data from all pos files
-data = [pd.read_csv('../data/processed_data/' + filename + '.pos',
+data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
                     sep='\s+',
-                    header=12)
-        for filename in filenames]
+                    comment='%',
+                    names=['date', 'time', 'latitude(deg)', 'longitude(deg)',
+                    'height(m)', 'Q', 'ns', 'sdn(m)', 'sde(m)', 'sdu(m)',
+                    'sdne(m)', 'sdeu(m)', 'sdun(m)', 'age(s)', 'ratio'])
+            for filename in filenames]
 
 # calculate mean values of columns
-mean_values = [stake.mean() for stake in data]
+mean_values = [stake.mean() for stake in data_imp]
 
 # give each data frame a name attribute
 for i, df in enumerate(mean_values):
