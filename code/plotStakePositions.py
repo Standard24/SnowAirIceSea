@@ -6,6 +6,11 @@ import matplotlib.transforms as mtransforms
 import pandas as pd
 import numpy as np
 
+# use latex to draw text on plots (only for pdf...)
+from matplotlib import rc
+rc('text', usetex=True)
+plt.rc('font', family='serif')
+
 
 # define plot options
 def plotOpts(ax):
