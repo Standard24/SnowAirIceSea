@@ -9,6 +9,7 @@ __pycache__/
 *.gz
 *.out
 *.toc
+MainPart.pdf
 
 
 # others
