@@ -25,7 +25,7 @@
 \usepackage{epstopdf}
 \usepackage{pifont}
 \usepackage{natbib}
-\usepackage{cite}
+%\usepackage{cite}
 \usepackage[automark]{scrpage2}
 \usepackage{float}
 \usepackage{caption}
@@ -45,7 +45,7 @@
 
 \usepackage{upgreek}
 %\usepackage{sistyle}                   % Package to typeset SI units
-\usepackage{titlesec}
+%\usepackage{titlesec}
 
 %% New Commands
 %% ----------------------------------------------------------------------------------
@@ -54,26 +54,26 @@
 \newcommand{\nn}{\ensuremath{\mathrel{\nonumber}}}
 
 
-\titleformat{\chapter}                  % command to format the chapter titles
-        [hang]                          % shape/type of title
-        {\LARGE\bfseries}
-        {\makebox[0.5in][l]{\thechapter}}
-        {0em}
-        {}
-        [
-            \normalsize\normalfont      % reset font formatting
-            \vspace{0.5\baselineskip}
-            \hspace*{0.5in}             % indent author name width of chapter number box
-            \large                      % make text that follows large
-            \thispagestyle{empty}       % suppress page numbers
-            \textit{\chapterauthor}
-        ]                               % end of what comes after title
+%\titleformat{\chapter}                  % command to format the chapter titles
+%        [hang]                          % shape/type of title
+%        {\LARGE\bfseries}
+%        {\makebox[0.5in][l]{\thechapter}}
+%        {0em}
+%        {}
+%        [
+%            \normalsize\normalfont      % reset font formatting
+%            \vspace{0.5\baselineskip}
+%            \hspace*{0.5in}             % indent author name width of chapter number box
+%            \large                      % make text that follows large
+%            \thispagestyle{empty}       % suppress page numbers
+%            \textit{\chapterauthor}
+%        ]                               % end of what comes after title
 
 
-\titlespacing*{\chapter}
-     {0em}                              % spacing to left of chapter title
-     {0ex}                              % vertical space before title
-     {3\baselineskip}                   % vertical spacing after title; here set to 3 lines 
+%\titlespacing*{\chapter}
+%     {0em}                              % spacing to left of chapter title
+%     {0ex}                              % vertical space before title
+%     {3\baselineskip}                   % vertical spacing after title; here set to 3 lines 
 
 
 \newcommand{\todo}[1]{\textbf{\textcolor{red}{#1}}}
@@ -112,7 +112,6 @@
 \bibliographystyle{AGFstyle}
 
 \clearpage
-
 
 %%%%%%%%%%%%%%%%% PREFACE %%%%%%%%%%%%%%%%%
 %\chapter*{Preface}
