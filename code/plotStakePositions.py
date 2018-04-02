@@ -35,7 +35,8 @@ filenames = ['2009_stake_coordinates',
              '2015_stake_coordinates_deg2utm',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
-             '2018_stake_coordinates']
+             '2018_stake_coordinates_trimble_post']
+             #'2018_stake_coordinates_corr']
 
 # import all csv files: Create a list of pandas data frames
 data = [pd.read_csv('../data/stake_coordinates/' + filename
@@ -57,65 +58,89 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
                  [2015, 'T1-2009'], [2015, 'T1-2014'], [2015, 'T1-2015'],
                  [2016, 'T1-2015'], [2016, 'T1-2016'],
                  [2017, 'T1-2016'], [2017, 'T1-2017'],
-                 [2018, 'T1-2017'], [2018, 'T1-2018'], [2018, 'T1c-2017']],
+                 [2018, 'T1-i-2017'], [2018, 'T1-ii-2017'], [2018, 'T1-2018']],
           'T2': [[2011, 'T2-2009'], [2012, 'T2-2009'],
                  [2013, 'T2-2009'], [2014, 'T2-2009'],
                  [2015, 'T2-2009'], [2015, 'T2-2015'],
                  [2016, 'T2-2015'], [2016, 'T2-2016'],
-                 [2017, 'T2-2016'],
-                 [2018, 'T2-2016']],
+                 [2017, 'T2-2016'], [2017, 'T2-2017'],
+                 [2018, 'T2-2016'], [2018, 'T2-i-2017'], [2018, 'T2-ii-2017'],
+                 [2018, 'T2-2018']],
           'T3': [[2011, 'T3-2009'], [2012, 'T3-2009'],
                  [2013, 'T3-2012'], [2014, 'T3-2012'],
                  [2015, 'T3-2012'], [2015, 'T3-2015'],
                  [2016, 'T3-2015'], [2017, 'T3-2017'],
-                 [2018, 'T3-2017'], [2018, 'T3-2018']],
+                 [2018, 'T3-2017']],
           'T4': [[2011, 'T4-2009'], [2012, 'T4-a2009'],
                  [2013, 'T4-2009'], [2014, 'T4-2014'], 
                  [2015, 'T4-2014'], [2016, 'T4-2016'],
-                 [2017, 'T4-2016']],
+                 [2017, 'T4-2016'],
+                 [2018, 'T4-2016'], [2018, 'T4-2018']],
           'T5': [[2011, 'T5-2009'], [2012, 'T5-b2009'],
                  [2013, 'T5-2009'], [2014, 'T5-2012'],
                  [2015, 'T5-2009'], [2016, 'T5-2016'],
-                 [2017, 'T5-2016']],
+                 [2017, 'T5-2016'],
+                 [2018, 'T5-2016'], [2018, 'T5-2018']],
           'T6': [[2011, 'T6-2009'],#[2012, 'T6-2009'], [2013, 'T6-2009'],
                  [2013, 'T6-2013'],
                  [2015, 'T6-2013'], [2016, 'T6-2016'],
-                 [2017, 'T6-2016']],
+                 [2017, 'T6-2016'],
+                 [2018, 'T6-2016'], [2018, 'T6-2018']],
           'T7': [[2011, 'T7-2009'], [2012, 'T7-2009'], 
                  [2013, 'T7-2009'], [2014, 'T7-2009'],
                  [2015, 'T7-2009'], [2015, 'T7-2015'],
-                 [2016, 'T7-2015'], [2017, 'T7-2015'], [2017, 'T7-2017']],
+                 [2016, 'T7-2015'], [2017, 'T7-2015'], [2017, 'T7-2017'],
+                 [2018, 'T7-2017'], [2018, 'T7-2015']],
           'T8': [[2011, 'T8-2009'], [2012, 'T8-2009'],
                  [2013, 'T8-2009'], [2014, 'T8-2009'],
                  [2015, 'T8-2009'], [2015, 'T8-2015'],
                  [2016, 'T8-2015'], [2016, 'T8-2016'],
-                 [2017, 'T8-2016'], [2017, 'T8-2017']],
+                 [2017, 'T8-2016'], [2017, 'T8-2017'],
+                 [2018, 'T8-2017']],
          'BL2': [[2012, 'BL2-2011'], [2013, 'BL2-2012'], [2014, 'BL2-2012'],
                  #[2015, 'BL2-2011'],
-                 [2016, 'BL2-2016'], [2017, 'BL2-2016']],
+                 [2016, 'BL2-2016'], [2017, 'BL2-2016'],
+                 [2018, 'BL2-2016'], [2018, 'BL2-2018']],
          'BL3': [[2012, 'BL3-2011'], [2013, 'BL3-2011'], [2014, 'BL3-2011'],
                  [2015, 'BL3-2011'], [2015, 'BL3-2015'],
                  [2016, 'BL3-2015'], [2016, 'BL3-2016'],
-                 [2017, 'BL3-2015'], [2017, 'BL3-2016']],
+                 [2017, 'BL3-2015'], [2017, 'BL3-2016'],
+                 [2018, 'BL3-2016'], [2018, 'BL3-2018']],
          'BL4': [[2012, 'BL4-2011'], [2013, 'BL4-2012'], [2014, 'BL4-2012'],
-                 [2015, 'BL4-2012'], [2016, 'BL4-2016'], [2017, 'BL4-2016']],
+                 [2015, 'BL4-2012'], [2016, 'BL4-2016'], [2017, 'BL4-2016'],
+                 [2018, 'BL4-i-2016'], [2018, 'BL4-ii-2016'],
+                 [2018, 'BL4-2018']],
          'BL5': [[2012, 'BL5-2011'], [2013, 'BL5-2011'], [2014, 'BL5-2011'],
                  [2015, 'BL5-2012'], [2016, 'BL5-2011'], [2017, 'BL5-2011'],
-                 [2017, 'BL5-2017']]         
+                 [2017, 'BL5-2017'],
+                 [2018, 'BL5-i-2017'], [2018, 'BL5-ii-2017']]         
          }
 
+# increase automatic plot limits for some plots in meters
+# ((left, right), (bottom, top))
+limits = {'T1' : ((.3, 0), (0, 0)),
+          'T2' : ((.7, 1.3), (0, 0)),
+          'T3' : ((0, 0), (0, .5)),
+          'T6' : ((0, 1), (0, 0)),
+          'T7' : ((0, .2), (0, 0)),
+          'T8' : ((.7, .7), (0, 0)),
+          'BL2' : ((0, .2), (0, 0)),
+          'BL3' : ((2, 1), (0, 0)),
+          'BL5' : ((0, 0), (.3, .6))
+          }
 
 stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
           'BL2', 'BL3', 'BL4', 'BL5']
-colordict = {'2009':defcol[3], '2010':defcol[4], '2011':defcol[5],
+colordict = {'2009':defcol[3], '2011':defcol[5],
              '2012':defcol[6], '2013':defcol[7], '2014':defcol[8],
              '2015':defcol[0], '2016':defcol[1], '2017':defcol[2],
              '2018':defcol[9]}
 keys = list(colordict.keys())
 values= list(colordict.values())
 
-patches = [mpatches.Patch(color=c, label=y, clip_box=mtransforms.Bbox([[0,.01],[0,.01]])) for c, y in zip(values, keys)]
-#red_patch = mpatches.Patch(color='red', label='The red data')
+patches = [mpatches.Patch(color=c, label=y, 
+                          clip_box=mtransforms.Bbox([[0,.01],[0,.01]]))
+           for c, y in zip(values, keys)]
 
 
 ###############################################################################
@@ -178,7 +203,7 @@ class stake(object):
         self.northing  = [year['Northing'].values[0]  for year in self.data]
         self.easting   = [year['Easting'].values[0]   for year in self.data]
         self.elevation = [year['Elevation'].values[0] for year in self.data]
-
+        print('Stake ' + title + ' initialized.')
 
     def makePlots(self):
         """ Save the following plots for the stake:
@@ -231,6 +256,19 @@ class stake(object):
 
         plotOpts(plt.gca())
         plt.legend(handles=patches)
+
+
+        # if entry for stake is present in dict, change limits
+        try:
+            ylim_bot = plt.gca().get_ylim()[0] - limits[self.title][1][0]
+            ylim_top = plt.gca().get_ylim()[1] + limits[self.title][1][1]
+            plt.ylim(ylim_bot, ylim_top)
+            xlim_lef = plt.gca().get_xlim()[0] - limits[self.title][0][0]
+            xlim_rig = plt.gca().get_xlim()[1] + limits[self.title][0][1]
+            plt.xlim(xlim_lef, xlim_rig)
+        except KeyError:
+            pass
+
         plt.savefig('../fig/' + self.title + '_2d.pdf')
         plt.close(f)
 
@@ -266,11 +304,11 @@ for i, s in enumerate(ss[:8]):
     #ylims = axarr[i].get_ylim()
     #axarr[i].set_ylim([ylims[0] - 1.5, ylims[1] + 1.5])
 
-    axarr[i].set_ylim([ylimsmean - 10, ylimsmean + 10])
+    axarr[i].set_ylim([ylimsmean - 12, ylimsmean + 12])
 
 
-axarr[0].set_xlim([2010.5, 2017.5])
-axarr[0].set_xticks(range(2011, 2018))
+axarr[0].set_xlim([2010.5, 2018.5])
+axarr[0].set_xticks(range(2011, 2019))
 
 f.savefig('../fig/Tellbreen_all_Elevation.pdf')
 
