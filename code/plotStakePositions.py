@@ -101,7 +101,8 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
                  #[2015, 'BL2-2011'],
                  [2016, 'BL2-2016'], [2017, 'BL2-2016'],
                  [2018, 'BL2-2016'], [2018, 'BL2-2018']],
-         'BL3': [[2012, 'BL3-2011'], [2013, 'BL3-2011'], [2014, 'BL3-2011'],
+         'BL3': [[2011, 'BL3-2011'],
+                 [2012, 'BL3-2011'], [2013, 'BL3-2011'], [2014, 'BL3-2011'],
                  [2015, 'BL3-2011'], [2015, 'BL3-2015'],
                  [2016, 'BL3-2015'], [2016, 'BL3-2016'],
                  [2017, 'BL3-2015'], [2017, 'BL3-2016'],
@@ -110,7 +111,8 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
                  [2015, 'BL4-2012'], [2016, 'BL4-2016'], [2017, 'BL4-2016'],
                  [2018, 'BL4-i-2016'], [2018, 'BL4-ii-2016'],
                  [2018, 'BL4-2018']],
-         'BL5': [[2012, 'BL5-2011'], [2013, 'BL5-2011'], [2014, 'BL5-2011'],
+         'BL5': [[2011, 'BL5-2011'],
+                 [2012, 'BL5-2011'], [2013, 'BL5-2011'], [2014, 'BL5-2011'],
                  [2015, 'BL5-2012'], [2016, 'BL5-2011'], [2017, 'BL5-2011'],
                  [2017, 'BL5-2017'],
                  [2018, 'BL5-i-2017'], [2018, 'BL5-ii-2017']]         
@@ -310,5 +312,31 @@ for i, s in enumerate(ss[:8]):
 axarr[0].set_xlim([2010.5, 2018.5])
 axarr[0].set_xticks(range(2011, 2019))
 
-f.savefig('../fig/Tellbreen_all_Elevation.pdf')
+f.savefig('../fig/Elevation_Tellbreen.pdf')
+
+
+###############################################################################
+# make a plot of the elevation of all stakes on blekumbreen
+f, axarr = plt.subplots(4, sharex=True)
+
+for i, s in enumerate(ss[8:]):
+    # make plotdata: drop nan from elevation, also drop matching year numbers,
+    # and do some funny transposing... nan==nan -> False
+    plotdata = np.array([[d,e] for d,e in zip(s.dates, s.elevation) if e==e]).T
+    axarr[i].plot(plotdata[0], plotdata[1], '.')
+    axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
+    plotOpts(axarr[i])
+    axarr[i].set_ylabel(stakes[i+8])
+    ylimsmean = np.mean(axarr[i].get_ylim())
+    axarr[i].yaxis.set_label_position("right")
+    axarr[i].set_yticks(np.arange(0, 1000, 5))
+    axarr[i].grid(axis='y')
+
+    axarr[i].set_ylim([ylimsmean - 8, ylimsmean + 8])
+
+
+axarr[0].set_xlim([2010.5, 2018.5])
+axarr[0].set_xticks(range(2011, 2019))
+
+f.savefig('../fig/Elevation_Blekumbreen.pdf')
 
