@@ -7,8 +7,11 @@ import numpy as np
 from coordinate_transformation2 import from_latlon
 
 
-filenames =  ['46250700_org', '46250700_corr', '46250701_org', '46250703_org', '46250704_org', '46250705_org']
-stakenames = ['T1-2017',  'T1c-2017',      'T1-2018',  'T2-2016',  'T3-2017',  'T3-2018' ]
+fieldbook = pd.read_csv('../data/fieldbook_data.csv',
+                        sep='\s')
+
+filenames = [str(name) + '_corr' for name in fieldbook['filename']]
+stakenames = [str(name) for name in fieldbook['name']]
 
 # read data from all pos files
 data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
@@ -42,9 +45,13 @@ data = [
 
 writeToFile = [header] + data
 
-with open('../data/stake_coordinates/2018_stake_coordinates.csv', 'w') as f:
+with open('../data/stake_coordinates/2018_stake_coordinates_corr.csv',
+          'w') as f:
     for line in writeToFile:
         # use space as separator, dont write [, ] and '
         write = str(line).replace(',', '').replace('\'', '')[1:-1]
         f.write(write + '\n')
 
+if __name__ == '__main__':
+#    print(fieldbook)
+    print([d.describe() for d in data_imp])
