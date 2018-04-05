@@ -7,9 +7,7 @@ import numpy as np
 from coordinate_transformation2 import from_latlon
 
 
-
-
-filename = '46250701_corr_off'
+filename = '46250753_corr_STEC'
 
 
 # read data from all pos files
@@ -44,9 +42,9 @@ print(np.std(north))
 
 f, (ax1, ax2, ax3) = plt.subplots(3, figsize=(11.5,6))
 
-ax1.axhline(528388.696)
-ax2.axhline(8687105.363)
-ax3.axhline(342.045)
+ax1.axhline(524644.296)
+ax2.axhline(8686130.739)
+ax3.axhline(629.737)
 
 for ax, y in [(ax1, east), (ax2, north), (ax3, height)]:
 
