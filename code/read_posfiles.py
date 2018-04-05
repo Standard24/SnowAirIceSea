@@ -22,8 +22,9 @@ data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
                     'sdne(m)', 'sdeu(m)', 'sdun(m)', 'age(s)', 'ratio'])
             for filename in filenames]
 
+
 # calculate mean values of columns
-mean_values = [stake.mean() for stake in data_imp]
+mean_values = [stake[stake['Q'] == 2].mean() for stake in data_imp]
 
 # give each data frame a name attribute
 for i, df in enumerate(mean_values):

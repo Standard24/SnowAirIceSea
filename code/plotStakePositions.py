@@ -35,8 +35,8 @@ filenames = ['2009_stake_coordinates',
              '2015_stake_coordinates_deg2utm',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
-             '2018_stake_coordinates_trimble_post']
-             #'2018_stake_coordinates_corr']
+             #'2018_stake_coordinates_trimble_post']
+             '2018_stake_coordinates_corr']
 
 # import all csv files: Create a list of pandas data frames
 data = [pd.read_csv('../data/stake_coordinates/' + filename
@@ -121,8 +121,10 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
 # increase automatic plot limits for some plots in meters
 # ((left, right), (bottom, top))
 limits = {'T1' : ((.3, 0), (0, 0)),
-          'T2' : ((.7, 1.3), (0, 0)),
+          'T2' : ((1.5, 1.5), (0, 0)),
           'T3' : ((0, 0), (0, .5)),
+          'T4' : ((.5, .5), (0, 0)),
+          'T5' : ((0, .5), (0, 0)),
           'T6' : ((0, 1), (0, 0)),
           'T7' : ((0, .2), (0, 0)),
           'T8' : ((.7, .7), (0, 0)),
@@ -241,8 +243,9 @@ class stake(object):
         # plot 2d movement
         ###
         f = plt.figure(figsize=(8, 6), dpi=80)
+        
         plt.gca().set_aspect('equal')
-
+        plt.gca().ticklabel_format(useOffset=False)
         
         colors = [colordict[date[-4:]] for date in self.names]
         for x, y, c in zip(self.easting, self.northing, colors):
@@ -258,6 +261,8 @@ class stake(object):
 
         plotOpts(plt.gca())
         plt.legend(handles=patches)
+        
+
 
 
         # if entry for stake is present in dict, change limits

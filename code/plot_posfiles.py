@@ -7,7 +7,7 @@ import numpy as np
 from coordinate_transformation2 import from_latlon
 from read_posfiles import data_imp
 
-dat = data_imp[0]
+dat = data_imp[25]
 
 print(dat.describe())
 utm = np.array([from_latlon(lat, lon) for lat, lon in zip(dat['latitude(deg)'], dat['longitude(deg)']) ]).T
