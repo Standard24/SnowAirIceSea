@@ -1,12 +1,65 @@
 %---Linda
 
-2 post processing methods:
-+ to show that there are no differences in the result to the commercial post processing software 'Trimble Business Center' post processed the data with both methods.
-+ advantage new: open source, available for different system sofwares
+The accurancy of the post processed postions is decreasing with a increasing distance to the base station.
+The nearest base station is Statens Kartverks SatRef located on Platåberget with a distance between 14 km and 20 km depending on the stake.\medskip
 
-after that we had to correct our Setup deviation:
-+ subtract the distance rover stake from the northing component
-+ consider the deviation due to the inclination of the stake (dependent from the inclination of the stake and the height difference at the ice surface to the last year measurment)
-+ all accurancies
+% 2 different methods:
+In our report we use a new method for the postprocessing. 
+This method is an open source alternative which is available for different system softwares. 
+The previous used 'Trimble Business Center' software is only available on a windows system and needs a licens. 
+We operate both methods to show that the results of both methods do not differ.
+This approves that our results are comparable to the reuslts of the last years.\medskip
 
-table with final data
+% steps of the post processing:
+While the post processing with the usual method in the 'Trimble Business Center' all steps from section 5 in Gölles (2012) are done.
+For each day the data file from the measurements and the corresponding base station data file is imported. 
+We have data for the days of year (doy) 070, 072, 074 and 075.
+All files from the base station are in the .o18-format. 
+The data from the reciever have the .t02 format. 
+After the post processing the results from the are stored in a .csv-file.\medskip
+
+The open source post processing requires different steps.
+First of all the raw data file has to be transformed from the .t02-format to the .tdg-format. 
+The Trimble format .t02 is not readable for the final post processing program.
+This was done with the programm rubpkr00 which is available on the website of unavco (http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html).
+The used command is 'runpkr00 -g -d filename.t02'.
+Due to problems with the package we had to do a manual transformation of the package.
+To provide the correct file format for the last post processing step we use the toolkit teqc.
+This toolkit is also available on the website of unavco (https://www.unavco.org/software/data-processing/teqc/teqc.html).
+Then the file can be converted by another commad using './teqc +nav filename.nav +obs filename.obs filename.tgd' to an observation (.obs) and navigation (.nav) file.
+After that it is necessary to download also the base station data from the platform http://ftp.statkart.no/.
+The final step in the post processing of the GPS data is done with the open source program package RTKLIB.
+This package is available for the download in the website http://www.rtklib.com/rtklib.htm.
+In this package we use the executable rtkpost.exe in the subdirectory /bin of the downloaded full package with source Programs with the version 2.4.2.
+In this software the two navigation file from the receiver and the base station as well as the observation file from the receiver has to be read in.
+For this method the .n18-format from the basestation is needed as comparable navigation file.
+The next steps are consistent to the description on the website https://docs.emlid.com/reach/common/tutorials/gps-post-processing/.
+For this we had to modify the settings of rtkpost.exe and load the three required files. 
+The final output after the post processing is a position file (.pos). 
+This file includes for every time step the post processed position in longitude and latitude.
+Then we calculate a median over all time steps to get an average position for every measurement.
+Because we consistenly use the UTM coordinate system, we transform the lon/lat coordinates by using the python function from\_latlon.
+The analysis in this report is made with python.\medskip
+
+% error correction of the post processed data:
+The post processed data are not the final data. 
+To get the final position with a minimal error to the real position, we have to include the different aspects from our measurement setup (see section setup).
+We subtract the distance between the rover and the stake from the northing component.
+In addition, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.\medskip
+
+\begin{equation}
+	\Delta_{abs} = (h_{snow} + h_{antenna} - h_{ref_year}) * sin(\alpha)
+\end{equation}
+
+\begin{equation}
+	\Delta_{north} = - \Delta_{abs} * cos(\phi)
+\end{equation}
+
+\begin{equation}
+	\Delta_{east} = - \Delta_{abs} * sin(\phi)
+\end{equation}
+% name accurancies of the final data:
+Despite all the correction, it is important for the interpretation of the results to consider the accurancy of all parts our measurments.
+
+% table with final data and uncerainties:
+% \input{table_final_data.tex}
