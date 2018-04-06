@@ -47,6 +47,13 @@ To get the final position with a minimal error to the real position, we have to 
 We subtract the distance between the rover and the stake from the northing component.
 In addition, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.\medskip
 
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{../pictures/schematic_setup.pdf}
+\caption{Schematic figure of the relevant parameter in the measurment setup.}
+\end{figure}
+
+
 \begin{equation}
 	\Delta_{abs} = (h_{snow} + h_{antenna} - h_{ref_year}) * sin(\alpha)
 \end{equation}
@@ -58,8 +65,31 @@ In addition, we consider the inclination of the stake and calculate the error de
 \begin{equation}
 	\Delta_{east} = - \Delta_{abs} * sin(\phi)
 \end{equation}
+
 % name accurancies of the final data:
 Despite all the correction, it is important for the interpretation of the results to consider the accurancy of all parts our measurments.
 
-% table with final data and uncerainties:
-% \input{table_final_data.tex}
+% tables:
+\begin{table}[h]
+\caption{Final positions after the TBC post processing.}
+\centering 
+\input{tables/tbc_tab.tex}
+\end{table}
+
+%\begin{table}[h]
+%\caption{Final positions after the open source post processing.}
+%\centering
+%\input{tables/os_tab.tex}
+%\end{table}
+
+The raw data from our measurements are given in the appendix (table xy). 
+%\usepackage{pdflscape}
+%\begin{landscape}
+%\begin{table}[h]
+%\caption{Raw data collected in the field.}
+%\centering
+%\input{tables/fb_tab.tex}
+%\end{table}
+%\end{landscape}
+
+
