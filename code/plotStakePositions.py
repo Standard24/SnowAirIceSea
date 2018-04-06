@@ -37,8 +37,8 @@ filenames = ['2009_stake_coordinates',
              '2017_stake_coordinates',
              #'2018_stake_coordinates_trimble_post']
              #'2018_stake_coordinates_corr']
-             '2018_stake_coordinates_corr_STEC']
-             #'2018_stake_coordinates_corr_LC']
+             #'2018_stake_coordinates_corr_STEC']
+             '2018_stake_coordinates_corr_LC']
 
 # import all csv files: Create a list of pandas data frames
 data = [pd.read_csv('../data/stake_coordinates/' + filename
@@ -294,7 +294,8 @@ class stake(object):
         plt.savefig('../fig/' + self.title + '_2d.pdf')
         plt.close(f)
 
-
+#import IPython
+#IPython.embed()
 
 ###############################################################################
 # make a list of all stake objects
