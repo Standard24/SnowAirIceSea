@@ -24,7 +24,24 @@ data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
 
 
 # calculate mean values of columns
-mean_values = [stake[stake['Q'] == 2].mean() for stake in data_imp]
+
+# no filtering
+#mean_values = [stake.mean() for stake in data_imp]
+
+# only take values with Q==2
+#mean_values = [stake[stake['Q'] == 2].mean() for stake in data_imp]
+
+# use weighted average
+mean_values = [
+               pd.Series({
+                   'latitude(deg)' : np.average(
+                       stake['latitude(deg)'], weights=stake['sdn(m)']),
+                   'longitude(deg)' : np.average(
+                       stake['longitude(deg)'], weights=stake['sde(m)']),
+                   'height(m)' : np.average(
+                       stake['height(m)'], weights=stake['sdu(m)'])
+                       })
+               for stake in data_imp]
 
 # give each data frame a name attribute
 for i, df in enumerate(mean_values):

@@ -36,7 +36,9 @@ filenames = ['2009_stake_coordinates',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
              #'2018_stake_coordinates_trimble_post']
-             '2018_stake_coordinates_corr']
+             #'2018_stake_coordinates_corr']
+             '2018_stake_coordinates_corr_STEC']
+             #'2018_stake_coordinates_corr_LC']
 
 # import all csv files: Create a list of pandas data frames
 data = [pd.read_csv('../data/stake_coordinates/' + filename
@@ -200,9 +202,16 @@ class stake(object):
         self.names = list(zip(*titles[title]))[1]
         # get the years of the measurements
         self.dates = list(zip(*titles[title]))[0]
+
         # read the particular row(s) for the stake from each data frame
-        self.data = [data[t_d[date]].loc[data[t_d[date]]['Name'] == name]
-                     for date, name in zip(self.dates, self.names)]
+        self.data = []
+        for date, name in zip(self.dates, self.names):
+            row = data[t_d[date]].loc[data[t_d[date]]['Name'] == name]
+            if row.empty:
+                print('--- ' + str(date) + ' ' + name + ' not found.')
+            else:
+                self.data += [row]
+        
         # read northing and easting from the row
         self.northing  = [year['Northing'].values[0]  for year in self.data]
         self.easting   = [year['Easting'].values[0]   for year in self.data]
@@ -217,27 +226,33 @@ class stake(object):
         ###
         # plot time evaluation
         ###
-        f, (ax1, ax2) = plt.subplots(2, figsize=(8, 6), dpi=80)
 
-        # subplot of northing
-        ax1.set_title('Time evolution of movement of ' + self.title)
-        ax1.errorbar(self.dates, self.northing, yerr=err, fmt='.', capsize=3)
-        ax1.plot(self.dates, self.northing, color='k', linewidth=.5)
-        ax1.set_ylabel('Northing / m')
-        ax1.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
-        ax1.set_xlim([2010.7, 2018.3])
-        plotOpts(ax1)
+        if len(self.dates) == len(self.northing):
+            f, (ax1, ax2) = plt.subplots(2, figsize=(8, 6), dpi=80)
 
-        # subplot of easting
-        ax2.errorbar(self.dates, self.easting, yerr=err, fmt='.', capsize=3)
-        ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
-        ax2.set_ylabel('Easting / m')
-        ax2.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
-        ax2.set_xlim([2010.7, 2018.3])
-        plotOpts(ax2)
+            # subplot of northing
+            ax1.set_title('Time evolution of movement of ' + self.title)
+            ax1.errorbar(self.dates, self.northing, yerr=err, fmt='.',
+                          capsize=3)
+            ax1.plot(self.dates, self.northing, color='k', linewidth=.5)
+            ax1.set_ylabel('Northing / m')
+            ax1.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
+            ax1.set_xlim([2010.7, 2018.3])
+            plotOpts(ax1)
 
-        plt.savefig('../fig/' + self.title + '_timeEvolution.pdf')
-        plt.close(f)
+            # subplot of easting
+            ax2.errorbar(self.dates, self.easting, yerr=err, fmt='.',
+                         capsize=3)
+            ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
+            ax2.set_ylabel('Easting / m')
+            ax2.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
+            ax2.set_xlim([2010.7, 2018.3])
+            plotOpts(ax2)
+
+            plt.savefig('../fig/' + self.title + '_timeEvolution.pdf')
+            plt.close(f)
+        else:
+            print('Could not plot time evaluation for ' + self.title)
 
         ###
         # plot 2d movement
