@@ -32,16 +32,16 @@ data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
 #mean_values = [stake[stake['Q'] == 2].mean() for stake in data_imp]
 
 # use weighted average
-mean_values = [
-               pd.Series({
-                   'latitude(deg)' : np.average(
-                       stake['latitude(deg)'], weights=stake['sdn(m)']),
-                   'longitude(deg)' : np.average(
-                       stake['longitude(deg)'], weights=stake['sde(m)']),
-                   'height(m)' : np.average(
-                       stake['height(m)'], weights=stake['sdu(m)'])
-                       })
-               for stake in data_imp]
+mean_values = []
+for stake in data_imp:
+    mean_values += [pd.Series({
+    'latitude(deg)' : np.average(stake['latitude(deg)'],
+    weights=[1/(s**2) for s in stake['sdn(m)']]),
+    'longitude(deg)' : np.average(stake['longitude(deg)'],
+    weights=[1/(s**2) for s in stake['sde(m)']]),
+    'height(m)' : np.average(stake['height(m)'],
+    weights=[1/(s**2) for s in stake['sdu(m)']])
+                             })]
 
 # give each data frame a name attribute
 for i, df in enumerate(mean_values):
