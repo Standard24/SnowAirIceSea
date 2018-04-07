@@ -11,13 +11,21 @@ plt.rc('font', family='serif')
 
 from coordinate_transformation2 import from_latlon
 
-staketitle = 'BL5-i-2017'
-corr = '_LC' #_STEC or _LC
+staketitle = 'T7-2015'
+corr = '' #_STEC or _LC or ''
 
 
 # read the filename for the stake from textfile
-filenames = pd.read_csv('../data/LC-STEC-data.csv',
+
+# for STEC data:
+#filenames = pd.read_csv('../data/LC-STEC-data.csv',
+#                    sep=' ', index_col=0)
+                    
+# for LC data
+filenames = pd.read_csv('../data/fieldbook_data.csv',
                     sep=' ', index_col=0)
+                    
+                                 
 filename = filenames.loc[staketitle, 'filename'] + '_corr' + corr
 print('filename: ' + filename)
 
