@@ -36,7 +36,8 @@ filenames = ['2009_stake_coordinates',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
              #'2018_stake_coordinates_trimble_post']
-             '2018_stake_coordinates_corr']
+             #'2018_stake_coordinates_corr']
+             '2018_stake_coordinates_corr_final']
              #'2018_stake_coordinates_corr_STEC']
              #'2018_stake_coordinates_corr_LC']
 
@@ -259,7 +260,7 @@ class stake(object):
             ax1.errorbar(self.dates, self.northing, yerr=self.sN, fmt='.',
                           capsize=3)
             ax1.plot(self.dates, self.northing, color='k', linewidth=.5)
-            ax1.set_ylabel('Northing / m')
+            ax1.set_ylabel('Northing [m]')
             ax1.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
             ax1.set_xlim([2010.7, 2018.3])
             plotOpts(ax1)
@@ -268,7 +269,7 @@ class stake(object):
             ax2.errorbar(self.dates, self.easting, yerr=self.sE, fmt='.',
                          capsize=3)
             ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
-            ax2.set_ylabel('Easting / m')
+            ax2.set_ylabel('Easting [m]')
             ax2.set_xticks([2011, 2012, 2013, 2014, 2015, 2016, 2017])
             ax2.set_xlim([2010.7, 2018.3])
             plotOpts(ax2)
@@ -292,8 +293,8 @@ class stake(object):
             plt.errorbar(x, y, xerr=sx, yerr=sy, fmt='.', color='k', ecolor=c)
         #plt.plot(self.easting, self.northing, color='k', linewidth=.5)
 
-        plt.xlabel('Easting / m')
-        plt.ylabel('Northing / m')
+        plt.xlabel('Easting [m]')
+        plt.ylabel('Northing [m]')
 
         # write year next to stake positions    
         for i, (year, x, y) in enumerate(zip(
