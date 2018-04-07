@@ -9,7 +9,7 @@ filename_tbc = '2018_stake_coordinates_trimble_post'
 data_tbc = pd.read_csv('../data/stake_coordinates/' + filename_tbc
         + '.csv', sep=' ')
         
-filename_os = '2018_stake_coordinates_corr'
+filename_os = '2018_stake_coordinates_corr_LC'
 data_os = pd.read_csv('../data/stake_coordinates/' + filename_os
         + '.csv', sep=' ')
 
