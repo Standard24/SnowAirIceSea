@@ -23,6 +23,15 @@ data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
             for filename in filenames]
 
 
+# add columns with utm coordinates
+for df in data_imp:
+    df['latitude(m)'] = df.apply(
+      lambda row: from_latlon(row['latitude(deg)'], row['longitude(deg)'])[1],
+      axis=1)
+    df['longitude(m)'] = df.apply(
+      lambda row: from_latlon(row['latitude(deg)'], row['longitude(deg)'])[0],
+      axis=1)
+
 # calculate mean values of columns
 
 # no filtering
@@ -35,13 +44,20 @@ data_imp = [pd.read_csv('../data/processed_data/' + filename + '.pos',
 mean_values = []
 for stake in data_imp:
     mean_values += [pd.Series({
-    'latitude(deg)' : np.average(stake['latitude(deg)'],
+    'latitude(m)' : np.average(stake['latitude(m)'],
     weights=[1/(s**2) for s in stake['sdn(m)']]),
-    'longitude(deg)' : np.average(stake['longitude(deg)'],
+    'longitude(m)' : np.average(stake['longitude(m)'],
     weights=[1/(s**2) for s in stake['sde(m)']]),
     'height(m)' : np.average(stake['height(m)'],
     weights=[1/(s**2) for s in stake['sdu(m)']])
                              })]
+
+# calculate standard deviations of timeseries for each stake
+uncertainties = [
+    [np.std(stake['latitude(m)']),
+     np.std(stake['longitude(m)']),
+     np.std(stake['height(m)'])]
+     for stake in data_imp]
 
 # give each data frame a name attribute
 for i, df in enumerate(mean_values):
@@ -50,16 +66,19 @@ for i, df in enumerate(mean_values):
 ###############################################################################
 # write mean values to textfile
 # header for textfile
-header = ['Name', 'Northing', 'Easting', 'Elevation']
+header = ['Name', 'Northing', 'Easting', 'Elevation', 'sN', 'sE', 'sH']
 
 # list of lines with data
 # convert lonlat to utm
 data = [ 
         [mv.df_name,
-         from_latlon(mv['latitude(deg)'], mv['longitude(deg)'])[1],
-         from_latlon(mv['latitude(deg)'], mv['longitude(deg)'])[0],
-         mv['height(m)'] ] 
-        for mv in mean_values] 
+         mv['latitude(m)'],
+         mv['longitude(m)'],
+         mv['height(m)'],
+         uc[0],
+         uc[1],
+         uc[2] ] 
+        for mv, uc in zip(mean_values, uncertainties)] 
 
 writeToFile = [header] + data
 
