@@ -36,9 +36,9 @@ filenames = ['2009_stake_coordinates',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
              #'2018_stake_coordinates_trimble_post']
-             #'2018_stake_coordinates_corr']
+             '2018_stake_coordinates_corr']
              #'2018_stake_coordinates_corr_STEC']
-             '2018_stake_coordinates_corr_LC']
+             #'2018_stake_coordinates_corr_LC']
 
 # import all csv files: Create a list of pandas data frames
 data = [pd.read_csv('../data/stake_coordinates/' + filename
@@ -49,9 +49,6 @@ for i, t in enumerate(time):
     print('\n' + str(t) + ':')
     print(data[i])
 
-
-# choose measurement error in meters
-err = .2
 
 # choose one title for each stake and make lists which contains the
 # different names of the stake and the different years
@@ -115,7 +112,7 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
                  [2018, 'BL4-2018']],
          'BL5': [[2011, 'BL5-2011'],
                  [2012, 'BL5-2011'], [2013, 'BL5-2011'], [2014, 'BL5-2011'],
-                 [2015, 'BL5-2012'], [2016, 'BL5-2011'], [2017, 'BL5-2011'],
+                 [2015, 'BL5-2011'], [2016, 'BL5-2011'], [2017, 'BL5-2011'],
                  [2017, 'BL5-2017'],
                  [2018, 'BL5-i-2017'], [2018, 'BL5-ii-2017']]         
          }
@@ -134,6 +131,19 @@ limits = {'T1' : ((.3, 0), (0, 0)),
           'BL3' : ((2, 1), (0, 0)),
           'BL5' : ((0, 0), (.3, .6))
           }
+
+# list to move some year labels (dx, dy), up and right are positive
+lu = (-.35, -.15) # left under
+ru = ( .05, -.15) # right under
+lo = (-.35,  .05) # left over
+movelabs = {'T1': {3: lo, 5: ru, 9: lu, 11:lu, 12:lo},
+            'T3': {2: lu,
+                   3: ru,
+                   5: ru,
+                   6: lo,
+                   8: ru}
+           }
+
 
 stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
           'BL2', 'BL3', 'BL4', 'BL5']
@@ -216,6 +226,24 @@ class stake(object):
         self.northing  = [year['Northing'].values[0]  for year in self.data]
         self.easting   = [year['Easting'].values[0]   for year in self.data]
         self.elevation = [year['Elevation'].values[0] for year in self.data]
+        
+        # try to read measurement errors from file
+        # if not in file, use constant error
+
+        self.sN        = []
+        for year in self.data:
+            try:
+                self.sN += [year['sN'].values[0]]
+            except KeyError:
+                self.sN += [.2]
+
+        self.sE        = []
+        for year in self.data:
+            try:
+                self.sE += [year['sE'].values[0]]
+            except KeyError:
+                self.sE += [.2]
+
         print('Stake ' + title + ' initialized.')
 
     def makePlots(self):
@@ -232,7 +260,7 @@ class stake(object):
 
             # subplot of northing
             ax1.set_title('Time evolution of movement of ' + self.title)
-            ax1.errorbar(self.dates, self.northing, yerr=err, fmt='.',
+            ax1.errorbar(self.dates, self.northing, yerr=self.sN, fmt='.',
                           capsize=3)
             ax1.plot(self.dates, self.northing, color='k', linewidth=.5)
             ax1.set_ylabel('Northing / m')
@@ -241,7 +269,7 @@ class stake(object):
             plotOpts(ax1)
 
             # subplot of easting
-            ax2.errorbar(self.dates, self.easting, yerr=err, fmt='.',
+            ax2.errorbar(self.dates, self.easting, yerr=self.sE, fmt='.',
                          capsize=3)
             ax2.plot(self.dates, self.easting, color='k', linewidth=.5)
             ax2.set_ylabel('Easting / m')
@@ -263,16 +291,23 @@ class stake(object):
         plt.gca().ticklabel_format(useOffset=False)
         
         colors = [colordict[date[-4:]] for date in self.names]
-        for x, y, c in zip(self.easting, self.northing, colors):
-            plt.errorbar(x, y, yerr=err, xerr=err, fmt='.', color=c)
-        plt.plot(self.easting, self.northing, color='k', linewidth=.5)
+        for x, y, sx, sy, c in zip(
+                self.easting, self.northing, self.sE, self.sN, colors):
+            plt.errorbar(x, y, xerr=sx, yerr=sy, fmt='.', color='k', ecolor=c)
+        #plt.plot(self.easting, self.northing, color='k', linewidth=.5)
 
         plt.xlabel('Easting / m')
         plt.ylabel('Northing / m')
 
         # write year next to stake positions    
-        for year, x, y in zip(self.dates, self.easting, self.northing):
-            plt.annotate(year, (x + .05, y + .05))
+        for i, (year, x, y) in enumerate(zip(
+            self.dates, self.easting, self.northing)):
+            try:
+                dx, dy = movelabs[self.title][i]
+            except KeyError:
+                dx, dy = (.05, .05)
+                
+            plt.annotate(year, (x + dx, y + dy))
 
         plotOpts(plt.gca())
         plt.legend(handles=patches)
