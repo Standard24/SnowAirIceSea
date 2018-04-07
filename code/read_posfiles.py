@@ -6,11 +6,12 @@ import numpy as np
 
 from coordinate_transformation2 import from_latlon
 
+suffix = '_corr' # '_corr' '_corr_LC'
 
 fieldbook = pd.read_csv('../data/fieldbook_data.csv',
                         sep='\s')
 
-filenames = [str(name) + '_corr' for name in fieldbook['filename']]
+filenames = [str(name) + suffix for name in fieldbook['filename']]
 stakenames = [str(name) for name in fieldbook['name']]
 
 # read data from all pos files
@@ -82,7 +83,7 @@ data = [
 
 writeToFile = [header] + data
 
-with open('../data/stake_coordinates/2018_stake_coordinates_corr.csv',
+with open('../data/stake_coordinates/2018_stake_coordinates' + suffix + '.csv',
           'w') as f:
     for line in writeToFile:
         # use space as separator, dont write [, ] and '
