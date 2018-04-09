@@ -38,7 +38,8 @@ fieldbook = pd.read_csv('../data/fieldbook_data.csv',
 corr_dir = {}   
 fd_pos_dir = {}  
 fd_other_dir = {} 
-error_dir = {}               
+error_dir = {}      
+error_ref_dir = {}         
 for k in range(0, len(fieldbook['name'])):
     # --- calculate the correction values 
     # absoute delta
@@ -86,12 +87,42 @@ for k in range(0, len(fieldbook['name'])):
     s_final_north = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north**2)
     s_final_east = np.sqrt(data_os_dir[fieldbook['name'][k]]['sE']**2 + s_delta_east**2)
     s_final_elev = np.sqrt(s_delta_elev**2 + data_os_dir[fieldbook['name'][k]]['sH']**2)
-    #s_delta_ref_17 =
-    #s_delta_ref_16 = 
-    #s_delta_ref_15 = 
+    
+    s_delta_elev_ref = np.sqrt(s_ha**2 + s_hs**2 + s_dh**2)
+    
+    s_delta_ref_17 = np.sqrt((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
+    - fieldbook['dh_17_18'][k]**2) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+    s_delta_north_ref_17 = np.sqrt(s_delta_ref_17**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_17**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2)
+    s_delta_east_ref_17 = np.sqrt(s_delta_ref_17**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_17**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
+    sN_17 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_17**2)
+    sE_17 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sE']**2 + s_delta_east_ref_17**2)
+    
+    s_delta_ref_16 = np.sqrt((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
+    - fieldbook['dh_16_18'][k]**2) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+    s_delta_north_ref_16 = np.sqrt(s_delta_ref_16**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_16**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2)
+    s_delta_east_ref_16 = np.sqrt(s_delta_ref_16**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_16**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
+    sN_16 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_16**2)
+    sE_16 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sE']**2 + s_delta_east_ref_16**2)
+    
+    s_delta_ref_15 = np.sqrt((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2\
+    - fieldbook['dh_15_18'][k]**2) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+    s_delta_north_ref_15 = np.sqrt(s_delta_ref_15**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_15**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2)
+    s_delta_east_ref_15 = np.sqrt(s_delta_ref_15**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_15**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
+    sN_15 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_15**2)
+    sE_15 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sE']**2 + s_delta_east_ref_15**2)
     
     error_dir[fieldbook['name'][k]] = {'sN': round(s_final_north,2), 'sE': round(s_final_east,2), 'sH': round(s_final_elev,2)}
-        
+    
+    error_ref_dir[fieldbook['name'][k]] = {'sN_ref_17': round(sN_17,2),
+                                      'sE_ref_17': round(sE_17,2),
+                                      'sN_ref_16': round(sN_16,2),
+                                      'sE_ref_16': round(sE_16,2),
+                                      'sN_ref_15': round(sN_15,2),
+                                      'sE_ref_15': round(sE_15,2)}
+    
     # creating dict for the fieldbook data table     
     fd_pos_dir[fieldbook['name'][k]] = {'Northing [m]': '{:.2f}'.format(fieldbook['northing'][k]),
     'Easting [m]': '{:.2f}'.format(fieldbook['easting'][k]),
@@ -138,10 +169,10 @@ for key in data_tbc_dir.keys():
 # 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
 #df_tbc_tab_final = df_tbc_tab_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
 #tab_tbc_final = df_tbc_tab_final.to_latex(index=False)
-
+#
 #with open('../protocol/tables/tbc_tab.tex', 'w') as f:
 #    f.write(tab_tbc_final.encode('utf-8'))
-
+#
 ## data in .csv-file 
 #df_tbc_final = pd.DataFrame(final_tbc_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_tbc_final.to_csv('../data/stake_coordinates/' + filename_tbc + '_final' + '.csv', sep=' ', encoding='utf-8')
@@ -151,10 +182,10 @@ for key in data_tbc_dir.keys():
 # 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
 #df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
 #tab_os_final = df_os_tab_final.to_latex(index=False)
-
+#
 #with open('../protocol/tables/os_tab.tex', 'w') as f:
 #    f.write(tab_os_final.encode('utf-8'))
-
+#
 #df_os_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_os_final = df_os_final.merge(df_error)
@@ -162,6 +193,8 @@ for key in data_tbc_dir.keys():
 
 ## position vales referenced to the last year (for the velocity)
 #df_os_ref_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
+#df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
+#df_os_ref_final = df_os_ref_final.merge(df_error_ref)
 #df_os_ref_final.to_csv('../data/stake_coordinates/' + filename_os + '_ref_final' + '.csv', sep=' ', encoding='utf-8')
 
 # fieldbook
@@ -172,12 +205,21 @@ for key in data_tbc_dir.keys():
 #'Direction of Incl. [deg]', 'Distance Rover-Stake [m]']]
 #tab_fb_final = df_fb_final.to_latex(index=False)
 #tab_other_final = df_other_final.to_latex(index=False)
- 
+# 
 #with open('../protocol/tables/fb_pos_tab.tex', 'w') as f:
 #    f.write(tab_fb_final.encode('utf-8'))
 #
 #with open('../protocol/tables/fb_other_tab.tex', 'w') as f:
 #    f.write(tab_other_final.encode('utf-8'))
- 
- 
+
+# mean position errors
+sN = 0
+sE = 0 
+for key in error_dir.keys():
+    sN = sN + error_dir[key]['sN']
+    sE = sE + error_dir[key]['sE']
+sN_mean = sN/len(error_dir.keys())
+sE_mean = sE/len(error_dir.keys())
+print sN_mean, sE_mean
+
  
