@@ -31,7 +31,7 @@
 \usepackage{caption}
 \usepackage{subcaption}
 %X%%\usepackage{subfig}                % XXXXXXXXXXX this does not work with our compiler
-%X%%\captionsetup[sub]{justification=centering}
+\captionsetup[sub]{justification=centering}
 %\usepackage{makeplot}
 \usepackage[toc,page]{appendix}     % for making an appendix
 \usepackage[hyphens]{url}           % prints URLs like they should be in bibtex
@@ -47,7 +47,7 @@
 \usepackage{upgreek}
 %\usepackage{sistyle}                   % Package to typeset SI units
 %X%%\usepackage{siunitx}                % XXXXXXXXXXX this does not work with our compiler
-\usepackage{titlesec}
+%X%%\usepackage{titlesec}
 \usepackage{subfiles}
 \usepackage{gensymb}                % to use \degree
 \usepackage{rotating}
@@ -59,27 +59,28 @@
 \newcommand{\chapterauthor}{}
 \newcommand{\nn}{\ensuremath{\mathrel{\nonumber}}}
 
-
-\titleformat{\chapter}                  % command to format the chapter titles
-[hang]                          % shape/type of title
-{\LARGE\bfseries}
-{\makebox[0.5in][l]{\thechapter}}
-{0em}
-{}
-[
-\normalsize\normalfont      % reset font formatting
-\vspace{0.5\baselineskip}
-\hspace*{0.5in}             % indent author name width of chapter number box
-\large                      % make text that follows large
-\thispagestyle{empty}       % suppress page numbers
-\textit{\chapterauthor}
-]                               % end of what comes after title
-
-
-\titlespacing*{\chapter}
-{0em}                              % spacing to left of chapter title
-{0ex}                              % vertical space before title
-{3\baselineskip}                   % vertical spacing after title; here set to 3 lines 
+%X%%%
+%\titleformat{\chapter}                  % command to format the chapter titles
+%[hang]                          % shape/type of title
+%{\LARGE\bfseries}
+%{\makebox[0.5in][l]{\thechapter}}
+%{0em}
+%{}
+%[
+%\normalsize\normalfont      % reset font formatting
+%\vspace{0.5\baselineskip}
+%\hspace*{0.5in}             % indent author name width of chapter number box
+%\large                      % make text that follows large
+%\thispagestyle{empty}       % suppress page numbers
+%\textit{\chapterauthor}
+%]                               % end of what comes after title
+%
+%
+%\titlespacing*{\chapter}
+%{0em}                              % spacing to left of chapter title
+%{0ex}                              % vertical space before title
+%{3\baselineskip}                   % vertical spacing after title; here set to 3 lines 
+%X%%
 
 %X%%\DeclareSIUnit[number-unit-product = \,]   % can not be used because package is commented
 %X%%\masl{m.a.s.l}
@@ -117,7 +118,7 @@
 
 \begin{document}
 
-\maketitle
+%\maketitle
 
 \setcounter{tocdepth}{2}
 \tableofcontents
