@@ -125,10 +125,21 @@ for key in pos_ref_dict.keys():
             v15 = np.nan
             s_v15 = np.nan
             
-        vel_dict[key] = {'Velocity_17': v17, 'Error_17':s_v17, 
-            'Velocity_16': v16, 'Error_16':s_v16, 
-            'Velocity_15': v15, 'Error_15':s_v15}
+        vel_dict[key] = {'Velocity_17': round(v17,2), 'Error_17':round(s_v17,2), 
+            'Velocity_16': round(v16,2), 'Error_16':round(s_v16,2), 
+            'Velocity_15': round(v15,2), 'Error_15':round(s_v15,2)}
         
 
 df_vel = pd.DataFrame(vel_dict).transpose().reset_index().rename(columns={'index':'Name'})
 df_vel.to_csv('../data/stake_velocities.csv', sep=' ', encoding='utf-8')    
+
+df_vel = pd.DataFrame(vel_dict).transpose().reset_index().rename(columns={'index':'Name', 
+'Velocity_17': 'Velocity [m/a] (2017)', 'Error_17': 'Error [m/a] (2017)', 
+'Velocity_16': 'Velocity [m/a] (2016)', 'Error_16': 'Error [m/a] (2016)', 
+'Velocity_15': 'Velocity [m/a] (2015)', 'Error_15': 'Error [m/a] (2015)' })
+df_vel = df_vel[['Name', 'Velocity [m/a] (2017)', 'Error [m/a] (2017)', 
+'Velocity [m/a] (2016)', 'Error [m/a] (2016)', 
+'Velocity [m/a] (2015)', 'Error [m/a] (2015)']]
+tab_vel = df_vel.to_latex(index=False)
+with open('../protocol/tables/vel_tab.tex', 'w') as f:
+    f.write(tab_vel.encode('utf-8'))

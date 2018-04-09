@@ -91,8 +91,8 @@ for k in range(0, len(fieldbook['name'])):
     s_delta_elev_ref = np.sqrt(s_ha**2 + s_hs**2 + s_dh**2)
     
     s_delta_ref_17 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
-    - fieldbook['dh_17_18'][k]**2) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
-    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2))
+    - fieldbook['dh_17_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
     s_delta_north_ref_17 = np.sqrt(s_delta_ref_17**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_17**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     s_delta_east_ref_17 = np.sqrt(s_delta_ref_17**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_17**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     sN_17 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_17**2)
@@ -101,16 +101,16 @@ for k in range(0, len(fieldbook['name'])):
 #    IPython.embed()
     
     s_delta_ref_16 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
-    - fieldbook['dh_16_18'][k]**2) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
-    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2))
+    - fieldbook['dh_16_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
     s_delta_north_ref_16 = np.sqrt(s_delta_ref_16**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_16**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     s_delta_east_ref_16 = np.sqrt(s_delta_ref_16**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_16**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     sN_16 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_16**2)
     sE_16 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sE']**2 + s_delta_east_ref_16**2)
     
     s_delta_ref_15 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2\
-    - fieldbook['dh_15_18'][k]**2) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
-    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2))
+    - fieldbook['dh_15_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
     s_delta_north_ref_15 = np.sqrt(s_delta_ref_15**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_15**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     s_delta_east_ref_15 = np.sqrt(s_delta_ref_15**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_15**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     sN_15 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_15**2)
@@ -180,24 +180,29 @@ for key in data_tbc_dir.keys():
 #df_tbc_final.to_csv('../data/stake_coordinates/' + filename_tbc + '_final' + '.csv', sep=' ', encoding='utf-8')
 
 ## open source
+#df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name',
+#'sN': 'Error Northing [m]', 'sE': 'Error Easting [m]', 'sH': 'Error Elevation [m]'})
+#
 #df_os_tab_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name',
 # 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
-#df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
+#df_os_tab_final.merge(df_error)
+#df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Error Northing [m]', 
+#'Easting [m]', 'Error Easting [m]', 'Elevation [m]', 'Error Elevation [m]']]
 #tab_os_final = df_os_tab_final.to_latex(index=False)
 #
 #with open('../protocol/tables/os_tab.tex', 'w') as f:
 #    f.write(tab_os_final.encode('utf-8'))
-#
+
 #df_os_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_os_final = df_os_final.merge(df_error)
 #df_os_final.to_csv('../data/stake_coordinates/' + filename_os + '_final' + '.csv', sep=' ', encoding='utf-8')
-#
-## position vales referenced to the last year (for the velocity)
-#df_os_ref_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_os_ref_final = df_os_ref_final.merge(df_error_ref)
-#df_os_ref_final.to_csv('../data/stake_coordinates/' + filename_os + '_ref_final' + '.csv', sep=' ', encoding='utf-8')
+
+# position vales referenced to the last year (for the velocity)
+df_os_ref_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_os_ref_final = df_os_ref_final.merge(df_error_ref)
+df_os_ref_final.to_csv('../data/stake_coordinates/' + filename_os + '_ref_final' + '.csv', sep=' ', encoding='utf-8')
 
 # fieldbook
 #df_fb_final = pd.DataFrame(fd_pos_dir).transpose().reset_index().rename(columns={'index':'Name'})
