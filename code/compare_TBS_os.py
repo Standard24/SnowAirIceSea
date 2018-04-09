@@ -31,8 +31,9 @@ for key in data_os_dir.keys():
     diff_north = data_tbc_dir[key]['Northing']-data_os_dir[key]['Northing']
     diff_east = data_tbc_dir[key]['Easting']-data_os_dir[key]['Easting']
     diff_elev = data_tbc_dir[key]['Elevation']-data_os_dir[key]['Elevation']
-    diff_dir[key] = {'dN': round(diff_north,2), 'dE': round(diff_east,2), 
-    'dH': round(diff_elev,2)}
+    diff_dir[key] = {'dN': np.abs(round(diff_north,2)), 
+    'dE': np.abs(round(diff_east,2)), 
+    'dH': np.abs(round(diff_elev,2))}
     
 df_difference = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'index':'Name'})
 
