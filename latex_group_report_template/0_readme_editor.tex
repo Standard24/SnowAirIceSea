@@ -1,0 +1,173 @@
+\documentclass[12pt,a4paper,notitlepage]{scrreprt}
+\usepackage{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{floatpag}				% Different pagestyles
+\usepackage{amsmath}
+\usepackage{booktabs} 				% Is needed for \toprule f.e. in tables
+\usepackage{array}					% Extending the array and tabular environments
+\usepackage{setspace}				% Set space between lines (\onehalfspacing, \doublespacing)
+\usepackage{cancel}					% Strike out things with \cancel{tostrikeout}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[bottom=3cm, top=2.5cm, left=2cm, right=2cm, bindingoffset=10mm]{geometry}
+									% Set the page differently to the default settings
+\usepackage{amsfonts}
+%\usepackage[cc]{titlepic}			% Enables ONE picture on titlepage
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pifont}
+\usepackage{natbib}
+%\usepackage{cite}
+\usepackage[automark]{scrpage2}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[sub]{justification=centering}
+%\usepackage{makeplot}
+\usepackage[toc,page]{appendix} 	% for making an appendix
+\usepackage[hyphens]{url} 	 		% prints URLs like they should be in bibtex
+\usepackage{wrapfig}				% Floating figures
+% \usepackage{abstract} 				% adds the word "Abstract" and modifications can be made
+\usepackage{bibtopic} 				% Several bibtex files within one document
+\usepackage{hyperref}				% Makes active (on click) references in the final pdf
+\usepackage{afterpage}				% Execute command after the next page break
+\usepackage{placeins}				% Control float placement with /FloatBarrier
+\pagestyle{scrheadings}
+\setheadsepline{1pt}
+\usepackage{verbatim}
+\setlength{\parindent}{0pt}
+
+% \newcommand{\chapterauthor}{}
+% \usepackage{titlesec}
+% \titleformat{\chapter}					% command to format the chapter titles
+%         [hang]							% shape/type of title
+%         {\LARGE\bfseries}
+%         {\makebox[0.5in][l]{\thechapter}}
+%         {0em}
+%         {}
+%         [
+%             \normalsize\normalfont		% reset font formatting
+%             \vspace{0.5\baselineskip}
+%             \hspace*{0.5in}				% indent author name width of chapter number box
+%             \large						% make text that follows large
+%             \thispagestyle{empty}		% suppress page numbers
+%             \textit{\chapterauthor}
+%         ]								% end of what comes after title
+% \titlespacing*{\chapter}
+%      {0em}								% spacing to left of chapter title
+%      {0ex}								% vertical space before title
+%      {3\baselineskip}					% vertical spacing after title; here set to 3 lines 
+
+
+\usepackage{sistyle}					% Package to typeset SI units
+% \usepackage{subfigure}
+
+\newcommand{\nn}{\ensuremath{\mathrel{\nonumber}}}
+\renewcommand{\thesection}{\arabic{section}}
+
+
+\title{Readme Editor}
+\author{Robert Gutmann, Yannick Kern}
+\date{June 2016}
+
+%===========================================================================================
+
+\begin{document}
+
+
+\setcounter{tocdepth}{2}
+\bibliographystyle{AGFstyle}
+
+\maketitle
+
+% ==================================================
+
+\section{General Introduction to this \LaTeX Template}
+
+This folder and subfolders shall provide an easy template to write your final reports in \LaTeX. It was first used for an AGF Course in 2014 (courtesy Hauke Schulz) and modified, optimized and reused in 2016. The tex-files contain a wide number of packages, that are used during compilation and therefore allow comprehensive use of commands but need a sufficiently large \LaTeX distribution, too. The template was used on UNIX-system (Linux, Mac) only and is best executed via command line, but can probably also be used on Windows computers. Also the use of \url{www.sharelatex.com} is possible and has been tested.
+
+
+\section{Description of folder}
+\label{sec:desciption}
+The main folder contains, besides this readme as pdf and tex-file:
+
+\begin{itemize}
+	\item \textbf{Main.tex} - the core of the whole report
+	\item \textbf{make.sh} - a shell script to compile the report, including bibliography references
+	\item \textbf{AGFstyle.bst} - the bib-style file
+	\item \textbf{studentxx} - the folder, which contains \textbf{everything}, that the other students need (see \autoref{sec:studx})
+\end{itemize}
+
+\textbf{Main.tex} contains the preamble of the final report as well as the the input links to all chapters, that were written by the other students. Also possible appendices are included in this file. Just have a look and familiarize yourself with the different paragraphs.\\
+
+The title of the document can be either inserted via the commands \verb#\title#, \verb#\author# and \verb#\date#, folloed by a \verb#\maketitle# in the document itself. Or you can use the titlepage paragraph and modify it for your purposes. Also the preface can be either included directly in the file or via the \verb#\include# command.\\
+
+Thereafter all the students' chapters can be included, using \verb#\subfile#. First a new path for all graphics of the chapter is set. Default is the folder \textit{figs} in the associated studentxx folder. Now the tex file for the chapter (\textit{ReportPart.tex}) is given as argument in \verb#\subfile#.
+If you want to include various chapters with different bibliographies and different picture folders (of course you do...), you only need to specify a new graphicspath at the start of each chapter and the location of the tex-file.\\
+
+At the end, you can add appendices as desired, using the same procedure. The students should use the file \textit{appendix.tex} for their appendix material instead of adding it at the end of their ReportPart.tex.
+
+
+\section{The studentxx-folder}\label{sec:studx}
+
+The students should only download this folder. They can find everything in it, that they need for the report writing:
+
+\begin{itemize}
+	\item \textbf{Compile.tex} - the \LaTeX file to compile, while working
+	\item \textbf{ReportPart.tex} - the file, that contains the chapters text, tables, pictures etc.
+	\item \textbf{literature.bib} - the bibfile for the citations
+	\item \textbf{figs} - the folder, where to put all your picture files
+	\item \textbf{appendix.tex} - the file that contains the appending text, tables, pictures etc. to you don't want to include in \textit{ReportPart.tex}
+	\item \textbf{AGFstyle.bst} - required by \textit{Compile.tex}
+\end{itemize}
+
+Each student or studentgroup has its own studentxx-folder that they should rename to student01, student02, ... or whichever name you tell them before uploading it again. (We usually enumerated and sent out a list of name-number pairs). At the end, the whole folder is simply uploaded again to the UNIS server. Now you have a whole amount of folders named with student01, student02, etc. The next step is to use the files from \autoref{sec:desciption}. All the studentxx folders and the files from \autoref{sec:desciption} need to be in the same folder. Include all the ReportParts like already started in the \textit{Main.tex}. Also don't forget to include the appendix file per student if they used it.\\
+
+\textbf{One very important note:} in any ReportPart uncomment the last 4 lines in the reference section. They should look like:
+\begin{verbatim}
+%-------------- References ---------------------
+% DON'T CHANGE ANYTHING IN THE FOLLOWING LINES!!!
+%\section*{References}
+%\begin{btSect}{studentxx/literature}
+%\btPrintCited
+%\end{btSect}
+\end{verbatim}
+Important: change the x to the number of the student in whose folder you are at that moment.
+
+\section{Compiling}
+
+As \LaTeX only includes every citation and reference and a full table of contents after a whole procedure of compiling, we wrote a shell script, that simplifies this process and looks like that
+
+\begin{verbatim}
+	pdflatex Main.tex -shell-escape
+	bibtex Main1.aux
+	#bibtex Main2.aux
+	#bibtex Main3.aux...
+	pdflatex Main.tex -shell-escape
+	pdflatex Main.tex -shell-escape
+
+	rm *.bbl *.log *.out *.toc
+\end{verbatim}
+
+That means it compiles the document once, then includes the bibliography for each chapter/student (because you have to bibtex the .aux-file for each chapter/student), and compiles twice again. At the end, every temporary file is removed, leaving the compiled pdf-file. Under perfect circumstances you are done now - Congratulations ;) !
+
+
+\section{Miscellaneous}
+
+Here are some more things, you might consider or might be asked at some point during the writing process. It depends on your level of accuracy/pedantry whether you want to standardise certain things or not.
+
+\begin{itemize}
+	\item You could provide a uniform style for tables. You can use the one of the students readme but also make your own.
+	\item You could decide how capital letters in titles have to occur (each word, only nouns, none at all).
+	\item You could define how to write urls (e.g \verb#\url{}# could be useful), units (the package \textit{sistyle} is included in the preamble) or coordinates.
+	\item If people get problems about where in their reports figures are placed by \LaTeX, the use of \verb#\FloatBarrier# after some figure environments could help.
+\end{itemize}
+
+Also the following problem might occur:\\
+If for example student 1 and student 2 having the same citekey for a reference in their \textit{literature.bib} file but student 2 is not using it then it will show up in his reference list anyway. Because the command \verb#\btPrintCited#  in the ReportPart.tex of student2 recognises that the citekey was already used (in this case from student1).  Therefore it counts as cited and is also printed in student2's references. The only way to avoid this is to use unique citekeys. There might be a more clever solution to this though which is beyond our knowledge.\\
+
+And of course, if you find the template or the readmes to be not helpful or incomplete, feel free to extent or replace it. Otherwise: have fun with it :) !\\
+
+\end{document}

@@ -1,0 +1,211 @@
+\documentclass[12pt,a4paper,notitlepage]{scrreprt}
+\usepackage{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{floatpag}				% Different pagestyles
+\usepackage{amsmath}
+\usepackage{booktabs} 				% Is needed for \toprule f.e. in tables
+\usepackage{array}					% Extending the array and tabular environments
+\usepackage{setspace}				% Set space between lines (\onehalfspacing, \doublespacing)
+\usepackage{cancel}					% Strike out things with \cancel{tostrikeout}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[bottom=3cm, top=2.5cm, left=2cm, right=2cm]{geometry}
+									% Set the page differently to the default settings
+\usepackage{amsfonts}
+%\usepackage[cc]{titlepic}			% Enables ONE picture on titlepage
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{pifont}
+\usepackage{natbib}
+%\usepackage{cite}
+\usepackage[automark]{scrpage2}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[sub]{justification=centering}
+%\usepackage{makeplot}
+\usepackage[toc,page]{appendix} 	% for making an appendix
+\usepackage[hyphens]{url} 	 		% prints URLs like they should be in bibtex
+\usepackage{wrapfig}				% Floating figures
+% \usepackage{abstract} 				% adds the word "Abstract" and modifications can be made
+\usepackage{bibtopic} 				% Several bibtex files within one document
+\usepackage{hyperref}				% Makes active (on click) references in the final pdf
+\usepackage{afterpage}				% Execute command after the next page break
+\usepackage{placeins}				% Control float placement with /FloatBarrier
+\pagestyle{scrheadings}
+\setheadsepline{1pt}
+\usepackage{verbatim}
+\setlength{\parindent}{0pt}
+
+% \newcommand{\chapterauthor}{}
+% \usepackage{titlesec}
+% \titleformat{\chapter}					% command to format the chapter titles
+%         [hang]							% shape/type of title
+%         {\LARGE\bfseries}
+%         {\makebox[0.5in][l]{\thechapter}}
+%         {0em}
+%         {}
+%         [
+%             \normalsize\normalfont		% reset font formatting
+%             \vspace{0.5\baselineskip}
+%             \hspace*{0.5in}				% indent author name width of chapter number box
+%             \large						% make text that follows large
+%             \thispagestyle{empty}		% suppress page numbers
+%             \textit{\chapterauthor}
+%         ]								% end of what comes after title
+% \titlespacing*{\chapter}
+%      {0em}								% spacing to left of chapter title
+%      {0ex}								% vertical space before title
+%      {3\baselineskip}					% vertical spacing after title; here set to 3 lines 
+
+
+\usepackage{sistyle}					% Package to typeset SI units
+% \usepackage{subfigure}
+
+\newcommand{\nn}{\ensuremath{\mathrel{\nonumber}}}
+\renewcommand{\thesection}{\arabic{section}}
+
+\title{Readme Students}
+\author{Robert Gutmann, Yannick Kern}
+\date{June 2016}
+
+%===========================================================================================
+
+\begin{document}
+
+
+\setcounter{tocdepth}{2}
+\bibliographystyle{AGFstyle}
+
+\maketitle
+
+\section{The studentxx - folder}
+
+This readme file provides you with the necessary information about the \LaTeX template, in which you are going to write your final report. The final work will of course be done by the editor, who is provided with more information on how to put the individual chapters together. All that concerns you, is the \textbf{studentxx-folder}. It provides you with the following files and subfolders: 
+
+\begin{itemize}
+	\item \textbf{Compile.tex} - the \LaTeX file to compile, while working
+	\item \textbf{ReportPart.tex} - the file, that contains the chapters' text, tables, pictures etc.
+	\item \textbf{literature.bib} - the bibfile for the citations
+	\item \textbf{figs} - the folder, where to put all your picture files
+	\item \textbf{appendix.tex} - the file that contains the appending text, tables, pictures etc. to you don't want to include in \textit{ReportPart.tex}
+	\item \textbf{AGFstyle.bst} - required by \textit{Compile.tex}, so don't care about it
+\end{itemize}
+
+As already indicated, all content that you want to write and put into your report goes into the \textit{ReportPart.tex} file: text, tables, figures, references. At the end you will find a short paragraph, that implements your references at the end of your report (Don't care about that part and don't change anything). That means each single report chapter will have its own reference part.\\
+
+When you want to see, how your written text will look like after compilation, you only have to compile \textit{Compile.tex} with a suitable \LaTeX compiler. \textbf{Don't} change anything in \textit{Compile.tex} just compile it. For Windows and Mac there is a large variety of (mostly free) software tools to do so, e.g. TeXworks, Texstudio, Texmaker etc. On Unix systems (Linux, Mac) you can simply compile via command line (\verb#pdflatex Compile.tex#). Do \textbf{not} try to compile \textit{ReportPart.tex}, it will raise an error because it does not contain any document preamble.\\
+
+Every figure you want to implement goes into the \textit{figs} folder. How you can include it in your text, you can read in the section about figures (\autoref{sec:figs}).
+
+
+\section{Figures}\label{sec:figs}
+
+Use the following code snippet, to include a picture. You do \textbf{not} need to give any file paths, just give the file name!
+
+\begin{verbatim}
+	\begin{figure}[ht]
+		\centering
+		\includegraphics[trim = 0mm 0mm 0mm 0mm, width=1\textwidth]{picture_name}
+		\caption{Here is the caption for the figure.}
+		\label{fig.labelname}
+	\end{figure}
+\end{verbatim}
+
+You only need to replace \verb#picture_name# by your pictures name and drop your picture in the \textit{figs} folder of your studentxx folder. If you want to change your picture you can trim/crop it with the first given argument or change the size by scaling it relatively to the textwidth (where \verb#1\textwidth# should be your maximum, that means just change 1 into 0.8 for example to get your picture smaller) You can also add \verb#rotate = 45# to rotate a picture (in this case by 45 degrees counterclockwise). Then you only need to add a caption and a label (see further explanation to labels below) and that's it!
+
+\section{References and Labels}
+
+On of \LaTeX 's power lies in the handling of references. Every object you might want to refer to in your report (e.g. a section, subsection, figure, table, chapter ...), you can label. Whenever you want to refer to this object you just call its labelname at the desired spot. Let's look at an example. Here is a table:
+
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{lll}
+  	\toprule
+    A & B & C \\
+    \midrule
+    d & e & f \\
+    g & h & i\\
+    \bottomrule
+  \end{tabular}
+  \caption{This is the caption of the table.}
+  \label{tab.testtable}
+\end{table}
+
+The code in \LaTeX is the following:
+
+\begin{verbatim}
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{lll}
+        \toprule
+        A & B & C \\
+        \midrule
+        d & e & f \\
+        g & h & i \\
+        \bottomrule
+    \end{tabular}
+    \caption{This is the caption of the table.}
+    \label{tab.testtable}
+\end{table}
+\end{verbatim}
+
+As you can see, the label is \verb#tab.testtable# so if we now want to refer to it at the end of the sentence we just write \verb#\autoref{tab.testtable}# at the result looks like that: \autoref{tab.testtable}.
+
+\textbf{Please do not confuse a REFERENCE with a CITATION of a report/article/... that has already been published.} You will get information about the latter very soon. 
+
+Just another word on the labels: use an easy and consistent way of labeling! Otherwise it will be hard for YOU to read your code again (which you will do at some point, believe me ;)). The label should contain the type of object (table, figure, section...), your name (because two people might call a figure "temperature03pm"...) and the actual name of the object. An example: Justus Meyer might call a figure about a timeseries of temperature \verb#fig.JM:temp_timeseries#. Please get in touch with the editor about the labeling system beforehand!\\
+
+You might also want to refer to another chapter. Let's say you want to student04. Then you would need to refer to his report label which in best case is \texttt{student04:report}. You already know how to refer by using \verb#\autoref{student04:report}#. If you compile your report and this reference prints out as \textbf{??}, don't worry. This is due to the fact that LaTeX doesn't know student04 yet because you are only compiling your \textit{ReportPart.tex}. The editor will take care of this when he is compiling all the reports together in the end.
+
+\section{Citations}
+\label{sec:citations}
+You will have to cite previous studies or articles that are related to your topic in your report. For this purpose, \LaTeX\ comes with two helpful commands: \verb#\citep{}# and \verb#\citet{}#. Let's look at an example again: Lilalu and collegues wrote, that green is a color and you want to state that, too. So you can choose one of the following options.\\
+
+\verb#\citet{lilalu} stated, that green is a color.# would look like this: Lilalu et al. (2016) stated, that green is a color. It is an \textit{in text} citation.\\
+
+\verb#One has to consider, that green is a color \citep{lilalu}.# would look like this: One has to consider, that green is a color (Lilalu et al., 2016). The citation comes in brackets after the statement.\\
+
+But of course, \LaTeX\ needs to know, what kind of literature Lilalu produced and where and when it was published. Therefore you have the bibtex file \textit{literature.bib}, where each piece of literature, you want to cite has a so-called bib item. These look e.g like that:
+
+\begin{verbatim}
+@article {lilalu,
+		author = {Lilalu, Lo and Lolale, Li},
+		title = {Colors in the rainbow},
+		journal = {Journal of Geophysical Research: Oceans},
+		volume = {0815},
+		number = {12345},
+		issn = {2156-2202},
+		doi = {10.1039/2016JC192757},
+		keywords = {colors, rainbow},
+		year = {2016},
+	}
+\end{verbatim}
+
+Behind the @ you can see which type of literature it is. Google tells you, which types there are. After \{ you have got the bib item key, which you use in the citation commands.\\
+You can find these bib items for most available literature online. Usually you can just download a bib file from the publishers page. Then you only need to add the bib item in the \textit{literature.bib} file and it should work.\\
+
+\section{Appendix}
+\label{studentxx:appendix}
+Everything you think is important but not important enough to show up in your actual report you can write into the file \textbf{appendix.tex}. Change the label in the \textit{appendix.tex} file 
+\begin{verbatim}
+	\label{studentxx:appendix} 		
+\end{verbatim}
+and replace x with your number. You can refer to your appendix by writing:\\ \verb#\autoref{studentxx:appendix}#. \\\textit{Example}:\\
+A table of all the measurement settings is in the appendix (see \verb#\autoref{studentxx:appendix}#). Looks like this: A table of all the measurement settings is found in the appendix (see \autoref{studentxx:appendix}).\\
+
+Information: Citations like you learned in \autoref{sec:citations} won't really work in the \textit{appendix.tex} file. Even they show up they might mess up the references in the final report of your course. So don't use them and if you really need to speak to your editor to find a solution.\\\\
+
+\section{Get started}
+After you agreed to a label standard in your course and everyone got a student number the next three things are the first things you are going to do:
+\begin{itemize}
+	\item change the name of your studentxx folder by replacing the "xx" with your number (e.g. 01, 02, 03, ... or  10, 11, 12, ... )
+	\item open your \textit{ReportPart.tex} file and change the label \textit{studentxx:report} to what you agreed on or at least replace the x by your student number
+	\item open your \textit{appendix.tex} file and also change the label here to your desired label. Do that step even if your are not sure yet if your are going to use an appendix.
+\end{itemize}
+
+Allright, we guess that is enough information for the moment. You might also find some of the information from this guideline in the first comment lines in each .tex file. Any specific questions you should ask the editor and also make sure that all of your course knows the answer. Open your \textit{ReportPart.tex} and get started. Good luck with your report! 
+
+\end{document}
