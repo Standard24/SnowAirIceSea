@@ -49,7 +49,7 @@ In addition, we consider the inclination of the stake and calculate the error de
 
 \begin{figure}
 \centering
-\includegraphics[width=\linewidth]{./figs/pictures/schematic_setup.pdf}
+\includegraphics[width=\linewidth]{/figs/pictures/schematic_setup.pdf}
 \caption{Schematic figure of the relevant parameter in the measurment setup.}
 \end{figure}
 
@@ -68,38 +68,27 @@ In addition, we consider the inclination of the stake and calculate the error de
 
 % name accurancies of the final data:
 Despite all the correction, it is important for the interpretation of the results to consider the accurancy of all parts our measurments.
+The average error on the Northing value is 0.40 m  
+The average error on the Easting value is 0.19 m
+The average error on the Elevation is 0.89 m
 
-% tables:
-\begin{table}[h]
-\caption{Final positions after the TBC post processing.}
-\centering 
-\input{tables/tbc_tab.tex}
-\label{GPS:tab:tbc_tab}
-\end{table}
+The raw data for our position measurements read from the controller ar given in the table in the appendix~\ref{GPS:tab:fb_pos_tab}.
+The raw data from our measurements are given in the appendix~\ref{GPS:tab:fb_others_tab}. 
+The TBC post processed coordinates in the appendix~\ref{GPS:tab:tbc_tab}.
 
 \begin{table}[h]
-\caption{Final positions after the open source post processing.}
+\caption{Final positions after the open source post processing and stake correction with the error.}
 \centering
 \input{tables/os_tab.tex}
 \label{GPS:tab:os_tab}
 \end{table}
 
-The raw data from our measurements are given in the appendix (table xy). 
 
 \begin{table}[h]
-\caption{Raw position data measured in the field.}
+\caption{Difference of Northing, Easting and Elevation between the two different post processing methods.}
 \centering
-\input{tables/fb_pos_tab.tex}
-\label{GPS:tab:fb_pos_tab}
+\input{tables/diff_tab.tex}
+\label{GPS:tab:diff_tab}
 \end{table}
-
-\begin{table}[h]
-\caption{Raw data collected in the field.}
-\centering
-\input{tables/fb_other_tab.tex}
-\label{GPS:tab:fb_other_tab}
-\end{table}
-
-
 
 

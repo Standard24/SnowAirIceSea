@@ -9,3 +9,26 @@
 
 
 Raw data from fieldbook.
+% raw position data from the Trimble Controller
+\begin{table}[h]
+\caption{Raw position data in Northing, Easting and Elevation from the Trimble Controller.}
+\centering
+\input{tables/fb_pos_tab.tex}
+\label{GPS:tab:fb_pos_tab}
+\end{table}
+
+% raw data from the measurements in the field
+\begin{table}[h]
+\caption{Raw data collected in the field used for the stake correction.}
+\centering
+\input{tables/fb_other_tab.tex}
+\label{GPS:tab:fb_other_tab}
+\end{table}
+
+% final positions post processed with the Trimble Business Center.
+\begin{table}[h]
+\caption{Final positions in Northing, Easting and Elevation with the TBC post processing and the stake correction.}
+\centering 
+\input{tables/tbc_tab.tex}
+\label{GPS:tab:tbc_tab}
+\end{table}
