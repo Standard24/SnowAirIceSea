@@ -1,0 +1,146 @@
+\documentclass[12pt,a4paper,titlepage = false,twoside, bibliography=totoc]{scrreprt}
+
+\usepackage[bottom=3cm, top=2.5cm, left=2cm, right=2cm, bindingoffset=10mm]{geometry}                % specify geometry of the pages
+
+%% Packages
+%% ------------------------------------------------------------------
+\usepackage{typearea}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+%\usepackage{floatpag}              % Different pagestyles
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}               % Is needed for \toprule f.e. in tables
+\usepackage{array}                  % Extending the array and tabular environments
+\usepackage{setspace}               % Set space between lines (\onehalfspacing, \doublespacing)
+%\usepackage{cancel}                 % Strike out things with \cancel{tostrikeout}
+\usepackage[usenames,dvipsnames]{xcolor}
+
+\usepackage{amsfonts}
+%\usepackage[cc]{titlepic}          % Enables ONE picture on titlepage
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{epstopdf}
+\usepackage{pifont}
+\usepackage{natbib}
+%\usepackage{cite}
+\usepackage[automark]{scrpage2}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[sub]{justification=centering}
+%\usepackage{makeplot}
+\usepackage[toc,page]{appendix}     % for making an appendix
+\usepackage[hyphens]{url}           % prints URLs like they should be in bibtex
+\usepackage{wrapfig}                % Floating figures
+\usepackage{abstract}               % adds the word "Abstract" and modifications can be made
+%\usepackage{bibtopic}               % Several bibtex files within one document
+% \usepackage[labelfont={color=brown,bf},font={small},singlelinecheck=false,format=plain,justification=justified,indention=0cm]{caption}
+\usepackage{hyperref}               % Makes active (on click) references in the final pdf
+\usepackage{afterpage}              % Execute command after the next page break
+\usepackage{placeins}               % Control float placement with /FloatBarrier
+
+
+\usepackage{upgreek}
+%\usepackage{sistyle}                   % Package to typeset SI units
+%\usepackage{titlesec}
+
+
+%% our changes
+
+
+
+
+
+%% New Commands
+%% ----------------------------------------------------------------------------------
+
+\newcommand{\chapterauthor}{}
+\newcommand{\nn}{\ensuremath{\mathrel{\nonumber}}}
+
+
+%\titleformat{\chapter}                  % command to format the chapter titles
+%        [hang]                          % shape/type of title
+%        {\LARGE\bfseries}
+%        {\makebox[0.5in][l]{\thechapter}}
+%        {0em}
+%        {}
+%        [
+%            \normalsize\normalfont      % reset font formatting
+%            \vspace{0.5\baselineskip}
+%            \hspace*{0.5in}             % indent author name width of chapter number box
+%            \large                      % make text that follows large
+%            \thispagestyle{empty}       % suppress page numbers
+%            \textit{\chapterauthor}
+%        ]                               % end of what comes after title
+
+
+%\titlespacing*{\chapter}
+%     {0em}                              % spacing to left of chapter title
+%     {0ex}                              % vertical space before title
+%     {3\baselineskip}                   % vertical spacing after title; here set to 3 lines 
+
+
+\newcommand{\todo}[1]{\textbf{\textcolor{red}{#1}}}
+\newcommand{\degc}{$^\circ$C}
+\newcommand{\edegc}{^\circ \text{C}}
+
+
+%% Miscellaneous Settings
+%% --------------------------------------------------------------------------
+
+% \setlength{\parindent}{0mm}
+
+\setheadsepline{1pt}
+
+\pagestyle{scrheadings}
+
+
+
+%% Main Document Part
+%% -------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%% Title %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Here could be your title}
+\author{A. Uthor}
+\date{\today}
+
+%%%%%%%%%%%%%%%%% Document %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%\maketitle
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+\bibliographystyle{AGFstyle}
+
+\clearpage
+
+%%%%%%%%%%%%%%%%% PREFACE %%%%%%%%%%%%%%%%%
+%\chapter*{Preface}
+%\addcontentsline{toc}{chapter}{Preface}
+%\include{preface}
+
+%%%%%%%%%%%%%%%% SINGLE REPORTS %%%%%%%%%%%
+
+\include{gps_report}
+%\include{student2/ReportPart}
+%\include{student3/ReportPart}
+%   .
+%   .
+%   .
+
+%%%%%%%%%%%%%%%%%%% APPENDIX %%%%%%%%%%%%%%%
+\begin{appendices}
+   \include{gps_report_appendix}
+%   \include{./appendix/instrument2}
+    %   .
+    %   .
+    %   .
+\end{appendices}
+
+\end{document}
