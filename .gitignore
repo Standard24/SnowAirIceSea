@@ -10,6 +10,7 @@ __pycache__/
 *.out
 *.toc
 MainPart.pdf
+Compile.pdf
 
 # bibtex
 *.bbl

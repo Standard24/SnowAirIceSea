@@ -36,8 +36,8 @@ filenames = ['2009_stake_coordinates',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
              #'2018_stake_coordinates_trimble_post']
-             #'2018_stake_coordinates_corr']
-             '2018_stake_coordinates_corr_final']
+             '2018_stake_coordinates_corr']
+             #'2018_stake_coordinates_corr_final']
              #'2018_stake_coordinates_corr_STEC']
              #'2018_stake_coordinates_corr_LC']
 
