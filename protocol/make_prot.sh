@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pdflatex -output-directory=./bin MainPart.tex
+pdflatex -output-directory=./bin Compile.tex
 
 
 # ok, this is stupid: bibtex has to be executed in ./bin now.
@@ -11,5 +11,5 @@ bibtex MainPart.aux
 rm AGFstyle.bst literature.bib
 cd ../
 
-pdflatex -output-directory=./bin MainPart.tex
-pdflatex -output-directory=./bin MainPart.tex
+pdflatex -output-directory=./bin Compile.tex
+pdflatex -output-directory=./bin Compile.tex
