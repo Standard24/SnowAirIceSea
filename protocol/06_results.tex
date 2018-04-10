@@ -21,17 +21,14 @@ Calculate glacier velocity from measurement data
 \end{table}
 
 \begin{equation}
-v = \frac{\sqrt{(\text{x1}-\text{x2})^2+(\text{y1}-\text{y2})^2}}{t}
+v = \frac{\sqrt{(N_{2018}-N_{ref,year})^2+(E_{2018} - E_{ref,year})^2}}{t}
 \end{equation}
 
 \begin{equation}
-s_v = 
-\sqrt{\frac
-{\left(\text{sx1}^2+\text{sx2}^2\right)(\text{x1}-\text{x2})^2+
-\left(\text{sy1}^2+\text{sy2}^2\right)(\text{y1}-\text{y2})^2}
-{(\text{x1}-\text{x2})^2+(\text{y1}-\text{y2})^2}}
+s_v = \sqrt{\frac{(\delta_{N_{2018}}^2 + \delta_{N_{ref,year}}^2) * (N_{2018}-N_{ref,year})^2 +
+(\delta_{E_{2018}}^2 + \delta_{E_{ref,year}}^2) * (E_{2018}-E_{ref,year})^2}
+{(N_{2018} - N_{ref,year})^2+ (E_{2018} - E_{ref,year})^2}}
 \end{equation}
-
 
 \begin{figure}[H]
     \centering
