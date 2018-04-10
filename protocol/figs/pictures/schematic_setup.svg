@@ -15,7 +15,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="drawing.svg">
+   sodipodi:docname="schematic_setup.svg">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5004828"
-     inkscape:cx="355.90693"
-     inkscape:cy="518.87254"
+     inkscape:cx="160.63645"
+     inkscape:cy="516.20674"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -203,7 +203,7 @@
    id="tspan3400">snow</tspan></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:30px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;baseline-shift:baseline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-weight:normal;font-size:30px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;baseline-shift:baseline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="197.87933"
        y="469.24908"
        id="text3384"
@@ -212,9 +212,9 @@
          x="197.87933"
          y="469.24908"
          id="tspan3388"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';baseline-shift:baseline;fill:#ff0000;">dh<tspan
-   style="font-size:64.99999762%;baseline-shift:sub;fill:#ff0000;"
-   id="tspan4206">ref_year</tspan></tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';baseline-shift:baseline;fill:#ff0000">dh<tspan
+   style="font-size:64.99999762%;baseline-shift:sub;fill:#ff0000"
+   id="tspan4206">ref,year</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -242,7 +242,7 @@
          y="497.90274"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Δ<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan3520">ref_year</tspan></tspan></text>
+   id="tspan3520">ref,year</tspan></tspan></text>
     <ellipse
        id="path3522"
        cx="344.66602"

@@ -53,9 +53,9 @@ In addition, we consider the inclination of the stake and calculate the error de
 \caption{Schematic figure of the relevant parameter in the measurment setup.}
 \end{figure}
 
-
+% formulars stake correction
 \begin{equation}
-	\Delta_{abs} = (h_{snow} + h_{antenna} - h_{ref_year}) * sin(\alpha)
+	\Delta_{abs} = (h_{snow} + h_{antenna}) * sin(\alpha)
 \end{equation}
 
 \begin{equation}
@@ -66,29 +66,62 @@ In addition, we consider the inclination of the stake and calculate the error de
 	\Delta_{east} = - \Delta_{abs} * sin(\phi)
 \end{equation}
 
+% formulars error propagation
+
+\begin{equation}
+	\delta_{\Delta_{abs}} = \sqrt{(h_{snow} + h_{antenna})^2 * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{snow}}^2 + \delta_{h_{antenna}}^2) * \sin^2(\alpha)}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{north}} = \sqrt{\delta_{\Delta_{abs}}^2 * cos^2(\phi) + \Delta_{abs}^2 * \delta_{\phi}^2 * sin^2(\phi)}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{east}} = \sqrt{\delta_{\Delta_{abs}}^2 * sin^2(\phi) + \Delta_{abs}^2 * \delta_{\phi}^2 * cos^2(\phi)}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{total_north}} = \sqrt{\delta_{\Delta_{p_north}}^2 + \delta_{\Delta_{north}}^2}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{total_east}} = \sqrt{\delta_{\Delta_{p_east}}^2 + \delta_{\Delta_{east}}^2}
+\end{equation}
+
+% for the referenced position
+\begin{equation}
+	\Delta_{ref,year} = (h_{snow} + h_{antenna} - dh_{ref,year}) * sin(\alpha)
+\end{equation}
+
+\begin{equation}
+\delta_{\Delta_{ref,year}} = \sqrt{\left|(h_{snow} + h_{antenna} - dh_{ref,year})^2\right| * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{snow}}^2 + \delta_{h_{antenna}}^2 + \delta_{dh_{ref,year}}^2) * \sin^2(\alpha)}
+\end{equation}
+
 % name accurancies of the final data:
 Despite all the correction, it is important for the interpretation of the results to consider the accurancy of all parts our measurments.
 The average error on the Northing value is 0.40 m  
 The average error on the Easting value is 0.19 m
 The average error on the Elevation is 0.89 m
 
-The raw data for our position measurements read from the controller ar given in the table in the appendix~\ref{GPS:tab:fb_pos_tab}.
-The raw data from our measurements are given in the appendix~\ref{GPS:tab:fb_others_tab}. 
-The TBC post processed coordinates in the appendix~\ref{GPS:tab:tbc_tab}.
+The raw data for our position measurements read from the controller ar given in the table in the appendix 
+%\ref{GPS:tab:fb_pos_tab}.
+The raw data from our measurements are given in the appendix
+%\ref{GPS:tab:fb_others_tab}. 
+The TBC post processed coordinates in the appendix 
+%\ref{GPS:tab:tbc_tab}.
 
 \begin{table}[h]
-\caption{Final positions after the open source post processing and stake correction with the error.}
-\centering
-\input{tables/os_tab.tex}
-\label{GPS:tab:os_tab}
+	\caption{Final positions after the open source post processing and stake correction with the error.}
+	\centering
+	\scriptsize
+	\input{tables/os_tab.tex}
+	\label{GPS:tab:os_tab}
 \end{table}
 
 
 \begin{table}[h]
-\caption{Difference of Northing, Easting and Elevation between the two different post processing methods.}
-\centering
-\input{tables/diff_tab.tex}
-\label{GPS:tab:diff_tab}
+	\caption{Difference of Northing, Easting and Elevation between the two different post processing methods.}
+	\centering
+	\input{tables/diff_tab.tex}
+	\label{GPS:tab:diff_tab}
 \end{table}
-
-
