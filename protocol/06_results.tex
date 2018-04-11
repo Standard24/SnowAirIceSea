@@ -7,10 +7,31 @@ Calculate glacier velocity from measurement data
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{../fig/stakePositions.pdf}
+    \includegraphics[width=\textwidth]{./figs/stakePositions.pdf}
     \caption{Stake positions on Tellbreen and Blekumbreen.}
     \label{GF:fig:stakepos}
 \end{figure}
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
+    \caption{First of two measurements of position of stake T1. Compare to Fig.~\ref{GF:fig:T1-ii_timeseries}.}
+    \label{GF:fig:T1-i_timeseries}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
+    \caption{Second of two measurements of position of stake T1. Compare to Fig.~\ref{GF:fig:T1-i_timeseries}.}
+    \label{GF:fig:T1-ii_timeseries}
+\end{figure}
+
+
+
+
 
 \begin{table}[h]
 	\caption{Velocity in m/a of every stake calcutate with the data from 2017, 2016 and 2015 with the corresponding error in m/a}
@@ -26,13 +47,13 @@ v = \frac{\sqrt{(N_{2018}-N_{ref,year})^2+(E_{2018} - E_{ref,year})^2}}{t}
 
 \begin{equation}
 s_v = \sqrt{\frac{(\delta_{N_{2018}}^2 + \delta_{N_{ref,year}}^2) * (N_{2018}-N_{ref,year})^2 +
-(\delta_{E_{2018}}^2 + \delta_{E_{ref,year}}^2) * (E_{2018}-E_{ref,year})^2}
+(\delta_{E_{2018}}^2 + \delta_{E_{ref,year}}^2) * (E_{2018}-E_{\text{ref,year}})^2}
 {(N_{2018} - N_{ref,year})^2+ (E_{2018} - E_{ref,year})^2}}
 \end{equation}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{../fig/T1_2d.pdf}
+    \includegraphics[width=\textwidth]{./figs/T1_2d.pdf}
     \caption{Measured position of stake T1 from 2009 to 2017.}
     \label{GF:fig:T1_2d}
 \end{figure}
