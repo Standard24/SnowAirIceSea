@@ -54,6 +54,11 @@ To get the final, we have to make the stake correction include the different asp
 We subtract the distance between the rover and the stake from the northing component.
 In addition, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.\medskip
 
+The calculations for the error propagation follow the provided rules \citep{errorprop}.
+
+
+
+\citep{Trprocess}
 \begin{figure}
 \centering
 \includegraphics[width=\linewidth]{./figs/pictures/schematic_setup.pdf}
@@ -171,3 +176,18 @@ The TBC post processed coordinates in the appendix
 	\input{tables/diff_tab.tex}
 	\label{GPS:tab:diff_tab}
 \end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
+    \caption{First of two measurements of position of stake T1. Compare to Fig.~\ref{GF:fig:T1-ii_timeseries}.}
+    \label{GF:fig:T1-i_timeseries}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
+    \caption{Second of two measurements of position of stake T1. Compare to Fig.~\ref{GF:fig:T1-i_timeseries}.}
+    \label{GF:fig:T1-ii_timeseries}
+\end{figure}
