@@ -7,7 +7,7 @@ pdflatex -output-directory=./bin Compile.tex
 # so, go there, take some bibliography files with you and delete them after you used it
 cp AGFstyle.bst literature.bib ./bin
 cd  ./bin
-bibtex MainPart.aux
+bibtex Compile.aux
 rm AGFstyle.bst literature.bib
 cd ../
 
