@@ -54,7 +54,7 @@ with open('../protocol/tables/diff_tab.tex', 'w') as f:
 
 # data in .csv-file 
 df_diff = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_diff.to_csv('../data/diff_tbc_os.csv', sep=' ', encoding='utf-8')
+df_diff.to_csv('../data/diff_tbc_os.csv', sep=' ', encoding='utf-8')
 
 # mean values
 print np.mean(df_difference['dN']), np.mean(df_difference['dE']), np.mean(df_difference['dH'])

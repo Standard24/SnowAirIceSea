@@ -167,89 +167,90 @@ for key in data_tbc_dir.keys():
     
 # --- data to DataFrame
 ## TBC    
-#df_tbc_tab_final = pd.DataFrame(final_tbc_dir).transpose().reset_index().rename(columns={'index':'Name',
-# 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
-#df_tbc_tab_final = df_tbc_tab_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
-#tab_tbc_final = df_tbc_tab_final.to_latex(index=False)
+df_tbc_tab_final = pd.DataFrame(final_tbc_dir).transpose().reset_index().rename(columns={'index':'Name',
+ 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
+df_tbc_tab_final = df_tbc_tab_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
+tab_tbc_final = df_tbc_tab_final.to_latex(index=False)
+
+with open('../protocol/tables/tbc_tab.tex', 'w') as f:
+    f.write(tab_tbc_final.encode('utf-8'))
+
+# data in .csv-file 
+df_tbc_final = pd.DataFrame(final_tbc_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_tbc_final.to_csv('../data/stake_coordinates/' + filename_tbc + '_final' + '.csv', sep=' ', encoding='utf-8')
+
+# open source
+df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name',
+'sN': 'Error Northing [m]', 'sE': 'Error Easting [m]', 'sH': 'Error Elevation [m]'})
+
+df_os_tab_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name',
+ 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
+df_os_tab_final = df_os_tab_final.merge(df_error)
+df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Error Northing [m]', 
+'Easting [m]', 'Error Easting [m]', 'Elevation [m]', 'Error Elevation [m]']]
+tab_os_final = df_os_tab_final.to_latex(index=False)
+
+with open('../protocol/tables/os_tab.tex', 'w') as f:
+    f.write(tab_os_final.encode('utf-8'))
+
+df_os_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_os_final = df_os_final.merge(df_error)
+df_os_final.to_csv('../data/stake_coordinates/' + filename_os + '_final' + '.csv', sep=' ', encoding='utf-8')
+
+# position vales referenced to the last year (for the velocity)
+
+df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name',
+'sN_ref_17': 'Error ref. Northing [m] (2017)', 'sE_ref_17': 'Error ref. Easting [m] (2017)',
+'sN_ref_16': 'Error ref. Northing [m] (2016)', 'sE_ref_16': 'Error ref. Easting [m] (2016)',
+'sN_ref_15': 'Error ref. Northing [m] (2015)', 'sE_ref_15': 'Error ref. Easting [m] (2015)'})
+
+df_os_ref_tab_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name',
+'Northing_17': 'Ref. Northing [m] (2017)', 'Easting_17': 'Ref. Easting [m] (2017)',
+'Northing_16': 'Ref. Northing [m] (2016)', 'Easting_16': 'Ref. Easting [m] (2016)',
+'Northing_15': 'Ref. Northing [m] (2015)', 'Easting_15': 'Ref. Easting [m] (2015)'})
+df_os_ref_tab_final = df_os_ref_tab_final.merge(df_error_ref)
+df_os_ref_tab_final = df_os_ref_tab_final[['Name', 
+'Ref. Northing [m] (2017)', 'Error ref. Northing [m] (2017)', 'Ref. Easting [m] (2017)', 'Error ref. Easting [m] (2017)',
+'Ref. Northing [m] (2016)', 'Error ref. Northing [m] (2016)', 'Ref. Easting [m] (2016)', 'Error ref. Easting [m] (2016)',
+'Ref. Northing [m] (2015)', 'Error ref. Northing [m] (2015)', 'Ref. Easting [m] (2015)', 'Error ref. Easting [m] (2015)']]
+tab_os_ref_final = df_os_ref_tab_final.to_latex(index=False)
+
+with open('../protocol/tables/os_ref_tab.tex', 'w') as f:
+    f.write(tab_os_ref_final.encode('utf-8'))
+
+df_os_ref_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_os_ref_final = df_os_ref_final.merge(df_error_ref)
+df_os_ref_final.to_csv('../data/stake_coordinates/' + filename_os + '_ref_final' + '.csv', sep=' ', encoding='utf-8')
+
+# fieldbook
+#df_fb_final = pd.DataFrame(fd_pos_dir).transpose().reset_index().rename(columns={'index':'Name'})
+#df_other_final = pd.DataFrame(fd_other_dir).transpose().reset_index().rename(columns={'index':'Name'})
+#df_fb_final = df_fb_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
+#df_other_final = df_other_final[['Name', 'Antenna height [m]', 'Snow depth [m]', 'Inclination [deg]',  
+#'Direction of Incl. [deg]', 'Distance Rover-Stake [m]']]
+#tab_fb_final = df_fb_final.to_latex(index=False)
+#tab_other_final = df_other_final.to_latex(index=False)
+# 
+#with open('../protocol/tables/fb_pos_tab.tex', 'w') as f:
+#    f.write(tab_fb_final.encode('utf-8'))
 #
-#with open('../protocol/tables/tbc_tab.tex', 'w') as f:
-#    f.write(tab_tbc_final.encode('utf-8'))
-#
-## data in .csv-file 
-#df_tbc_final = pd.DataFrame(final_tbc_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_tbc_final.to_csv('../data/stake_coordinates/' + filename_tbc + '_final' + '.csv', sep=' ', encoding='utf-8')
-#
-## open source
-#df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name',
-#'sN': 'Error Northing [m]', 'sE': 'Error Easting [m]', 'sH': 'Error Elevation [m]'})
-#
-#df_os_tab_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name',
-# 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
-#df_os_tab_final = df_os_tab_final.merge(df_error)
-#df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Error Northing [m]', 
-#'Easting [m]', 'Error Easting [m]', 'Elevation [m]', 'Error Elevation [m]']]
-#tab_os_final = df_os_tab_final.to_latex(index=False)
-#
-#with open('../protocol/tables/os_tab.tex', 'w') as f:
-#    f.write(tab_os_final.encode('utf-8'))
-#
-#df_os_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_os_final = df_os_final.merge(df_error)
-#df_os_final.to_csv('../data/stake_coordinates/' + filename_os + '_final' + '.csv', sep=' ', encoding='utf-8')
-#
-## position vales referenced to the last year (for the velocity)
-#
-#df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name',
-#'sN_ref_17': 'Error ref. Northing [m] (2017)', 'sE_ref_17': 'Error ref. Easting [m] (2017)',
-#'sN_ref_16': 'Error ref. Northing [m] (2016)', 'sE_ref_16': 'Error ref. Easting [m] (2016)',
-#'sN_ref_15': 'Error ref. Northing [m] (2015)', 'sE_ref_15': 'Error ref. Easting [m] (2015)'})
-#
-#df_os_ref_tab_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name',
-#'Northing_17': 'Ref. Northing [m] (2017)', 'Easting_17': 'Ref. Easting [m] (2017)',
-#'Northing_16': 'Ref. Northing [m] (2016)', 'Easting_16': 'Ref. Easting [m] (2016)',
-#'Northing_15': 'Ref. Northing [m] (2015)', 'Easting_15': 'Ref. Easting [m] (2015)'})
-#df_os_ref_tab_final = df_os_ref_tab_final.merge(df_error_ref)
-#df_os_ref_tab_final = df_os_ref_tab_final[['Name', 
-#'Ref. Northing [m] (2017)', 'Error ref. Northing [m] (2017)', 'Ref. Easting [m] (2017)', 'Error ref. Easting [m] (2017)',
-#'Ref. Northing [m] (2016)', 'Error ref. Northing [m] (2016)', 'Ref. Easting [m] (2016)', 'Error ref. Easting [m] (2016)',
-#'Ref. Northing [m] (2015)', 'Error ref. Northing [m] (2015)', 'Ref. Easting [m] (2015)', 'Error ref. Easting [m] (2015)']]
-#tab_os_ref_final = df_os_ref_tab_final.to_latex(index=False)
-#
-#with open('../protocol/tables/os_ref_tab.tex', 'w') as f:
-#    f.write(tab_os_ref_final.encode('utf-8'))
-#
-#df_os_ref_final = pd.DataFrame(final_os_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_error_ref = pd.DataFrame(error_ref_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_os_ref_final = df_os_ref_final.merge(df_error_ref)
-#df_os_ref_final.to_csv('../data/stake_coordinates/' + filename_os + '_ref_final' + '.csv', sep=' ', encoding='utf-8')
-#
-## fieldbook
-##df_fb_final = pd.DataFrame(fd_pos_dir).transpose().reset_index().rename(columns={'index':'Name'})
-##df_other_final = pd.DataFrame(fd_other_dir).transpose().reset_index().rename(columns={'index':'Name'})
-##df_fb_final = df_fb_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
-##df_other_final = df_other_final[['Name', 'Antenna height [m]', 'Snow depth [m]', 'Inclination [deg]',  
-##'Direction of Incl. [deg]', 'Distance Rover-Stake [m]']]
-##tab_fb_final = df_fb_final.to_latex(index=False)
-##tab_other_final = df_other_final.to_latex(index=False)
-## 
-##with open('../protocol/tables/fb_pos_tab.tex', 'w') as f:
-##    f.write(tab_fb_final.encode('utf-8'))
-##
-##with open('../protocol/tables/fb_other_tab.tex', 'w') as f:
-##    f.write(tab_other_final.encode('utf-8'))
-#
-## mean position errors
-#sN = 0
-#sE = 0 
-#sH = 0
-#for key in error_dir.keys():
-#    sN = sN + error_dir[key]['sN']
-#    sE = sE + error_dir[key]['sE']
-#    sH = sH + error_dir[key]['sH']
-#sN_mean = sN/len(error_dir.keys())
-#sE_mean = sE/len(error_dir.keys())
-#sH_mean = sH/len(error_dir.keys())
-#
-#print sN_mean, sE_mean, sH_mean
+#with open('../protocol/tables/fb_other_tab.tex', 'w') as f:
+#    f.write(tab_other_final.encode('utf-8'))
+
+# mean position errors
+sN = 0
+sE = 0 
+sH = 0
+for key in error_dir.keys():
+    sN = sN + error_dir[key]['sN']
+    sE = sE + error_dir[key]['sE']
+    sH = sH + error_dir[key]['sH']
+sN_mean = sN/len(error_dir.keys())
+sE_mean = sE/len(error_dir.keys())
+sH_mean = sH/len(error_dir.keys())
+
+print sN_mean, sE_mean, sH_mean
+    
  
