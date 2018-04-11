@@ -5,18 +5,43 @@
     \includegraphics[width=\textwidth]{./figs/stakePositions.pdf}
     \caption{Positions of all stakes in the flow line on Blekumbreen and Tellbreen.
     The different markers distinguish the year of the measurement.}
-    \label{GF:fig:stakepos}
+    \label{GPS:fig:stakepos}
+\end{figure}
+
+Figure~\ref{GPS:fig:stakepos} shows the positions of the currently 12 different stake locations
+on Blekumbreen and Tellbreen.
+At those locations, a total of 26 measurements has been performed in 2018.
+Additionally, all available data of stake positions since 2009 is shown on the figure.
+
+The stakes spread over about 5 kilometers in east-west direction and 1.5 kilometers in north-south direction.
+The coarse resolution of the figure shows a rough accordance of this years positions with last years values.
+
+Figure~\ref{GPS:fig:T1_2d} shows all available data for T1 in a higher resolution.
+The measurement of the position of T1-2017 (green) has been performed two times in order to estimate the uncertainty
+of the method.
+The two positions differ by 19\,cm and agree with each other within their uncertainties.
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/T1_2d.pdf}
+    \caption{Measured positions at the location of stake T1 from 2011 to 2018.
+    Different colors denote different stakes,
+  	the year next to the stake positions is the year of the measurement.
+    	At this location, a movement in south-east direction would be expected.
+    	This is not identifiable using the data at hand.
+ 	Similar plots of the other 11 stake locations are situated in the appendix.}
+    \label{GPS:fig:T1_2d}
 \end{figure}
 
 
-
-
-
-
 \begin{table}[h]
-	\caption{Velocity of the stakes measured in 2018, calculated with equations~\ref{GF:eq:v} and \ref{GF:eq:sv}.
-	The velocity of all stakes has been calculated using last years position.
-	If available, positions from 2016 and 2015 have also been used.}
+	\caption{Velocities of the stakes measured in 2018, calculated with equations~\ref{GPS:eq:v} and \ref{GPS:eq:sv}.
+	All velocities have been calculated using last years position.
+	If available, positions from 2016 and 2015 have also been used.
+	To be able to assess the uncertainty of the velocities, some measurements have been performed twice.
+	This is denoted by the suffices -i and -ii.}
 	\centering
 	%\scriptsize
 	\input{tables/vel_tab.tex}
@@ -24,23 +49,19 @@
 \end{table}
 
 \begin{equation}
-\label{GF:eq:v}
-v = \frac{\sqrt{(N_{2018}-N_{ref,year})^2+(E_{2018} - E_{ref,year})^2}}{t}
+\label{GPS:eq:v}
+v_\text{year} = \frac{\sqrt{(N_{2018}-N_{\text{year}})^2+(E_{2018} - E_{\text{year}})^2}}{t}
 \end{equation}
 
 \begin{equation}
-\label{GF:eq:sv}
-s_v = \sqrt{\frac{(\delta_{N_{2018}}^2 + \delta_{N_{ref,year}}^2) * (N_{2018}-N_{ref,year})^2 +
-(\delta_{E_{2018}}^2 + \delta_{E_{ref,year}}^2) * (E_{2018}-E_{\text{ref,year}})^2}
-{(N_{2018} - N_{ref,year})^2+ (E_{2018} - E_{ref,year})^2}}
+\label{GPS:eq:sv}
+\delta_{v_{\text{year}}} = \sqrt{\frac{
+(\delta_{N_{2018}}^2 + \delta_{N_{\text{year}}}^2) * (N_{2018}-N_{\text{year}})^2 +
+(\delta_{E_{2018}}^2 + \delta_{E_{\text{year}}}^2) * (E_{2018}-E_{\text{year}})^2}
+{(N_{2018} - N_{\text{year}})^2+ (E_{2018} - E_{\text{year}})^2}}
 \end{equation}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{./figs/T1_2d.pdf}
-    \caption{Measured position of stake T1 from 2009 to 2017.}
-    \label{GF:fig:T1_2d}
-\end{figure}
+
 
 
 \subsection{Vertical velocity (mass balance)}
