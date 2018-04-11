@@ -140,6 +140,6 @@ for key in pos_ref_dict.keys():
 #df_vel = df_vel[['Name', 'Velocity [m/a] (2017)', 'Error [m/a] (2017)', 
 #'Velocity [m/a] (2016)', 'Error [m/a] (2016)', 
 #'Velocity [m/a] (2015)', 'Error [m/a] (2015)']]
-#tab_vel = df_vel.to_latex(index=False)
+#tab_vel = df_vel.to_latex(index=False, na_rep='-')
 #with open('../protocol/tables/vel_tab.tex', 'w') as f:
 #    f.write(tab_vel.encode('utf-8'))

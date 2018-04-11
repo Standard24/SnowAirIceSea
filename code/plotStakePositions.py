@@ -185,7 +185,7 @@ plt.ylabel('Northing / m')
 plt.legend(ncol=2)
 plotOpts(f3.gca())
 
-plt.savefig('../fig/stakePositions.pdf')
+plt.savefig('../protocol/figs/stakePositions.pdf')
 
 
 ###############################################################################
@@ -323,7 +323,7 @@ class stake(object):
         except KeyError:
             pass
 
-        plt.savefig('../fig/' + self.title + '_2d.pdf')
+        plt.savefig('../protocol/figs/' + self.title + '_2d.pdf')
         plt.close(f)
 
 #import IPython
@@ -365,7 +365,7 @@ for i, s in enumerate(ss[:8]):
 axarr[0].set_xlim([2010.5, 2018.5])
 axarr[0].set_xticks(range(2011, 2019))
 
-f.savefig('../fig/Elevation_Tellbreen.pdf')
+f.savefig('../protocol/figs/Elevation_Tellbreen.pdf')
 
 
 ###############################################################################
@@ -391,5 +391,5 @@ for i, s in enumerate(ss[8:]):
 axarr[0].set_xlim([2010.5, 2018.5])
 axarr[0].set_xticks(range(2011, 2019))
 
-f.savefig('../fig/Elevation_Blekumbreen.pdf')
+f.savefig('../protocol/figs/Elevation_Blekumbreen.pdf')
 

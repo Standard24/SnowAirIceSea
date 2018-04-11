@@ -11,7 +11,7 @@ plt.rc('font', family='serif')
 
 from coordinate_transformation2 import from_latlon
 
-staketitle = 'T7-2015'
+staketitle = 'T1-ii-2017'
 corr = '' #_STEC or _LC or ''
 
 
@@ -94,13 +94,15 @@ for ax, y, s, ylabel in paramlist:
     ax.ticklabel_format(useOffset=False)
     ax.set_ylabel(ylabel)
     
+    
     # plot moving average
     #for N in [20, 50, 200]:
     #    ax.plot(x[int(N/2-1):-int(N/2)],
     #            np.convolve(y, np.ones((N,))/N, mode='valid'))
 
+ax3.set_xlabel('Time [s]')
    
-plt.savefig('../fig/timeseries/' + filename + '-' + staketitle +  
+plt.savefig('../protocol/figs/timeseries/' + filename + '-' + staketitle +  
         '_Timeseries-east-north-elev.pdf')
 
 
