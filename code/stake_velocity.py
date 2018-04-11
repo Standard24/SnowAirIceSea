@@ -140,6 +140,23 @@ df_vel = pd.DataFrame(vel_dict).transpose().reset_index().rename(columns={'index
 df_vel = df_vel[['Name', 'Velocity [m/a] (2017)', 'Error [m/a] (2017)', 
 'Velocity [m/a] (2016)', 'Error [m/a] (2016)', 
 'Velocity [m/a] (2015)', 'Error [m/a] (2015)']]
-tab_vel = df_vel.to_latex(index=False, na_rep='-')
+
+def nice_format(row, i):
+    if row[i] != row[i]:
+        return '-'
+    else:
+        ret = '%.2f'%row[i] + ' $\pm$ ' + '%.2f'%row[i+1]
+        return ret
+
+df_vel['Velocity [m/a] (2017)'] = df_vel.apply(lambda row: nice_format(row, 1), axis=1)
+df_vel['Velocity [m/a] (2016)'] = df_vel.apply(lambda row: nice_format(row, 3), axis=1)
+df_vel['Velocity [m/a] (2015)'] = df_vel.apply(lambda row: nice_format(row, 5), axis=1)
+df_vel = df_vel.drop('Error [m/a] (2017)', 1)
+df_vel = df_vel.drop('Error [m/a] (2016)', 1)
+df_vel = df_vel.drop('Error [m/a] (2015)', 1)
+#import IPython
+#IPython.embed()
+
+tab_vel = df_vel.to_latex(index=False, na_rep='-', column_format='lcccccc', escape=False)
 with open('../protocol/tables/vel_tab.tex', 'w') as f:
     f.write(tab_vel.encode('utf-8'))
