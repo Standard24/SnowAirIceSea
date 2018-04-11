@@ -1,49 +1,56 @@
 %---Linda
 
-The accurancy of the post processed postions is decreasing with a increasing distance to the base station.
-The nearest base station is Statens Kartverks SatRef located on Platåberget with a distance between 14 km and 20 km depending on the stake.\medskip
+The post processing is based on the correction of the raw data.
+Firstly, we have to process the data with the corresponding data of the base station data to get a higher accurancy of the GPS data.
+The nearest base station is Statens Kartverks SatRef located on Platåberget with a distance between 14 km and 20 km depending on the stake.
+\medskip
 
 % 2 different methods:
+In the previous reports the post processing was done with the commercial software \textit{Trimble Business Center} (TBC). 
 In our report we use a new method for the postprocessing. 
 This method is an open source alternative which is available for different system softwares. 
-The previous used 'Trimble Business Center' software is only available on a windows system and needs a licens. 
-We operate both methods to show that the results of both methods do not differ.
-This approves that our results are comparable to the reuslts of the last years.\medskip
+The TBC is only available on a windows system and needs a licens. 
+We operate both methods to compare the results of both methods.
+The differences for every stake are given in the table \ref{GPS:tab:diff_tab}.
+The direction for Northing and Easting varies randomly in the direction.
+Because of this, it is not possible to determine a bias for each component.
+This results in a mean difference of the absolut values with 0.15 m in the Northing, 0.14 m in the Easting and 0.24 m in the Elevation.
+\medskip
 
 % steps of the post processing:
-While the post processing with the usual method in the 'Trimble Business Center' all steps from section 5 in Gölles (2012) are done.
+While the post processing with the usual method in the TBC all steps from section 5 in Gölles (2012) are done.
 For each day the data file from the measurements and the corresponding base station data file is imported. 
 We have data for the days of year (doy) 070, 072, 074 and 075.
 All files from the base station are in the .o18-format. 
 The data from the reciever have the .t02 format. 
-After the post processing the results from the are stored in a .csv-file.\medskip
+After the post processing the results from the are stored in a .csv-file.
+\medskip
 
-The open source post processing requires different steps.
-First of all the raw data file has to be transformed from the .t02-format to the .tdg-format. 
-The Trimble format .t02 is not readable for the final post processing program.
-This was done with the programm rubpkr00 which is available on the website of unavco (http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html).
-The used command is 'runpkr00 -g -d filename.t02'.
+The open source post processing requires different processing steps.
+First of all the raw data file has to be transformed from the original Trimble format .t02 to the .tdg-format, because .t02-files are not readable for the final post processing program.
+This transformation was done with the programm \textit{runpkr00} which is available on the website of unavco \textit{http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html}.
+The used command is \textit{runpkr00 -g -d filename.t02}.
 Due to problems with the package we had to do a manual transformation of the package.
 To provide the correct file format for the last post processing step we use the toolkit teqc.
-This toolkit is also available on the website of unavco (https://www.unavco.org/software/data-processing/teqc/teqc.html).
-Then the file can be converted by another commad using './teqc +nav filename.nav +obs filename.obs filename.tgd' to an observation (.obs) and navigation (.nav) file.
-After that it is necessary to download also the base station data from the platform http://ftp.statkart.no/.
-The final step in the post processing of the GPS data is done with the open source program package RTKLIB.
-This package is available for the download in the website http://www.rtklib.com/rtklib.htm.
-In this package we use the executable rtkpost.exe in the subdirectory /bin of the downloaded full package with source Programs with the version 2.4.2.
+This toolkit is also available on the website of unavco \textit{https://www.unavco.org/software/data-processing/teqc/teqc.html}.
+Then the file can be converted by another commad using \textit{./teqc +nav filename.nav +obs filename.obs filename.tgd} to an observation (.obs) and navigation (.nav) file.
+After that it is necessary to download also the base station data from the platform \textit{http://ftp.statkart.no/}.
+The final step in the post processing of the GPS data is done with the open source program package \textit{RTKLIB}.
+This package is available for the download in the website \textit{http://www.rtklib.com/rtklib.htm}.
+In this package we use the executable rtkpost.exe in the subdirectory \textit{/bin} of the downloaded full package with source Programs with the version 2.4.2.
 In this software the two navigation file from the receiver and the base station as well as the observation file from the receiver has to be read in.
 For this method the .n18-format from the basestation is needed as comparable navigation file.
-The next steps are consistent to the description on the website https://docs.emlid.com/reach/common/tutorials/gps-post-processing/.
+The next steps are consistent to the description on the website \textit{https://docs.emlid.com/reach/common/tutorials/gps-post-processing/}.
 For this we had to modify the settings of rtkpost.exe and load the three required files. 
 The final output after the post processing is a position file (.pos). 
 This file includes for every time step the post processed position in longitude and latitude.
 Then we calculate a median over all time steps to get an average position for every measurement.
 Because we consistenly use the UTM coordinate system, we transform the lon/lat coordinates by using the python function from\_latlon.
-The analysis in this report is made with python.\medskip
+All the analysis in this report is made with python.\medskip
 
 % error correction of the post processed data:
-The post processed data are not the final data. 
-To get the final position with a minimal error to the real position, we have to include the different aspects from our measurement setup (see section setup).
+The post processed data with the base station data are not the final data. 
+To get the final, we have to make the stake correction include the different aspects from our measurement setup (see section setup).
 We subtract the distance between the rover and the stake from the northing component.
 In addition, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.\medskip
 
@@ -59,11 +66,23 @@ In addition, we consider the inclination of the stake and calculate the error de
 \end{equation}
 
 \begin{equation}
-	\Delta_{north} = - \Delta_{abs} * cos(\phi)
+	\Delta_{north} = - (\Delta_{abs} * cos(\phi)) - d_{rover-stake}
 \end{equation}
 
 \begin{equation}
 	\Delta_{east} = - \Delta_{abs} * sin(\phi)
+\end{equation}
+
+\begin{equation}
+	\Delta_{elev,os} = - (h_{snow} + h_{antenna}) 
+\end{equation}
+
+\begin{equation}
+	\Delta_{elev,TBC} = - h_{snow} 
+\end{equation}
+
+\begin{equation}
+	\Delta_{ref,year} = (h_{snow} + h_{antenna} - dh_{ref,year}) * sin(\alpha)
 \end{equation}
 
 % formulars error propagation
@@ -73,7 +92,7 @@ In addition, we consider the inclination of the stake and calculate the error de
 \end{equation}
 
 \begin{equation}
-	\delta_{\Delta_{north}} = \sqrt{\delta_{\Delta_{abs}}^2 * cos^2(\phi) + \Delta_{abs}^2 * \delta_{\phi}^2 * sin^2(\phi)}
+	\delta_{\Delta_{north}} = \sqrt{\delta_{\Delta_{abs}}^2 * cos^2(\phi) + \Delta_{abs}^2 * \delta_{\phi}^2 * sin^2(\phi) + \delta_{d_{rover-stake}}^2}
 \end{equation}
 
 \begin{equation}
@@ -81,27 +100,33 @@ In addition, we consider the inclination of the stake and calculate the error de
 \end{equation}
 
 \begin{equation}
-	\delta_{\Delta_{total_north}} = \sqrt{\delta_{\Delta_{p_north}}^2 + \delta_{\Delta_{north}}^2}
+	\delta_{\Delta_{total,north}} = \sqrt{\delta_{\Delta_{ts,north}}^2 + \delta_{\Delta_{north}}^2}
 \end{equation}
 
 \begin{equation}
-	\delta_{\Delta_{total_east}} = \sqrt{\delta_{\Delta_{p_east}}^2 + \delta_{\Delta_{east}}^2}
+	\delta_{\Delta_{total,east}} = \sqrt{\delta_{\Delta_{ts,east}}^2 + \delta_{\Delta_{east}}^2}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{total,elev}} = \sqrt{\delta_{\Delta_{ts,elev}}^2 +\delta_{\Delta_{elev}}^2}
 \end{equation}
 
 % for the referenced position
 \begin{equation}
-	\Delta_{ref,year} = (h_{snow} + h_{antenna} - dh_{ref,year}) * sin(\alpha)
+\delta_{\Delta_{ref,year}} = \sqrt{\left|(h_{snow} + h_{antenna} - dh_{ref,year})^2\right| * \delta_{\alpha}^2 * cos^2(\alpha)\\
++ (\delta_{h_{snow}}^2 + \delta_{h_{antenna}}^2 + \delta_{dh_{ref,year}}^2) * \sin^2(\alpha)}
 \end{equation}
 
 \begin{equation}
-\delta_{\Delta_{ref,year}} = \sqrt{\left|(h_{snow} + h_{antenna} - dh_{ref,year})^2\right| * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{snow}}^2 + \delta_{h_{antenna}}^2 + \delta_{dh_{ref,year}}^2) * \sin^2(\alpha)}
+	\delta_{\Delta_{ref, elev}} = \sqrt{\delta_{h_{snow}}^2 + \delta_{h_{snow}}^2 + \delta_{h_{snow}}^2}
 \end{equation}
 
+
 % name accurancies of the final data:
-Despite all the correction, it is important for the interpretation of the results to consider the accurancy of all parts our measurments.
-The average error on the Northing value is 0.40 m  
-The average error on the Easting value is 0.19 m
-The average error on the Elevation is 0.89 m
+The accurancy of the post processed postions with the base station data is decreasing with a increasing distance to the base station. 
+But this error is at least one order of magnitude smaller than the other errors. 
+The other accurancies are determined by the quality of our measurements \ref{GPS:tab:diff_tab}.
+
 
 The raw data for our position measurements read from the controller ar given in the table in the appendix 
 %\ref{GPS:tab:fb_pos_tab}.
@@ -109,6 +134,27 @@ The raw data from our measurements are given in the appendix
 %\ref{GPS:tab:fb_others_tab}. 
 The TBC post processed coordinates in the appendix 
 %\ref{GPS:tab:tbc_tab}.
+
+\begin{table}[h]
+	\caption{Used error values for the error propagation.}
+	\centering
+	\begin{tabular}{lc}
+	\toprule
+        error &  value \\
+	\midrule
+    $ \delta_{\alpha} $ &  3$^{\circ}$ \\
+    $ \delta_{\phi} $ &  22.5$^{\circ}$ \\
+    $ \delta_{h_{snow}}$ &  0.02 m \\
+    $ \delta_{h_{antenna}} $ &  0.05 m \\
+    $ \delta_{dh_{ref,year}} $ &  0.10 m \\
+    $ \delta_{d_{rover-stake}} $ &  0.02 m \\
+    $ \overline{\delta_{\Delta_{north}}} $ & 0.40 m \\
+    $ \overline{\delta_{\Delta_{east}}} $ & 0.19 m \\
+    $ \overline{\delta_{\Delta_{elev}}} $ & 0.89 m \\
+    \bottomrule
+\end{tabular}
+	\label{GPS:tab:err}
+\end{table}
 
 \begin{table}[h]
 	\caption{Final positions after the open source post processing and stake correction with the error.}
