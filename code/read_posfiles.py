@@ -79,9 +79,22 @@ data = [
          uc[0],
          uc[1],
          uc[2] ] 
-        for mv, uc in zip(mean_values, uncertainties)] 
+        for mv, uc in zip(mean_values, uncertainties)]
+        
+        
+
 
 writeToFile = [header] + data
+
+ 
+
+
+# replace two missing values with trimble values
+# T7-2015
+writeToFile[15][1:6] = [8686580.735, 525857.936, 617.000, 0.2, 0.2]
+# BL4-2018
+writeToFile[24][1:6] = [8686098.890, 524181.018, 571.859, 0.2, 0.2]
+
 
 with open('../data/stake_coordinates/2018_stake_coordinates' + suffix + '.csv',
           'w') as f:
@@ -92,4 +105,6 @@ with open('../data/stake_coordinates/2018_stake_coordinates' + suffix + '.csv',
 
 if __name__ == '__main__':
 #    print(fieldbook)
-    print([d.describe() for d in data_imp])
+#    print([d.describe() for d in data_imp])
+    pass
+
