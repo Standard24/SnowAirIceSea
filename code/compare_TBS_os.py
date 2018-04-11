@@ -49,12 +49,13 @@ df_diff_tab = df_diff_tab[['Name', 'Difference Northing [m]',
 'Difference Easting [m]', 'Difference Elevation [m]']]
 tab_diff = df_diff_tab.to_latex(index=False)
 
-with open('../protocol/tables/diff_tab.tex', 'w') as f:
-    f.write(tab_diff.encode('utf-8'))
-
-# data in .csv-file 
-df_diff = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'index':'Name'})
-df_diff.to_csv('../data/diff_tbc_os.csv', sep=' ', encoding='utf-8')
+#with open('../protocol/tables/diff_tab.tex', 'w') as f:
+#    f.write(tab_diff.encode('utf-8'))
+#
+## data in .csv-file 
+#df_diff = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'index':'Name'})
+#df_diff.to_csv('../data/diff_tbc_os.csv', sep=' ', encoding='utf-8')
 
 # mean values
 print np.mean(df_difference['dN']), np.mean(df_difference['dE']), np.mean(df_difference['dH'])
+print np.median(df_difference['dN']), np.median(df_difference['dE']), np.median(df_difference['dH'])
