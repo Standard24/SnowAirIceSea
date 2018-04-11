@@ -4,24 +4,49 @@
 
 Regarding to results of the previous years, it is given that the glacier velocity for the glaciers Tellbreen and Blekumbreen is less then one meter.
 The general used GPS system has only an accurancy in the order of meters.
-By correcting the raw data with the data from the base station, it is posssible to have a more accurate positioning to the order of millimeters.
-Carrier-based system, carrier-phase measurements ???
-%(\cite{UGPS})
-The accurancy depends on the distance to the base station (Gölles, 2012) and differs between the horizontal and the vertical component.
+By correcting the raw data with the data from the base station, it is posssible to have a more accurate positioning to the order of millimeters \citep{UGPS}.
+
+The aim of this report is to measure the ice velocity of the two glaciers.
+The velocity is calculated on different points on the glaciers. 
+The installed mass balance stakes provide a reference point.
+The velocity will be determined by the change of the stake position.
+The stake position is measured by GPS. 
+The GPS is working on two frequencies L1 and L2 which are two different services.
+The transmisson signals with L1 and L2 are the carrier components. 
+This is one component of the Global Navigation Satellite System (GNSS) structure the GPS receivers are using.
+In the GNSS there ar 24 operational plus some redundant stallites available.
+To reach the satellites the signal has to go through the atmosphere \citep{curcherdgps}.
+\medskip
+
+The errors from the GPS measurements that are corrected by the dGPS method are correlated in time and space.
+So the identified errors can assumed to be the same at the reciever as at the base station.
+The disturbances can be distingushed, because the position of the base station is very well known.
+The realistion of the GPS error correlation between two recievers with a specific distance can be defined as a baseline.
+Also a time correlation is meaningful, because there is always a time delay in the data tranfer possible.
+Possible disturbances can caused by satellite clock errors, ephermeris errors, tropospheric errors (variation of the speed of electromagnetic radiation), ionospheric errors (dependent on signal frequency, elevation angle and the total electron content). 
+There are also the reciever noise and multipath as a uncorreleted error source between the two recievers \citep{UGPS}.
+For further information it is to recommend to read in the referenced book.
+
+The accurancy of the dGPS depends on the distance to the base station and differs between the horizontal and the vertical component \citep{Trquickstart}.
+For the Fast Static method the horizontal accuracy is $ \pm $ 3 mm + 0.1 ppm and vertical $ \pm $ 3.5 + 0.4 ppm.
 The accurancy can reached because the coordinates of the base station ar well known. 
 So the disturbances by the atmosphere during the measuring time can be corrected, while the measured coordinates are compare on every timestep defined by the GPS time.. 
 The further steps of the post processing is explanined in the next section 
-%\ref{\section{Processing}}
+\ref{processing}.
 We also did two measurements at the same stake on two different days to see how the results are effected.
 \medskip
 
 The GPS measurements have been done with the Trimble differential Global Navigation Satellite System (GNSS). 
 The measured parameters were the northing and easting as well as the elevation.
-The setting during our measurements inculded the receiver Trimble R4, the controller Trimble TCS2 and a carbon pole to mount the receiver proberly next to the stake (see figure).\medskip
-
-During the operation of the measuremts we followed exact the description in section 2 and 3 in Gölles (2012). 
+The setting during our measurements inculded the receiver Trimble R4, the controller Trimble TCS2 and a carbon pole to mount the receiver proberly next to the stake (see figure).
+During the operation of the measuremts we followed exact the description in section 2 and 3 in \cite{Trquickstart}. 
 The recommended Fast Static survey method is used.
-The used coordinate system is the Universal Transversal Mercator (UTM) for the zone 33x with WGS 1984 date. 
+The used coordinate system is the Universal Transversal Mercator (UTM) for the zone 33x with WGS 1984 date  \citep{Trquickstart}. 
+
+The feature Static and FastStatic GPS surveying has position specifications of $ \pm $ 5 mm + 0.5 ppm RMS in the horizontal and $ \pm $ 5 mm + 1 ppm RMS in the vertical direction with the hint that the accuracy and reliability may be subject to anomalies due to multipath, obstructions, satellite geometry, and atmospheric conditions.
+This information and further information can be find in \cite{Truserguide}.
+\medskip
+
 The duration for our measurments with the GPS receiver was at least 15 minutes. 
 We had to made choice with a trade off between the quality of the result and the total number of measurements to measure all stakes at least one time. 
 With a longer measurement time it is possible to average out the fluctuations better.
