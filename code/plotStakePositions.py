@@ -36,8 +36,8 @@ filenames = ['2009_stake_coordinates',
              '2016_stake_coordinates',
              '2017_stake_coordinates',
              #'2018_stake_coordinates_trimble_post']
-             '2018_stake_coordinates_corr']
-             #'2018_stake_coordinates_corr_final']
+             #'2018_stake_coordinates_corr']
+             '2018_stake_coordinates_corr_final']
              #'2018_stake_coordinates_corr_STEC']
              #'2018_stake_coordinates_corr_LC']
 
@@ -162,26 +162,30 @@ patches = [mpatches.Patch(color=c, label=y,
 ###
 # plot all stake positions 2d
 ###
-f3 = plt.figure(figsize=(8, 6), dpi=80)
+f3 = plt.figure(figsize=(6.5, 3.4))
 
 markers = ['+', 'x', ',', ',', '+', ',', 'v', '^', '.', '+']
 colors = defcol[3:10] + defcol[:3]
 markersizes = [10, 8, 8, 8, 8, 5, 5, 5, 5, 10]
 
 for i, d in enumerate(data):
+    # only take stakes in flow line
+    d = d[d.Name.str.contains('T1|T2|T3|T4|T5|T6|T7|T8|BL2|BL3|BL4|BL5')]
     plt.plot(d['Easting'], d['Northing'], markers[i], label=time[i],
              color=colors[i], markersize=markersizes[i])
 
 # write names of the stakes to some stakes
-pos = [0, 1, 14, 2, 3, 4, 5, 6]  # position of the stakes to be labelled in the 2017 data
-for row, name in zip([data[-2].iloc[i] for i in pos], stakes):
-    plt.annotate(name, (row['Easting'] + 80, row['Northing']))
+pos = [0, 1, 14, 2, 3, 4, 5, 6, 7, 8, 9, 11]  # position of the stakes to be labelled in the 2017 data
+annotations = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
+          'BL5', 'BL4', 'BL3', 'BL2']
+for row, name in zip([data[-2].iloc[i] for i in pos], annotations):
+    plt.annotate(name, (row['Easting'] + 80, row['Northing'] - 20))
 
 plt.gca().set_aspect('equal')
-plt.xlim([522100, 528900])
+plt.xlim([522600, 528900])
 plt.ylim([8685100, 8688400])
-plt.xlabel('Easting / m')
-plt.ylabel('Northing / m')
+plt.xlabel('Easting [m]')
+plt.ylabel('Northing [m]')
 plt.legend(ncol=2)
 plotOpts(f3.gca())
 
@@ -392,4 +396,3 @@ axarr[0].set_xlim([2010.5, 2018.5])
 axarr[0].set_xticks(range(2011, 2019))
 
 f.savefig('../protocol/figs/Elevation_Blekumbreen.pdf')
-

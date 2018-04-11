@@ -1,51 +1,35 @@
---Moritz
-
-
-Plots...
-
-Calculate glacier velocity from measurement data
+\subsection{Horizontal velocity (glacier flow)}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./figs/stakePositions.pdf}
-    \caption{Stake positions on Tellbreen and Blekumbreen.}
+    \caption{Positions of all stakes in the flow line on Blekumbreen and Tellbreen.
+    The different markers distinguish the year of the measurement.}
     \label{GF:fig:stakepos}
 \end{figure}
 
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
-    \caption{First of two measurements of position of stake T1. Compare to Fig.~\ref{GF:fig:T1-ii_timeseries}.}
-    \label{GF:fig:T1-i_timeseries}
-\end{figure}
-
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
-    \caption{Second of two measurements of position of stake T1. Compare to Fig.~\ref{GF:fig:T1-i_timeseries}.}
-    \label{GF:fig:T1-ii_timeseries}
-\end{figure}
 
 
 
 
 
 \begin{table}[h]
-	\caption{Velocity in m/a of every stake calcutate with the data from 2017, 2016 and 2015 with the corresponding error in m/a}
+	\caption{Velocity of the stakes measured in 2018, calculated with equations~\ref{GF:eq:v} and \ref{GF:eq:sv}.
+	The velocity of all stakes has been calculated using last years position.
+	If available, positions from 2016 and 2015 have also been used.}
 	\centering
-	\scriptsize
+	%\scriptsize
 	\input{tables/vel_tab.tex}
 	\label{GPS:tab:os_tab}
 \end{table}
 
 \begin{equation}
+\label{GF:eq:v}
 v = \frac{\sqrt{(N_{2018}-N_{ref,year})^2+(E_{2018} - E_{ref,year})^2}}{t}
 \end{equation}
 
 \begin{equation}
+\label{GF:eq:sv}
 s_v = \sqrt{\frac{(\delta_{N_{2018}}^2 + \delta_{N_{ref,year}}^2) * (N_{2018}-N_{ref,year})^2 +
 (\delta_{E_{2018}}^2 + \delta_{E_{ref,year}}^2) * (E_{2018}-E_{\text{ref,year}})^2}
 {(N_{2018} - N_{ref,year})^2+ (E_{2018} - E_{ref,year})^2}}
@@ -57,3 +41,6 @@ s_v = \sqrt{\frac{(\delta_{N_{2018}}^2 + \delta_{N_{ref,year}}^2) * (N_{2018}-N_
     \caption{Measured position of stake T1 from 2009 to 2017.}
     \label{GF:fig:T1_2d}
 \end{figure}
+
+
+\subsection{Vertical velocity (mass balance)}
