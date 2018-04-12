@@ -15,7 +15,10 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="schematic_setup.svg">
+   sodipodi:docname="schematic_setup.svg"
+   inkscape:export-filename="/home/linda/Documents/Spring18/GitHub_Unis/protocol/figs/pictures/schematic_setup.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
   <defs
      id="defs4" />
   <sodipodi:namedview
@@ -25,9 +28,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.5004828"
-     inkscape:cx="485.23916"
-     inkscape:cy="855.06641"
+     inkscape:zoom="0.75"
+     inkscape:cx="475.90583"
+     inkscape:cy="643.7499"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -45,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
