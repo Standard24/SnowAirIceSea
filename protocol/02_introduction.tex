@@ -1,1 +1,31 @@
-Nice first sentences, about why this is a veery important thing to read.
+\documentclass[11pt]{report}
+\usepackage{geometry}
+\usepackage[parfill]{parskip}   
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{cite}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{epstopdf}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{lscape}
+\usepackage{lastpage}
+\usepackage{array}
+\usepackage{siunitx}
+\usepackage{verbatim}
+\usepackage{fancyhdr}
+\usepackage{textcomp}
+\geometry{a4paper, body={180mm,257mm}, left=15mm,top=20mm, headheight=7mm,headsep=4mm, marginparsep=4mm, marginparwidth=17mm}
+\pagestyle{fancy}
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\begin{document}
+
+\newcommand{\fraction}[2]{\raisebox{0.5ex}{#1} \slash \raisebox{-0.5ex}{#2}}
+
+Many topics in glaciology call for an understanding of the velocity field in a glacier. In fact, the way in which the flow redistributes mass is directly connected to a glacier's shape. But flow also induces energy redistribution and as such, the temperature distribution, which itself has implications for the nature of the coupling with the glacier bed. Spatial variations in speed, also known as strain rates $\epsilon$, are being studied by structural geologists who use glaciers as analogs for rock deformation. From a geomorphic point of view as well, the entrainment of debris and the different moraines they construct depend upon the flow field too. Understanding those velocity fields therefore is fundamental to the analysis of a number of problems in glacier mechanics.
+
+\end{document}
