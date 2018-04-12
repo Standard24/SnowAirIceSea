@@ -11,7 +11,7 @@ plt.rc('font', family='serif')
 
 from coordinate_transformation2 import from_latlon
 
-staketitle = 'T1-ii-2017'
+staketitle = 'T1-i-2017'
 corr = '' #_STEC or _LC or ''
 
 
@@ -69,7 +69,7 @@ su = data_imp['sdu(m)']
 #print(np.std(east))
 #print(np.std(north))
 
-f, (ax1, ax2, ax3) = plt.subplots(3, sharex=True, figsize=(8,5.2))
+f, (ax1, ax2, ax3) = plt.subplots(3, sharex=True, figsize=(8,5.2), dpi=300)
 
 ax1.axhline(easting_wm, color='k', linewidth=1, label='Weighted mean')
 ax2.axhline(northing_wm, color='k', linewidth=1, label='Weighted mean')
