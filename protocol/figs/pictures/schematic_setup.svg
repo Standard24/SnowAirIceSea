@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.5004828"
-     inkscape:cx="160.63645"
-     inkscape:cy="516.20674"
+     inkscape:cx="485.23916"
+     inkscape:cy="855.06641"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -89,11 +89,11 @@
          id="tspan3350"
          x="609.7561"
          y="764.55731"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">ice surface </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">ice surface </tspan><tspan
          sodipodi:role="line"
          x="609.7561"
          y="802.05731"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
          id="tspan4395">(current)</tspan></text>
     <text
        xml:space="preserve"
@@ -106,11 +106,11 @@
          id="tspan3354"
          x="635.36584"
          y="653.58173"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">snow surface </tspan><tspan
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">snow surface </tspan><tspan
          sodipodi:role="line"
          x="635.36584"
          y="691.08173"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
          id="tspan4393">(current)</tspan></text>
     <text
        xml:space="preserve"
@@ -122,12 +122,12 @@
          sodipodi:role="line"
          x="667.07318"
          y="542.60614"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
          id="tspan3402">ice surface </tspan><tspan
          sodipodi:role="line"
          x="667.07318"
          y="580.10614"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
          id="tspan4391">(reference year)</tspan></text>
     <path
        style="fill:#008000;fill-rule:evenodd;stroke:#008000;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -141,31 +141,33 @@
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="329.46832"
-       y="298.8988"
+       style="font-style:normal;font-weight:normal;font-size:37.38610077px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="317.77435"
+       y="310.56317"
        id="text3364"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="scale(1.0368987,0.9644144)"><tspan
          sodipodi:role="line"
          id="tspan3366"
-         x="329.46832"
-         y="298.8988"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">d<tspan
-   style="font-size:64.99999762%;baseline-shift:sub"
+         x="317.77435"
+         y="310.56317"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.03957558px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">d<tspan
+   style="font-size:18.22572327px;baseline-shift:sub"
    id="tspan3394">rover-stake</tspan></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
-       x="251.77213"
-       y="376.43582"
+       style="font-style:normal;font-weight:normal;font-size:38.21209335px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="253.91264"
+       y="377.22818"
        id="text3368"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="scale(1.004845,0.99517834)"><tspan
          sodipodi:role="line"
          id="tspan3370"
-         x="251.77213"
-         y="376.43582"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';fill:#008000;">h<tspan
-   style="font-size:64.99999762%;baseline-shift:sub;fill:#008000;"
+         x="253.91264"
+         y="377.22818"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:28.65906906px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';fill:#008000">h<tspan
+   style="font-size:18.62839508px;baseline-shift:sub;fill:#008000"
    id="tspan3396">antenna</tspan></tspan></text>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -203,17 +205,18 @@
    id="tspan3400">snow</tspan></tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:30px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;baseline-shift:baseline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="197.87933"
-       y="469.24908"
+       style="font-style:normal;font-weight:normal;font-size:26.48877335px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;baseline-shift:baseline;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="207.41125"
+       y="462.99112"
        id="text3384"
-       sodipodi:linespacing="125%"><tspan
+       sodipodi:linespacing="125%"
+       transform="scale(0.99000747,1.0100934)"><tspan
          sodipodi:role="line"
-         x="197.87933"
-         y="469.24908"
+         x="207.41125"
+         y="462.99112"
          id="tspan3388"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';baseline-shift:baseline;fill:#ff0000">dh<tspan
-   style="font-size:64.99999762%;baseline-shift:sub;fill:#ff0000"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.48877335px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, ';baseline-shift:baseline;fill:#ff0000">dh<tspan
+   style="font-size:17.21770287px;baseline-shift:sub;fill:#ff0000"
    id="tspan4206">ref,year</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -226,8 +229,8 @@
          id="tspan3498"
          x="327.48633"
          y="703.04346"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Δ<tspan
-   style="font-size:65%;baseline-shift:sub"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:22.5px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Δ<tspan
+   style="font-size:22.5px;baseline-shift:sub"
    id="tspan3518">abs</tspan></tspan></text>
     <text
        xml:space="preserve"
@@ -242,7 +245,12 @@
          y="497.90274"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '">Δ<tspan
    style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan3520">ref,year</tspan></tspan></text>
+   id="tspan3520">year,2018</tspan></tspan><tspan
+         sodipodi:role="line"
+         x="394.27914"
+         y="535.40271"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:30px;font-family:'Latin Modern Roman';-inkscape-font-specification:'Latin Modern Roman, '"
+         id="tspan4182" /></text>
     <ellipse
        id="path3522"
        cx="344.66602"

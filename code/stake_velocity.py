@@ -157,6 +157,6 @@ df_vel = df_vel.drop('Error (2015) [m/a]', 1)
 #import IPython
 #IPython.embed()
 
-tab_vel = df_vel.to_latex(index=False, na_rep='-', column_format='lcccccc', escape=False)
-with open('../protocol/tables/vel_tab.tex', 'w') as f:
-    f.write(tab_vel.encode('utf-8'))
+#tab_vel = df_vel.to_latex(index=False, na_rep='-', column_format='lcccccc', escape=False)
+#with open('../protocol/tables/vel_tab.tex', 'w') as f:
+#    f.write(tab_vel.encode('utf-8'))

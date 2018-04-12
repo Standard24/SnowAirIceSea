@@ -37,6 +37,9 @@ for key in data_os_dir.keys():
     diff_dir[key] = {'dN': round(diff_north,2), 
     'dE': round(diff_east,2), 
     'dH': round(diff_elev,2)}
+#    diff_dir[key] = {'dN': round(np.abs(diff_north),2), 
+#    'dE': round(np.abs(diff_east),2), 
+#    'dH': round(np.abs(diff_elev),2)}
     
 df_difference = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'index':'Name'})
 
@@ -47,11 +50,11 @@ df_diff_tab = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'
  'dH': 'Difference Elevation [m]' })
 df_diff_tab = df_diff_tab[['Name', 'Difference Northing [m]', 
 'Difference Easting [m]', 'Difference Elevation [m]']]
-tab_diff = df_diff_tab.to_latex(index=False)
+tab_diff = df_diff_tab.to_latex(index=False, column_format='lccc')
 
 #with open('../protocol/tables/diff_tab.tex', 'w') as f:
 #    f.write(tab_diff.encode('utf-8'))
-#
+
 ## data in .csv-file 
 #df_diff = pd.DataFrame(diff_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_diff.to_csv('../data/diff_tbc_os.csv', sep=' ', encoding='utf-8')
