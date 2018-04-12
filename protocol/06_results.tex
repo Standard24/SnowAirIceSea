@@ -11,27 +11,27 @@
 Figure~\ref{GPS:fig:stakepos} shows the positions of the currently 12 different stake locations
 on Blekumbreen and Tellbreen.
 At those locations, a total of 26 measurements has been performed in 2018.
-Additionally, all available data of the stake positions since 2009 is shown on the figure.
-
+Additionally, all available data of the stake positions since 2009 is shown on the figure.\\
 The coarse resolution of the figure shows a rough accordance of all of this years positions with the values 
 of the last years.
 The stakes spread over about 5 kilometers in east-west direction and 1.5 kilometers in north-south direction.
 
-
-Figure~\ref{GPS:fig:T1_2d} shows all available data for T1 in a higher resolution.
-The measurement of the location of T1-2017 (green) has been performed two times in order to estimate the uncertainty
+Figure~\ref{GPS:fig:T1_2d} shows all available data for one single stake (T1) in a higher resolution.\\
+The measurement of the location of T1-2017 (green) has been performed two times
+(Figs.~\ref{GPS:fig:T1-i_timeseries} and \ref{GPS:fig:T1-ii_timeseries})
+in order to estimate the uncertainty
 of the position.
 The two positions differ by 19\,cm and match within their uncertainties.
 
-Equation~\ref{GPS:eq:v} shows how the ice velocity $v_{year}$ has been calculated with the measured stake positions from
+Equation~\ref{GPS:eq:v} shows how the ice velocity $v_{year}$ has been calculated from the corrected stake positions in
 Tab.~\ref{GPS:tab:os_tab}:
-The distance between this years position and the position measured in 2017, 2016 or 2015 has been divided by the time $t$
-(one, two or three years).
+The distance between this years position and the position measured in 2017, 2016 or 2015 has been divided
+by the passed time $t$ (1, 2 or 3 years).
 $N_{year}$ and $E_{year}$ are the northing and easting of the year which has been used to calculate the distance to
 this years position.
 The positions of this year ($N_{year, 2018}$ and $E_{year, 2018}$) have been shifted by the respective distance
 $\Delta_{\text{ref}, year}$ that ablation has
-added to an inclined stake since the year $year$, as described in section~\ref{GPS:sec:Processing}.
+added to inclined stakes since the year $year$, as described in section~\ref{GPS:sec:Processing}.
 Equation~\ref{GPS:eq:sv} shows how the error on $v_{year}$ has been obtained.
 
 Table~\ref{GPS:tab:vel_tab} lists the calculated velocities for all stakes.
@@ -54,9 +54,9 @@ The direction of the movements can be seen on the detailed figures for each stak
 \end{figure}
 
 
-\begin{table}[h]
+\begin{table}[H]
 	\caption{Velocities of the stakes measured in 2018, calculated with equations~\ref{GPS:eq:v} and \ref{GPS:eq:sv}.
-	The velocity $v_{2017}$ has been calculated using last years position
+	The velocity $v_{2017}$ has been calculated using last years position.
 	For inclined stakes, this position has been corrected for the horizontal displacement due to ablation.
 	If available, corrected positions from 2016 and 2015 have also been used to obtain $v_{2016}$ and $v_{2015}$.
 	To be able to assess the uncertainty of the velocities, four measurements have been performed twice.
@@ -84,18 +84,80 @@ v_{year} = \frac{\sqrt{(N_{year, 2018}-N_{year})^2+(E_{year, 2018} - E_{year})^2
 
 \subsection{Vertical velocity (mass balance)}
 
+Besides the horizontal position, the GPS data also contain elevation.
+An analysis of the change of elevation (the vertical velocity) of the stakes over the past years offers the possibility to determine the individual average mass balances.\\
+We have been able to find elevation data from former groups for the last 7 years,
+back until 2011.
+Figures~\ref{GPS:fig:elev_ble} and \ref{GPS:fig:elev_tel} show this data,
+together with the new data from 2018.
+For most of the old data points, the uncertainties are not known.
+Therefore there are no error bars shown on the plots.
 
-\begin{figure}[H]
+Apart from a couple of outliers, the elevation of all stakes decreases quite linear.
+Therefore linear fits of the elevation have been performed for all stakes individually.
+The results of the fits are shown in Tables~\ref{GPS:tab:mbal_ble} and \ref{GPS:tab:mbal_tel}.\\
+With the individual mass balances for each stake,
+it is possible to calculate the mass balance gradients and the equilibrium line elevations of the two glaciers.
+This is shown in Figs.~\ref{GPS:fig:elev_ble_mbg} and \ref{GPS:fig:elev_tel_mbg}.
+The values on the y-axis (stake elevation) are mean values of all elevation measurements of the different years.
+
+The linear fits yield the following results for the equilibrium lines (EL) and mass balance gradients~(MBG) on Blekumbreen and Tellbreen:
+\begin{equation*}
+\begin{split}
+\text{EL}_\text{B} = 751 \pm 45\, \text{m} \qquad \text{MBG}_\text{B} = 5.1 \pm 1.0\, \text{mm/m}\\
+\text{EL}_\text{T} = 757 \pm 56\, \text{m} \qquad \text{MBG}_\text{T} = 6.8 \pm 1.4\, \text{mm/m}
+\end{split}
+\end{equation*}
+
+
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./figs/Elevation_Blekumbreen.pdf}
-    \caption{capt.}
+    \caption{GPS measured elevation of the stakes on Blekumbreen for the past 8 years.
+    Linear fits (red line) of the data have been performed to calculate the individual mass balances~$b$.}
     \label{GPS:fig:elev_ble}
 \end{figure}
 
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./figs/Elevation_Tellbreen.pdf}
-    \caption{capt.}
+    \caption{GPS measured elevation of the stakes on Tellbreen for the past 8 years.
+    Linear fits (red line) with $y = a + x*b$ have been performed to calculate the individual mass balances~$b$.}
     \label{GPS:fig:elev_tel}
+\end{figure}
+
+\begin{table}[h]
+	\caption{Results of the elevation fits from Fig.~\ref{GPS:fig:elev_ble} and
+	mean values of the elevation measurements for all stakes on Blekumbreen.
+    The data in the table is plotted in Fig.~\ref{GPS:fig:elev_ble_mbg}.}
+	\centering
+	\input{tables/mbal_ble.tex}
+	\label{GPS:tab:mbal_ble}
+\end{table}
+
+\begin{table}[h]
+	\caption{Results of the elevation fits from Fig.~\ref{GPS:fig:elev_tel} and
+	mean values of the elevation measurements for all stakes on Tellbreen.
+    The data in the table is plotted in Fig.~\ref{GPS:fig:elev_tel_mbg}.}
+	\centering
+	\input{tables/mbal_tel.tex}
+	\label{GPS:tab:mbal_tel}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/Elevation_Blekumbreen_mbg.pdf}
+    \caption{Mass balances of the stakes on Blekumbreen as a function of stake elevation and linear fit of the points to obtain
+    the equilibrium line elevation $a$ and the mass balance gradient $b$.}
+    \label{GPS:fig:elev_ble_mbg}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/Elevation_Tellbreen_mbg.pdf}
+    \caption{Mass balances of the stakes on Tellbreen as a function of stake elevation and linear fit of the points to obtain
+    the equilibrium line elevation $a$ and the mass balance gradient $b$.}
+    \label{GPS:fig:elev_tel_mbg}
 \end{figure}
