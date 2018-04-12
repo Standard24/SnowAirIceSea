@@ -219,7 +219,7 @@ labels = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
 labels = [label + ' \nElev. [m]' for label in labels]
 
 # make a plot of the elevation of all stakes on tellbreen
-f, axarr = plt.subplots(8, sharex=True, figsize=(6, 8.5))
+f, axarr = plt.subplots(8, sharex=True, figsize=(6, 8.5), tight_layout=True)
 
 # list for fitparams to be written to file
 writeToFile = [['elevation', 'b', 'sb']]
@@ -265,7 +265,6 @@ for i, s in enumerate(ss[:8]):
     #axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
     plotOpts(axarr[i])
 
-print(writeToFile)
 
 axarr[0].set_xlim([2010.5, 2018.5])
 axarr[0].set_xticks(range(2011, 2019))
@@ -277,6 +276,21 @@ with open('../data/elevations/Tellbreen.txt', 'w') as f:
         # use space as separator, dont write [, ] and '
         write = str(line).replace(',', '').replace('\'', '')[1:-1]
         f.write(write + '\n')
+        
+# EXPORT TABLE TO CSV
+exp_tab = pd.DataFrame(writeToFile[1:], columns=['Elevation [m]', 'b', 'sb'])
+# add column with names
+exp_tab['Stake name'] = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8']
+# make new column with \pm
+exp_tab['Mass balance [m]'] = exp_tab.apply(lambda row: row[1] + ' $\pm$ ' + row[2], axis=1)
+# choose three columns for export
+exp_tab = exp_tab[['Stake name', 'Elevation [m]', 'Mass balance [m]']]
+print(exp_tab)
+# convert to latex format
+exp_tab = exp_tab.to_latex(index=False, column_format='lcc', escape=False)
+
+with open('../protocol/tables/mbal_tel.tex', 'w') as f:
+    f.write(exp_tab)
 
 ###############################################################################
 # make a plot of the elevation of all stakes on blekumbreen
@@ -284,7 +298,7 @@ with open('../data/elevations/Tellbreen.txt', 'w') as f:
 # list for fitparams to be written to file
 writeToFile = [['elevation', 'b', 'sb']]
 
-f, axarr = plt.subplots(4, sharex=True, figsize=(7, 6))
+f, axarr = plt.subplots(4, sharex=True, figsize=(6, 5), tight_layout=True)
 
 for i, s in enumerate(ss[8:]):
     # make plotdata: drop nan from elevation, also drop matching year numbers,
@@ -325,8 +339,8 @@ for i, s in enumerate(ss[8:]):
     axarr[i].plot(plotdata[0], plotdata[1], '.', color='tab:blue')
     #axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
     plotOpts(axarr[i])
+    
 
-print(writeToFile)
 #import IPython
 #IPython.embed()
 
@@ -341,3 +355,21 @@ with open('../data/elevations/Blekumbreen.txt', 'w') as f:
         # use space as separator, dont write [, ] and '
         write = str(line).replace(',', '').replace('\'', '')[1:-1]
         f.write(write + '\n')
+
+
+
+# EXPORT TABLE TO CSV
+exp_tab = pd.DataFrame(writeToFile[1:], columns=['Elevation [m]', 'b', 'sb'])
+# add column with names
+exp_tab['Stake name'] = ['BL2', 'BL3', 'BL4', 'BL5']
+# make new column with \pm
+exp_tab['Mass balance [m]'] = exp_tab.apply(lambda row: row[1] + ' $\pm$ ' + row[2], axis=1)
+# choose three columns for export
+exp_tab = exp_tab[['Stake name', 'Elevation [m]', 'Mass balance [m]']]
+print(exp_tab)
+# convert to latex format
+exp_tab = exp_tab.to_latex(index=False, column_format='lcc', escape=False)
+
+with open('../protocol/tables/mbal_ble.tex', 'w') as f:
+    f.write(exp_tab)
+

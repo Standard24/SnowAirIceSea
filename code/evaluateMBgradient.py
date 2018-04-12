@@ -19,12 +19,14 @@ def plotOpts(ax):
                    top=True)
 
 glacier = 'Blekumbreen'
-glacier = 'Tellbreen'
+#glacier = 'Tellbreen'
 
 if glacier == 'Blekumbreen':
-    xfit = np.array([-1.85, 0.1])
+    xfit = np.array([-1.9, 0.1])
+    asp = .0027
 else:
     xfit = np.array([-3.1, 0.2])
+    asp = .0035
 
 # import all csv files: Create a list of pandas data frames
 data = pd.read_csv('../data/elevations/' + glacier + '.txt', sep=' ')
@@ -35,15 +37,17 @@ print(data)
 #IPython.embed()
 
 # plot MBgradient on blekumbreen
-f = plt.figure(figsize=(6, 4))
+f = plt.figure(figsize=(6, 3.5), tight_layout=True)
 
 x =  data['b']
 sx = data['sb']
 y =  data['elevation']
 plt.errorbar(x, y, xerr=sx, fmt='.', ecolor='lightgrey', label='',
         elinewidth=1)
+        
+plt.gca().set_aspect(asp)
 
-plt.ylabel('Elevation [m]')
+plt.ylabel('Stake elevation [m]')
 plt.xlabel('Mass balance [m/y]')
 
 
@@ -57,6 +61,9 @@ def pol_1st(x, a, b):
 
 popt, pcov = curve_fit(pol_1st, xdat, ydat, p0=[1, 0.1])
 
+plt.axhline(popt[0], linestyle='--', color='lightgrey', linewidth=.5)
+plt.axvline(0, linestyle='--', color='lightgrey', linewidth=.5)
+
 sEL = np.sqrt(pcov[0][0])
 sMBG= np.sqrt(pcov[1][1])
 
@@ -66,8 +73,7 @@ plt.plot(xfit, pol_1st(xfit, *popt), 'r-', linewidth=1,
       % tuple([popt[0], sEL, popt[1], sMBG]))
 
 plt.legend()
-plt.axhline(popt[0], linestyle='--', color='k', linewidth=.5)
-plt.axvline(0, linestyle='--', color='k', linewidth=.5)
+
 
 print(popt)
 print('Uncert on equilibrium line: ' + str(sEL))

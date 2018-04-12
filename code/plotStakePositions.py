@@ -134,9 +134,9 @@ limits = {'T1' : ((.3, 0), (0, 0)),
           }
 
 # list to move some year labels (dx, dy), up and right are positive
-lu = (-.35, -.15) # left under
-ru = ( .05, -.15) # right under
-lo = (-.35,  .05) # left over
+lu = (-.4, -.2) # left under
+ru = ( .05, -.2) # right under
+lo = (-.4,  .05) # left over
 movelabs = {'T1': {3: lo, 5: ru, 9: lu, 11:lu, 12:lo},
             'T3': {2: lu, 3: ru, 5: ru, 6: lo, 8: ru}
            }
@@ -162,7 +162,7 @@ patches = [mpatches.Patch(color=c, label=y,
 ###
 # plot all stake positions 2d
 ###
-f3 = plt.figure(figsize=(6.5, 3.4))
+f3 = plt.figure(figsize=(6, 3.1), tight_layout=True)
 
 markers = ['+', 'x', ',', ',', '+', ',', 'v', '^', '.', '+']
 colors = defcol[3:10] + defcol[:3]
@@ -179,7 +179,7 @@ pos = [0, 1, 14, 2, 3, 4, 5, 6, 7, 8, 9, 11]  # position of the stakes to be lab
 annotations = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
           'BL5', 'BL4', 'BL3', 'BL2']
 for row, name in zip([data[-2].iloc[i] for i in pos], annotations):
-    plt.annotate(name, (row['Easting'] + 80, row['Northing'] - 20))
+    plt.annotate(name, (row['Easting'] - 100, row['Northing'] - 250))
 
 plt.gca().set_aspect('equal')
 plt.xlim([522600, 528900])
@@ -257,7 +257,7 @@ class stake(object):
         ###
 
         if len(self.dates) == len(self.northing):
-            f, (ax1, ax2) = plt.subplots(2, figsize=(8, 6), dpi=80)
+            f, (ax1, ax2) = plt.subplots(2, figsize=(6, 4.5), dpi=80)
 
             # subplot of northing
             ax1.set_title('Time evolution of movement of ' + self.title)
@@ -286,7 +286,7 @@ class stake(object):
         ###
         # plot 2d movement
         ###
-        f = plt.figure(figsize=(8, 6), dpi=80)
+        f = plt.figure(figsize=(6, 4.5), dpi=80, tight_layout=True)
         
         plt.gca().set_aspect('equal')
         plt.gca().ticklabel_format(useOffset=False)
@@ -341,58 +341,3 @@ ss = [stake(s) for s in stakes]
 for s in ss:
     s.makePlots()
 
-# make a plot of the elevation of all stakes on tellbreen
-f, axarr = plt.subplots(8, sharex=True, figsize=(6, 8.5))
-
-for i, s in enumerate(ss[:8]):
-    # make plotdata: drop nan from elevation, also drop matching year numbers,
-    # and do some funny transposing... nan==nan -> False
-    plotdata = np.array([[d,e] for d,e in zip(s.dates, s.elevation) if e==e]).T
-    axarr[i].plot(plotdata[0], plotdata[1], '.')
-    axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
-    plotOpts(axarr[i])
-    axarr[i].set_ylabel(stakes[i])
-    ylimsmean = np.mean(axarr[i].get_ylim())
-    axarr[i].yaxis.set_label_position("right")
-    axarr[i].set_yticks(np.arange(0, 1000, 10))
-    axarr[i].grid(axis='y')
-    
-
-    
-    # make more space on top and bottom: shift ylims by 1.5
-    #ylims = axarr[i].get_ylim()
-    #axarr[i].set_ylim([ylims[0] - 1.5, ylims[1] + 1.5])
-
-    axarr[i].set_ylim([ylimsmean - 12, ylimsmean + 12])
-
-
-axarr[0].set_xlim([2010.5, 2018.5])
-axarr[0].set_xticks(range(2011, 2019))
-
-f.savefig('../protocol/figs/Elevation_Tellbreen.pdf')
-
-
-###############################################################################
-# make a plot of the elevation of all stakes on blekumbreen
-f, axarr = plt.subplots(4, sharex=True, figsize=(7, 6))
-
-for i, s in enumerate(ss[8:]):
-    # make plotdata: drop nan from elevation, also drop matching year numbers,
-    # and do some funny transposing... nan==nan -> False
-    plotdata = np.array([[d,e] for d,e in zip(s.dates, s.elevation) if e==e]).T
-    axarr[i].plot(plotdata[0], plotdata[1], '.')
-    axarr[i].plot(plotdata[0], plotdata[1], linewidth=.5, color='k')
-    plotOpts(axarr[i])
-    axarr[i].set_ylabel(stakes[i+8])
-    ylimsmean = np.mean(axarr[i].get_ylim())
-    axarr[i].yaxis.set_label_position("right")
-    axarr[i].set_yticks(np.arange(0, 1000, 5))
-    axarr[i].grid(axis='y')
-
-    axarr[i].set_ylim([ylimsmean - 8, ylimsmean + 8])
-
-
-axarr[0].set_xlim([2010.5, 2018.5])
-axarr[0].set_xticks(range(2011, 2019))
-
-f.savefig('../protocol/figs/Elevation_Blekumbreen.pdf')
