@@ -2,16 +2,16 @@
 
 \subsection{Methods}
 
-Regarding to results of the previous years, it is given that the glacier velocity for the glaciers Tellbreen and Blekumbreen is less then one meter.
+The aim of this report is to measure the ice velocity of the two glaciers which calculated on different points on the glaciers. 
+The points are consitently given by the mass balance stakes as a reference point to the last years.
+The velocity will be calculated by the position difference of the stakes as a function of time.
+
+Regarding to the results of the previous years, it is given that the ice velocity for the glaciers Tellbreen and Blekumbreen is less then one meter.
+The position measurements are made with GPS. 
 The general used GPS system has only an accurancy in the order of meters.
-By correcting the raw data with the data from the base station, it is posssible to have a more accurate positioning to the order of millimeters \citep{UGPS}.
+By correcting the measurement data with the data from the base station, it is posssible to have a more accurate positioning to the order of millimeters \citep{UGPS}. This method is names differential GPS (dGPS).
 \medskip
 
-The aim of this report is to measure the ice velocity of the two glaciers.
-The velocity is calculated on different points on the glaciers. 
-The installed mass balance stakes provide a reference point.
-The velocity will be determined by the change of the stake position.
-The stake position is measured by GPS. 
 The GPS is working on two frequencies L1 and L2 which are two different services.
 The transmisson signals with L1 and L2 are the carrier components. 
 This is one component of the Global Navigation Satellite System (GNSS) structure the GPS receivers are using.
@@ -38,6 +38,7 @@ Also a time correlation is meaningful, because there is always a time delay in t
 Possible disturbances can caused by satellite clock errors, ephermeris errors, tropospheric errors (variation of the speed of electromagnetic radiation), ionospheric errors (dependent on signal frequency, elevation angle and the total electron content). 
 There are also the reciever noise and multipath as a uncorreleted error source between the two recievers \citep{UGPS}.
 For further information it is to recommend to read in the referenced book.
+\medskip
 
 The accurancy of the dGPS depends on the distance to the base station and differs between the horizontal and the vertical component \citep{Trquickstart}.
 For the Fast Static method the horizontal accuracy is $ \pm $ 3 mm + 0.1 ppm and vertical $ \pm $ 3.5 + 0.4 ppm.
@@ -62,19 +63,21 @@ This information and further information can be find in \cite{Truserguide}.
 The duration for our measurments with the GPS receiver was at least 15 minutes. 
 We had to made choice with a trade off between the quality of the result and the total number of measurements to measure all stakes at least one time. 
 With a longer measurement time it is possible to average out the fluctuations better.
+\medskip
 
+The analysis in this report is made with python.
 
-\subsection{Setup}
+\subsection{Setup} \label{GPS:subsec:setup}
 
-The setup for our measurments is specifed by a specific guidelines to insure that the measurements are consistent during the whole fieldwork.
-The rover on the carbon pole has to be positioned on the top on the stake as far as possible. 
-To determine the error from a tilted stake, it is necessary to measure the inclination of the stake as well as the direction of inclination with the compass.
+The setup for our measurments is specifed by a specific guideline to insure that the measurements are consistent during the whole fieldwork.
+The receiver on the carbon pole has to be positioned on the top on the stake as far as possible. 
+To determine the uncertainty from a tilted stake, it is necessary to measure the inclination of the stake as well as the direction of inclination with the compass.
 The snow depth is measured with the probe which has a centimeter scale on it.
 With snow depth and the antenna height the actual height over the ice surface is known. 
 When the stake is already melted out too high, it is necessary to put the pole with the rover next to the stake. 
 In this case the poles has to be positioned northwards of the stake so that the correction is only to the northing component, which makes the calculation easier. 
-Also the distance from rover pole to stake is measured.
-These two setups are shown in photographs in figure \ref{GPS:fig:setup}.
+Also the distance from the receiver to stake is measured.
+These two differenr setups are shown in photographs in the figure \ref{GPS:fig:setup}.
 
 \begin{figure}[H]
 	\centering
