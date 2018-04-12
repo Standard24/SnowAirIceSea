@@ -6,30 +6,44 @@ The nearest base station is Statens Kartverks SatRef located on Platåberget wit
 In the following the mass balance stake is only named stake and the pole with the rover will be shortend to the name rover.
 \medskip
 
-% 2 different methods:
-In the previous reports the post processing was done with the commercial software \textit{Trimble Business Center} (TBC). 
+In the previous reports the post processing was done with the commercial software Trimble Business Center (TBC). 
 In our report we use a new method for the postprocessing. 
-This method is an open source alternative which is available for different system softwares. 
+This method is an open source (OS) alternative which is available for different system softwares. 
 The TBC is only available on a windows system and needs a licens. 
 We operate both methods to compare the results of both methods.
-The differences for every stake are given in the table \ref{GPS:tab:diff_tab}.
-The direction for Northing and Easting varies randomly in the direction.
-Because of this, it is not possible to determine a bias for each component.
-This results in a mean difference of the absolut values with 0.15 m in the Northing, 0.14 m in the Easting and 0.24 m in the Elevation.
 \medskip
 
-% steps of the post processing:
+\subsection{Trimble}
+
 While the post processing with the usual method in the TBC all steps from section 5 in Gölles (2012) are done.
 For each day the data file from the measurements and the corresponding base station data file is imported. 
 We have data for the days of year (doy) 070, 072, 074 and 075.
 All files from the base station are in the .o18-format. 
 The data from the reciever have the .t02 format. 
 After the post processing the results from the are stored in a .csv-file.
+The GNSS processing in the TBC used the combination of reference and rover data.
+The goal is “fix” the number of whole wavelengths between the rover and satellites.
+This process is done in two steps by generating a 'float' solution an and resolve an integer value. 
+Wheh it is sucessful the solution is defined as 'fixed'.
+The transition from 'float' to 'fixed' is the initialization.
+A slow convergence of the solution is possible for longer baselines or shielding of the signal by objects in the surrounding.
+By mistake it is possible that during the post processing process a wrong fixed values is hold which can lead to an unnormal high position error.
+After some amount of time the float solution can switch instantaneously to a fixed solution. 
+There is also a disadvantag of the float and fixed approach for integer ambiguity resolution.
+At some point in time the convergence to fixed solution is hold on and impossible to change. 
+The result define then a wrong position, which is caused by a incorrect set of interger ambiguties.
+The TBC use automatically the best way to process the position data. 
+It is distingushed in short and long baselines.
+Baselines are determined by the distance between rover and reference station.
+For longer baselines the errors have to be reduced with an additional approach like a model.
+For different settings and situations the TBC used different approaches for the tropospheric and ionospheric errors and choose the right combinaion of different applications.
+This makes it difficult to distinguish the settings used for the post processing to compare with the open source processing \citep{Trprocess}.
 \medskip
 
-The open source post processing requires different processing steps.
+\subsection{Open source}
+The OS post processing requires different processing steps.
 First of all the raw data file has to be transformed from the original Trimble format .t02 to the .tdg-format, because .t02-files are not readable for the final post processing program.
-This transformation was done with the programm  runpkr00  which is available on the website of unavco \url{http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html}.
+This transformation was done with the programm runpkr00 which is available on the website of unavco \url{http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html}.
 The used command is 
 \begin{verbatim} 
 runpkr00 -g -d filename.t02 
@@ -53,87 +67,123 @@ For this we had to modify the settings of rtkpost.exe and load the three require
 The final output after the post processing is a position file (.pos). 
 This file includes for every time step the post processed position in longitude and latitude.
 Then we calculate a median over all time steps to get an average position for every measurement.
-Because we consistenly use the UTM coordinate system, we transform the lon/lat coordinates by using the python function \textit{from\_latlon}.
+Because we consistenly use the UTM coordinate system, we transform the lon/lat coordinates by using a python function.
 All the analysis in this report is made with python.
 \medskip
 
-% theory of trimble post processing/
-%...GNSS processing theory:
-There are five different GNSS constellations GPS, GLONASS, QZSS, COMPASS and Galileo.
-The Real-time Kinematic (RTK) of Trimble.
-The orbit of the satellites is approximately in 20000 km.
-When the position of the satellite is known, the position of the receiver is calculated by trilateration based on the measured distance between receiver and each satellite.
-The position of the satellite is broadcast as a ephemerides, which is a specific positioning.
-For reducong the errors by different sources the receiver need a additional source with precise positions, clock offsets and goog correction of atmosphic disturbances. 
-Differential positioning is used to reduce the errors by orbit and atmosphere, which ar e similar for both receiver. 
-The Carrier phase is used for the measurements because it has a smaller wavenegth than the Pseudorandom Noise (PRN) code signal.
-
-%The carrier phase measurement is the difference in the phase of the received signal and the phase of an equivalent signal generated from the receiver’s oscillator or clock.
-
-%Traditional GNSS processing engines used the combination of reference and rover data to attempt to “fix” the number of whole wavelengths between the rover and satellites.
-
-This process is done in two steps by generating a 'float' solution an and resolve an integer value. 
-Wheh it is sucessful the solution is defined as 'fixed'.
-The transition from 'float' to 'fixed' is the initialization.
-
-%The float solution was often maintained for a considerable amount of time when working in a difficult environment or with a long baseline, and was followed by an instantaneous switch to a fixed solution. Hence, the convergence from float to fixed was highly polarized. There were a number of disadvantages to the float/fixed approach for integer ambiguity resolution. For one thing, the user was unable to extract usable positions until the receiver had converged on a fixed solution. Also, there was the possibility of an incorrect solution where the processing engine selected the wrong set of integer ambiguities. In this event, the correct integer set was discarded and could not be selected until the search was repeated. For RTK, this resulted in a position outlier being reported with unrealistically good precisions for many seconds until detected by an automated integrity check.
-
-A slow convergence of the solution is possible for longer baselines or shielding of the signal by objects in the surrounding.
-
-By mistake it is possible that during the post processing process a wrong fixed values is hold which can lead to an unnormal high position error.
-
-%---post processingn application
-The TBC use automatically the best way to process the position data. 
-It is distingushed in short and long baselines.
-Baselines are determined by the distance between rover and reference station.
-For longer baselines the errors have to be reduced with an additional approach like a model.
-For different settings and situations the TBC used different approaches for the tropospheric and ionospheric errors and choose the right combinaion of different applications.
-
-\citep{Trprocess}.
-
 % therory of the open source post processing
-The header with the settings for the post processing is available in the appendix.
+The header with the settings for the OS post processing is available in the appendix.
+The setting are as similar as possible to the TBC settings.
+But like described is the processing method in the TBC flexible.
+In the open source post processing it is possible to select different correction methods for the tropospheric and ionospheric correction. 
+Due to missing informations from TBC the probaly best method was choosen with 'iono-free' correction for the ionosphere and the 'saastamoinen' correction for optimize the accurancy due to tropospheric errors. 
+The other settings can be taken from the header information to repeat the OS post processing. 
+\medskip
+
+The results of the OS post processing are given as a time series of latitude, longitude and elevation, where the horizontal components are transformed to the UTM coordinate system. 
+For the better understanding of the OS values it is usefull to compare timeseries of the post processed positions for two different measurements at the same stake.
+For both stakes the settings in the post processing were the same.
+In the first measurement (figure \label{GPS:fig:T1-i_timeseries}) the values coverge after a few seconds to a fixed solution.
+In the second measurement (figure \label{GPS:fig:T1-ii_timeseries}) the values vary during the hole time series.
+Out of this time series the weighted average was calculated to get one position value for every stake, the OS value.
+The properties of the second measurement leads to a bigger difference between the TBC value and the OS value.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
+<<<<<<< b16495712c6fe1d4f410193b378fd8ae12fa99e4
     \caption{First of two 15 minutes measurements of position of stake T1-2017. Compare to Fig.~\ref{GF:fig:T1-ii_timeseries}.}
-    \label{GF:fig:T1-i_timeseries}
+    \label{GPS:fig:T1-i_timeseries}
+>>>>>>> update of my report parts
 \end{figure}
-
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
+<<<<<<< b16495712c6fe1d4f410193b378fd8ae12fa99e4
     \caption{Second measurement of position of stake T1-2017. Compare to Fig.~\ref{GF:fig:T1-i_timeseries}.}
-    \label{GF:fig:T1-ii_timeseries}
+    \label{GPS:fig:T1-ii_timeseries}
+>>>>>>> update of my report parts
 \end{figure}
 
-Then it was calculated the weighted average to get one position value for every stake.
+A comparison to the time series of the TBC post processing is not possible, because it is not possible to get this out of the TBC.
 
-% error correction of the post processed data:
+
+\subsection{Stake correction}
 The post processed data with the base station data are not the final data. 
 To get the final, we have to make the stake correction include the different aspects from our measurement setup (see section setup).
 We subtract the distance between the rover and the stake from the northing component.
 Also it was necessary to correct the position on the ice surface with the inclination of the stake. 
 For this, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.
 The raw data from our measurements which are relevant for our stake corrections are in the appendix in table \ref{GPS:tab:fb_others_tab}.
+For the better understanding all variables for the stake corrections are shown in the schematic figure \ref{GPS:fig:schema}.
 \medskip
 
-The calculations for the error propagation follow the common rule.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.9\linewidth]{./figs/pictures/schematic_setup.pdf}
-\caption{Schematic figure of the relevant parameter in the measurment setup.}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{./figs/pictures/schematic_setup.pdf}
+	\caption{Schematic figure of the relevant parameter in the measurment setup.}
+	\label{GPS:fig:schema}
 \end{figure}
 
-% name accurancies of the final data:
+The stake correction is derived by the geomatry of our measurement setup.
+First the absolut horizontal difference $\Delta_{\text{abs}}$ depending in the inclination $\alpha$ and the height composite of snow depth $h_{\text{snow}}$ and antenna height $h_{\text{antenna}}$.
+\begin{equation}
+	\Delta_{\text{abs}} = (h_{\text{snow}} + h_{\text{antenna}}) * sin(\alpha)
+\end{equation}
+
+Then the correction is different for the northing and easting. The norting correction is calculated with the cosinus of the direction of the inclination $\phi$. 
+The angle of direction is defined in a range from 0$^{\circ}$ to 359$^{\circ}$ with 0$^{\circ}$ for North, 90$^{\circ}$ for East, 180$^{\circ}$ for South and 270$^{\circ}$ for West.
+Due to geometrical reasons the sign has to be negative. 
+Additionally the the distance between the rover and the stake $d_{\text{rover-stake}}$ has to be subtracted from the original northing.
+\begin{equation}
+	\Delta_{\text{north}} = - (\Delta_{\text{abs}} * cos(\phi)) - d_{\text{rover-stake}}
+\end{equation}
+
+The easting difference $\Delta_{\text{east}}$ is calculated with the sine of $\phi$.
+\begin{equation}
+	\Delta_{\text{east}} = - \Delta_{\text{abs}} * sin(\phi)
+\end{equation}
+
+The elevation correction is different between the OS and the TCS values.
+For the TBC values the elevation correction $\Delta_{\text{elev,TBC}}$ only the $h_{\text{snow}}$ need to be subtracted because the $h_{\text{antenna}}$ is already caluclated out while the measurement with the Controller.
+\begin{equation}
+	\Delta_{\text{elev,TBC}} = - h_{\text{snow}} 
+\end{equation}
+
+The elevation correction of the OS elevation $\Delta_{\text{elev,os}}$ is done by $h_{\text{snow}}$ and $h_{\text{antenna}}$.
+\begin{equation}
+	\Delta_{\text{elev,os}} = - (h_{\text{snow}} + h_{\text{antenna}}) 
+\end{equation}
+
+\subsubsection*{Referenced positions}
+
+To calculate the actual velocity it is necessary to reference the location of the stake to the ice surface elevation of the referenced year. 
+This has been done for the years 2015, 2016 and 2017 on the 2018 OS values.
+In gerneal, the calculation works in the similar way.
+The height for stake correction with the inclination is different, because the relevant height difference is, in our case of an over all ablation, lower than for the actual values of this year. So the height difference of the height surface between the referenced year and 2018 $dh_{year,2018}$ is considered for the calculation of the absolute horizontal difference $\Delta_{year,2018}$.
+
+\begin{equation}
+	\Delta_{year,2018} = (h_{\text{snow}} + h_{\text{antenna}} - dh_{year,2018}) * sin(\alpha)
+\end{equation}
+
+\subsection{Evaluation}
+
+For the difference between the two different methods is not systematic and in the avereage of the absolute values in the order of centimeters with 0.09 m for the northing, 0.05 m for thehe  easting and 0.24 m for the elevation. This is mainly caused by a few unclear values after the post processing. The meadian of the northing and eastind difference is about 0.01 m and for the elevation only 0.07 m. For the comparison the TBC post processed coordinates are in the appendix in table \ref{GPS:tab:tbc_tab}.
+The differences for northing, easting and elevation for every stake is displayed in a table in the appendix in table \ref{GPS:tab:diff_tab}. 
+
+This shows that the OS processed values are a reasonable replacement for the TBC values.
+This means that in the following report the OS values are consideres.
+This means also that the error propagation is done for the OS values so we can finaly determine the uncertainty of the velocity values.
+
+\subsection{Error propagation}
+
+The calculations for the error propagation are done by following the common rule.
 The accurancy of the post processed postions with the base station data is decreasing with a increasing distance to the base station. 
 But this error is at least one order of magnitude smaller than the other errors. 
 The other accurancies are determined by the quality of our measurements \ref{GPS:tab:errors}.
 
-\begin{table}[h]
+\begin{table}[H]
 	\caption{Used error values for the error propagation.}
 	\centering
 	\begin{tabular}{lc}
@@ -150,46 +200,33 @@ The other accurancies are determined by the quality of our measurements \ref{GPS
     $ \overline{\delta_{\Delta_{east}}} $ & 0.19 m \\
     $ \overline{\delta_{\Delta_{elev}}} $ & 0.89 m \\
     \bottomrule
-\end{tabular}
+	\end{tabular}
 	\label{GPS:tab:errors}
 \end{table} 
 
+The error calculation for the final position is dependent of different errors.
 
-% formulars stake correction
-\begin{equation}
-	\Delta_{\text{abs}} = (h_{\text{snow}} + h_{\text{antenna}}) * sin(\alpha)
-\end{equation}
-
-\begin{equation}
-	\Delta_{\text{north}} = - (\Delta_{\text{abs}} * cos(\phi)) - d_{\text{rover-stake}}
-\end{equation}
-
-\begin{equation}
-	\Delta_{\text{east}} = - \Delta_{\text{abs}} * sin(\phi)
-\end{equation}
-
-\begin{equation}
-	\Delta_{\text{elev,os}} = - (h_{\text{snow}} + h_{\text{antenna}}) 
-\end{equation}
-
-\begin{equation}
-	\Delta_{\text{elev,TBC}} = - h_{\text{snow}} 
-\end{equation}
-
-% formulars error propagation
-
+The error of the absolut horizontal difference $\delta_{\Delta_{\text{abs}}}$ is dependent on the errors of the parameter and the parameter itself.
 \begin{equation}
 	\delta_{\Delta_{\text{abs}}} = \sqrt{(h_{\text{snow}} + h_{\text{antenna}})^2 * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2) * \sin^2(\alpha)}
 \end{equation}
 
+The error of the northing correction $\delta_{\Delta_{\text{north}}}$ is
 \begin{equation}
 	\delta_{\Delta_{\text{north}}} = \sqrt{\delta_{\Delta_{\text{abs}}}^2 * cos^2(\phi) + \Delta_{\text{abs}}^2 * \delta_{\phi}^2 * sin^2(\phi) + \delta_{d_{\text{rover-stake}}}^2}
 \end{equation}
 
+The error of the easting correction $\delta_{\Delta_{\text{east}}}$ is
 \begin{equation}
 	\delta_{\Delta_{\text{east}}} = \sqrt{\delta_{\Delta_{\text{abs}}}^2 * sin^2(\phi) + \Delta_{\text{abs}}^2 * \delta_{\phi}^2 * cos^2(\phi)}
 \end{equation}
 
+The error of the elevation correction $\delta_{\Delta_{\text{elev}}}$ is
+\begin{equation}
+\delta_{\Delta_{\text{elev}}} = \sqrt{\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2}
+\end{equation}
+	
+Based on this errors the total error for norting $\delta_{\Delta_{\text{total,north}}}$, easting $\delta_{\Delta_{\text{total,east}}}$ and eleavtion $\delta_{\Delta_{\text{total,elev}}}$ can calculated with the error of the time series of our OS post processed GPS time series $\delta_{\Delta_{\text{ts,north}}}$ for northing, $\delta_{\Delta_{\text{ts,east}}}$ for easting and $\delta_{\Delta_{\text{ts,elev}}}$ for the elevation.
 \begin{equation}
 	\delta_{\Delta_{\text{total,north}}} = \sqrt{\delta_{\Delta_{\text{ts,north}}}^2 + \delta_{\Delta_{\text{north}}}^2}
 \end{equation}
@@ -202,24 +239,25 @@ The other accurancies are determined by the quality of our measurements \ref{GPS
 	\delta_{\Delta_{\text{total,elev}}} = \sqrt{\delta_{\Delta_{\text{ts,elev}}}^2 +\delta_{\Delta_{\text{elev}}}^2}
 \end{equation}
 
-% for the referenced position
-To calculate the actual velocity it is necessary to reference the location of the stake to the ice surface elevation of the referenced year. 
-This has been done for the years 2015, 2016 and 2017.
- 
+\subsubsection*{Referenced positions}
+For the refenced positions only two euations differ to the previous error propagation. 
+The error of the absolute difference $\Delta_{year,2018}$ is
 \begin{equation}
-\delta_{\Delta_{year,2018}} = \sqrt{\left|(h_{\text{snow}} + h_{\text{antenna}} - dh_{year,2018})^2\right| * \delta_{\alpha}^2 * cos^2(\alpha)\\
-+ (\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2 + \delta_{dh_{year,2018}}^2) * \sin^2(\alpha)}
+\begin{split}
+\delta_{\Delta_{year,2018}} = & 
+\ ((h_{\text{snow}} + h_{\text{antenna}} - dh_{year,2018})^2 * \delta_{\alpha}^2 * cos^2(\alpha)\\
+&+ (\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2 + \delta_{dh_{year,2018}}^2) * \sin^2(\alpha))^{1/2}
+\end{split}
 \end{equation}
 
+The error for the elevation correction $\delta_{\Delta_{year, \text{elev}}}$ is also different by the uncertainty of the height difference of the ice surface $\delta_{dh_{\text{year, 2018}}}$.
 \begin{equation}
-	\delta_{\Delta_{year, \text{elev}}} = \sqrt{\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{snow}}}^2}
+	\delta_{\Delta_{year, \text{elev}}} = \sqrt{\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2 + \delta_{dh_{\text{year, 2018}}}^2}
 \end{equation}
 
-\begin{equation}
-	\Delta_{year,2018} = (h_{\text{snow}} + h_{\text{antenna}} - dh_{year,2018}) * sin(\alpha)
-\end{equation}
+\subsection{Final positions}
 
-The final data show the actual position of the stakes on this years ice surface.
+The final data with all the processing and correction included show the actual position of the stakes on this years ice surface.
 
 \begin{table}[H]
 	\caption{Final positions after the open source post processing and stake correction with the error.}
@@ -227,6 +265,3 @@ The final data show the actual position of the stakes on this years ice surface.
 	\input{tables/os_tab.tex}
 	\label{GPS:tab:os_tab}
 \end{table}
-
-For the difference between the two different methods is not systematic and in the avereage of the absolute values in the order of centimeters with 0.09 m for the northing, 0.05 m for thehe  easting and 0.24 m for the elevation. This is mainly caused by a few unclear values after the post processing. The meadian of the northing and eastind difference is about 0.01 m and for the elevation only 0.07 m. For the comparison the TBC post processed coordinates are in the appendix in table \ref{GPS:tab:tbc_tab}.
-The differences for northing, easting and elevation for every stake is displayed in a table in the appendix in table \ref{GPS:tab:diff_tab}. 

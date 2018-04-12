@@ -5,6 +5,7 @@
 Regarding to results of the previous years, it is given that the glacier velocity for the glaciers Tellbreen and Blekumbreen is less then one meter.
 The general used GPS system has only an accurancy in the order of meters.
 By correcting the raw data with the data from the base station, it is posssible to have a more accurate positioning to the order of millimeters \citep{UGPS}.
+\medskip
 
 The aim of this report is to measure the ice velocity of the two glaciers.
 The velocity is calculated on different points on the glaciers. 
@@ -16,6 +17,17 @@ The transmisson signals with L1 and L2 are the carrier components.
 This is one component of the Global Navigation Satellite System (GNSS) structure the GPS receivers are using.
 In the GNSS there ar 24 operational plus some redundant stallites available.
 To reach the satellites the signal has to go through the atmosphere \citep{curcherdgps}.
+\medskip
+
+There are five different GNSS constellations GPS, GLONASS, QZSS, COMPASS and Galileo.
+The Real-time Kinematic (RTK) of Trimble.
+The orbit of the satellites is approximately in 20000 km.
+When the position of the satellite is known, the position of the receiver is calculated by trilateration based on the measured distance between receiver and each satellite.
+The position of the satellite is broadcast as a ephemerides, which is a specific positioning.
+For reducong the errors by different sources the receiver need a additional source with precise positions, clock offsets and goog correction of atmosphic disturbances. 
+Differential positioning is used to reduce the errors by orbit and atmosphere, which ar e similar for both receiver. 
+The Carrier phase is used for the measurements because it has a smaller wavenegth than the Pseudorandom Noise (PRN) code signal.
+To meassure the carrier the difference in the phase of the received signal and the phase of an equivalent signal is taken which is generated from the receiver’s oscillator or clock \citep{Trprocess}.
 \medskip
 
 The errors from the GPS measurements that are corrected by the dGPS method are correlated in time and space.
@@ -64,10 +76,10 @@ In this case the poles has to be positioned northwards of the stake so that the 
 Also the distance from rover pole to stake is measured.
 These two setups are shown in photographs in figure \ref{GPS:fig:setup}.
 
-\begin{figure}
-\centering
-\includegraphics[width=0.48\linewidth]{./figs/pictures/GPS_setup.jpg}
-\includegraphics[width=0.485\linewidth]{./figs/pictures/setup_ontop.JPG}
-\caption{Setup while the GPS measurement next to the stake (left) and on top of the stake (right).}
-\label{GPS:fig:setup}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.48\linewidth]{./figs/pictures/GPS_setup.jpg}
+	\includegraphics[width=0.485\linewidth]{./figs/pictures/setup_ontop.JPG}
+	\caption{Setup while the GPS measurement next to the stake (left) and on top of the stake (right).}
+	\label{GPS:fig:setup}
 \end{figure}
