@@ -1,0 +1,72 @@
+% That is the appendix. Just add stuff. that you do not want to include in the main report but still want to show. here.
+% Name the label to for example "student03:appendix" if you are student 03 so that you can refer to your appendix in your ReportPart by using "\ref{student03:appendix}"
+% No referencing in appendix implemented yet.
+
+%%%%%%%%%%%%%%%%%%%%%  John Doe  %%%%%%%%%%%%%%%%%%%%%
+
+\chapter{Appendix GPS measurements}
+\label{studentxx:appendix}
+
+\subsection*{Header of a position file}
+% header position file 
+\begin{verbatim}
+ program   : RTKPOST ver.2.4.2
+ inp file  : *.obs
+ inp file  : lyrs07*0.18o
+ inp file  : *.nav
+ obs start : 2018/03/15 10:48:19.0 GPST (week1992 384499.0s)
+ obs end   : 2018/03/15 11:19:49.0 GPST (week1992 386389.0s)
+ pos mode  : static
+ freqs     : L1+L2
+ solution  : forward
+ elev mask : 15.0 deg
+ dynamics  : on
+ tidecorr  : off
+ ionos opt : iono-free
+ tropo opt : saastamoinen
+ ephemeris : broadcast
+ navi sys  : gps glonass galileo qzss sbas
+ amb res   : fix and hold
+ amb glo   : on
+ val thres : 3.0
+ antenna1  :                       ( 0.0000  0.0000  0.0000)
+ antenna2  :                       ( 0.0000  0.0000  0.0000)
+ ref pos   : 78.228825638   15.397310064   495.6816
+\end{verbatim}
+
+\subsection*{Additional data}
+
+% raw position data from the Trimble Controller
+\begin{table}[h]
+	\caption{Raw position data in Northing, Easting and Elevation from the Trimble Controller.}
+	\centering
+		\input{tables/fb_pos_tab.tex}
+		\label{GPS:tab:fb_pos_tab}	
+\end{table}
+
+% raw data from the measurements in the field
+\begin{table}[h]
+	\caption{Raw data collected in the field used for the stake correction.}
+	\centering
+	\begin{turn}{90}
+		\scriptsize
+		\input{tables/fb_other_tab.tex}
+		\label{GPS:tab:fb_other_tab}
+	\end{turn}
+\end{table}
+
+% final positions post processed with the Trimble Business Center.
+\begin{table}[h]
+	\caption{Final positions in Northing, Easting and Elevation with the TBC post processing and the stake correction.}
+	\centering 
+	\input{tables/tbc_tab.tex}
+	\label{GPS:tab:tbc_tab}
+\end{table}
+
+% difference between post processing methods
+\begin{table}[h]
+	\caption{Difference of Northing, Easting and Elevation between the two different post processing methods.}
+	\centering
+	\input{tables/diff_tab.tex}
+	\label{GPS:tab:diff_tab}
+\end{table}
