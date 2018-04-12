@@ -8,7 +8,6 @@
 \label{studentxx:appendix}
 
 \subsection*{Header of a position file}
-% header position file 
 \begin{verbatim}
  program   : RTKPOST ver.2.4.2
  inp file  : *.obs
@@ -34,11 +33,10 @@
  ref pos   : 78.228825638   15.397310064   495.6816
 \end{verbatim}
 
-\subsection*{Additional data}
+\subsection*{Additional data in the processing}
 
-% raw data from the measurements in the field
-\begin{table}[h]
-	\caption{Raw data collected in the field used for the stake correction.}
+\begin{table}[H]
+	\caption{Measurements of the setup parameter used for the stake correction.}
 	\centering
 	\begin{turn}{90}
 		\scriptsize
@@ -49,16 +47,16 @@
 
 
 % final positions post processed with the Trimble Business Center.
-\begin{table}[h]
-	\caption{Final positions in Northing, Easting and Elevation with the TBC post processing and the stake correction.}
+\begin{table}[H]
+	\caption{Final TBC positions in Northing, Easting and Elevation with stake correction.}
 	\centering 
 	\input{tables/tbc_tab.tex}
 	\label{GPS:tab:tbc_tab}
 \end{table}
 
 % difference between post processing methods
-\begin{table}[h]
-	\caption{Difference of Northing, Easting and Elevation between the two different post processing methods.}
+\begin{table}[H]
+	\caption{Difference of Northing, Easting and Elevation between the OS and TBC values.}
 	\centering
 	\input{tables/diff_tab.tex}
 	\label{GPS:tab:diff_tab}
