@@ -91,9 +91,14 @@ for k in range(0, len(fieldbook['name'])):
     
     s_delta_elev_ref = np.sqrt(s_ha**2 + s_hs**2 + s_dh**2)
     
-    s_delta_ref_17 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
-    - fieldbook['dh_17_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
-    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+#    s_delta_ref_17 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
+#    - fieldbook['dh_17_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+#    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+
+    s_delta_ref_17 = np.sqrt((fieldbook['snow_depth'][k] + fieldbook['antenna_height'][k]
+    - fieldbook['dh_17_18'][k])**2 * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs**2 + s_ha**2 + s_dh**2) * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)    
+    
     s_delta_north_ref_17 = np.sqrt(s_delta_ref_17**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_17**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_drs**2)
     s_delta_east_ref_17 = np.sqrt(s_delta_ref_17**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_17**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     sN_17 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_17**2)
@@ -101,17 +106,27 @@ for k in range(0, len(fieldbook['name'])):
 #    import IPython
 #    IPython.embed()
     
-    s_delta_ref_16 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
-    - fieldbook['dh_16_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
-    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+#    s_delta_ref_16 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2
+#    - fieldbook['dh_16_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+#    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+    
+    s_delta_ref_16 = np.sqrt((fieldbook['snow_depth'][k] + fieldbook['antenna_height'][k]
+    - fieldbook['dh_16_18'][k])**2 * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs**2 + s_ha**2 + s_dh**2) * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+    
     s_delta_north_ref_16 = np.sqrt(s_delta_ref_16**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_16**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_drs**2)
     s_delta_east_ref_16 = np.sqrt(s_delta_ref_16**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_16**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     sN_16 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_16**2)
     sE_16 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sE']**2 + s_delta_east_ref_16**2)
     
-    s_delta_ref_15 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2\
-    - fieldbook['dh_15_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
-    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+#    s_delta_ref_15 = np.sqrt(np.abs((fieldbook['snow_depth'][k]**2 + fieldbook['antenna_height'][k]**2\
+#    - fieldbook['dh_15_18'][k]**2)) * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+#    + (s_hs + s_ha + s_dh)**2 * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)
+    
+    s_delta_ref_15 = np.sqrt((fieldbook['snow_depth'][k] + fieldbook['antenna_height'][k]
+    - fieldbook['dh_15_18'][k])**2 * np.cos(np.deg2rad(fieldbook['inclination'][k]))**2 * s_inc**2\
+    + (s_hs**2 + s_ha**2 + s_dh**2) * np.sin(np.deg2rad(fieldbook['inclination'][k]))**2)    
+    
     s_delta_north_ref_15 = np.sqrt(s_delta_ref_15**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_15**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_drs**2)
     s_delta_east_ref_15 = np.sqrt(s_delta_ref_15**2 * np.sin(np.deg2rad(fieldbook['inc_dir'][k]))**2 + s_inc_dir**2 * delta_ref_15**2 * np.cos(np.deg2rad(fieldbook['inc_dir'][k]))**2)
     sN_15 = np.sqrt(data_os_dir[fieldbook['name'][k]]['sN']**2 + s_delta_north_ref_15**2)
@@ -180,35 +195,33 @@ for key in data_tbc_dir.keys():
 #df_tbc_final.to_csv('../data/stake_coordinates/' + filename_tbc + '_final' + '.csv', sep=' ', encoding='utf-8')
 
 # open source
-df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name',
-'sN': 'Error Northing [m]', 'sE': 'Error Easting [m]', 'sH': 'Error Elevation [m]'})
-
-def nice_format(row, i):
-    if row[i] != row[i]:
-        return '-'
-    else:
-        ret = '%.2f'%row[i] + ' $\pm$ ' + '%.2f'%row[i+1]
-        return ret
-
-
-
-df_os_tab_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name',
- 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
-df_os_tab_final = df_os_tab_final.merge(df_error)
-df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Error Northing [m]', 
-'Easting [m]', 'Error Easting [m]', 'Elevation [m]', 'Error Elevation [m]']]
-
-df_os_tab_final['Northing [m]'] = df_os_tab_final.apply(lambda row: nice_format(row, 1), axis=1)
-df_os_tab_final['Easting [m]'] = df_os_tab_final.apply(lambda row: nice_format(row, 3), axis=1)
-df_os_tab_final['Elevation [m]'] = df_os_tab_final.apply(lambda row: nice_format(row, 5), axis=1)
-df_os_tab_final = df_os_tab_final.drop('Error Northing [m]', 1)
-df_os_tab_final = df_os_tab_final.drop('Error Easting [m]', 1)
-df_os_tab_final = df_os_tab_final.drop('Error Elevation [m]', 1)
-
-tab_os_final = df_os_tab_final.to_latex(index=False, column_format='lcccccc', escape=False)
-
-with open('../protocol/tables/os_tab.tex', 'w') as f:
-    f.write(tab_os_final.encode('utf-8'))
+#df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name',
+#'sN': 'Error Northing [m]', 'sE': 'Error Easting [m]', 'sH': 'Error Elevation [m]'})
+#
+#def nice_format(row, i):
+#    if row[i] != row[i]:
+#        return '-'
+#    else:
+#        ret = '%.2f'%row[i] + ' $\pm$ ' + '%.2f'%row[i+1]
+#        return ret
+#
+#df_os_tab_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name',
+# 'Northing': 'Northing [m]', 'Easting': 'Easting [m]', 'Elevation': 'Elevation [m]' })
+#df_os_tab_final = df_os_tab_final.merge(df_error)
+#df_os_tab_final = df_os_tab_final[['Name', 'Northing [m]', 'Error Northing [m]', 
+#'Easting [m]', 'Error Easting [m]', 'Elevation [m]', 'Error Elevation [m]']]
+#
+#df_os_tab_final['Northing [m]'] = df_os_tab_final.apply(lambda row: nice_format(row, 1), axis=1)
+#df_os_tab_final['Easting [m]'] = df_os_tab_final.apply(lambda row: nice_format(row, 3), axis=1)
+#df_os_tab_final['Elevation [m]'] = df_os_tab_final.apply(lambda row: nice_format(row, 5), axis=1)
+#df_os_tab_final = df_os_tab_final.drop('Error Northing [m]', 1)
+#df_os_tab_final = df_os_tab_final.drop('Error Easting [m]', 1)
+#df_os_tab_final = df_os_tab_final.drop('Error Elevation [m]', 1)
+#
+#tab_os_final = df_os_tab_final.to_latex(index=False, column_format='lcccccc', escape=False)
+#
+#with open('../protocol/tables/os_tab.tex', 'w') as f:
+#    f.write(tab_os_final.encode('utf-8'))
 
 #df_os_final = pd.DataFrame(final_os_dir).transpose().reset_index().rename(columns={'index':'Name'})
 #df_error = pd.DataFrame(error_dir).transpose().reset_index().rename(columns={'index':'Name'})
@@ -257,17 +270,17 @@ with open('../protocol/tables/os_tab.tex', 'w') as f:
 #    f.write(tab_other_final.encode('utf-8'))
 
 # mean position errors
-sN = 0
-sE = 0 
-sH = 0
-for key in error_dir.keys():
-    sN = sN + error_dir[key]['sN']
-    sE = sE + error_dir[key]['sE']
-    sH = sH + error_dir[key]['sH']
-sN_mean = sN/len(error_dir.keys())
-sE_mean = sE/len(error_dir.keys())
-sH_mean = sH/len(error_dir.keys())
-
-print sN_mean, sE_mean, sH_mean
+#sN = 0
+#sE = 0 
+#sH = 0
+#for key in error_dir.keys():
+#    sN = sN + error_dir[key]['sN']
+#    sE = sE + error_dir[key]['sE']
+#    sH = sH + error_dir[key]['sH']
+#sN_mean = sN/len(error_dir.keys())
+#sE_mean = sE/len(error_dir.keys())
+#sH_mean = sH/len(error_dir.keys())
+#
+#print sN_mean, sE_mean, sH_mean
     
  
