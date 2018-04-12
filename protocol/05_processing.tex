@@ -28,24 +28,31 @@ After the post processing the results from the are stored in a .csv-file.
 
 The open source post processing requires different processing steps.
 First of all the raw data file has to be transformed from the original Trimble format .t02 to the .tdg-format, because .t02-files are not readable for the final post processing program.
-This transformation was done with the programm \textit{runpkr00} which is available on the website of unavco \textit{http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html}.
-The used command is \textit{runpkr00 -g -d filename.t02}.
+This transformation was done with the programm  runpkr00  which is available on the website of unavco \url{http://kb.unavco.org/kb/article/trimble-runpkr00-v5-40-latest-version-mac-osx-10-7-windows-xp-7-linux-solaris-744.html}.
+The used command is 
+\begin{verbatim} 
+runpkr00 -g -d filename.t02 
+\end{verbatim}.
 Due to problems with the package we had to do a manual transformation of the package.
 To provide the correct file format for the last post processing step we use the toolkit teqc.
-This toolkit is also available on the website of unavco \textit{https://www.unavco.org/software/data-processing/teqc/teqc.html}.
-Then the file can be converted by another commad using \textit{./teqc +nav filename.nav +obs filename.obs filename.tgd} to an observation (.obs) and navigation (.nav) file.
-After that it is necessary to download also the base station data from the platform \textit{http://ftp.statkart.no/}.
+This toolkit is also available on the website of unavco \url{https://www.unavco.org/software/data-processing/teqc/teqc.html}.
+Then the file can be converted by another commad using
+\begin{verbatim}
+./teqc +nav filename.nav +obs filename.obs filename.tgd
+\end{verbatim} 
+to an observation (.obs) and navigation (.nav) file.
+After that it is necessary to download also the base station data from the platform \url{http://ftp.statkart.no/}.
 The final step in the post processing of the GPS data is done with the open source program package \textit{RTKLIB}.
-This package is available for the download in the website \textit{http://www.rtklib.com/rtklib.htm}.
+This package is available for the download in the website \url{http://www.rtklib.com/rtklib.htm}.
 In this package we use the executable rtkpost.exe in the subdirectory \textit{/bin} of the downloaded full package with source Programs with the version 2.4.2.
 In this software the two navigation file from the receiver and the base station as well as the observation file from the receiver has to be read in.
 For this method the .n18-format from the basestation is needed as comparable navigation file.
-The next steps are consistent to the description on the website \textit{https://docs.emlid.com/reach/common/tutorials/gps-post-processing/}.
+The next steps are consistent to the description on the website \url{https://docs.emlid.com/reach/common/tutorials/gps-post-processing/}.
 For this we had to modify the settings of rtkpost.exe and load the three required files. 
 The final output after the post processing is a position file (.pos). 
 This file includes for every time step the post processed position in longitude and latitude.
 Then we calculate a median over all time steps to get an average position for every measurement.
-Because we consistenly use the UTM coordinate system, we transform the lon/lat coordinates by using the python function from\_latlon.
+Because we consistenly use the UTM coordinate system, we transform the lon/lat coordinates by using the python function \textit{from\_latlon}.
 All the analysis in this report is made with python.\medskip
 
 % error correction of the post processed data:
@@ -54,78 +61,16 @@ To get the final, we have to make the stake correction include the different asp
 We subtract the distance between the rover and the stake from the northing component.
 In addition, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.\medskip
 
-The calculations for the error propagation follow the provided rules \citep{errorprop}.
+The calculations for the error propagation follow the common rules.
 
+For the difference between the two different methods is not systematic and in the avereage of the absolute values in the order of centimeters with 0.09 m for the northing, 0.05 m for thehe  easting and 0.24 m for the elevation. This is mainly caused by a few unclear values after the post processing. The meadian of the northing and eastind difference is about 0.01 m and for the elevation only 0.07 m 
 
+% theory of trimble post processing
+\citep{Trprocess}.
 
-\citep{Trprocess}
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{./figs/pictures/schematic_setup.pdf}
-\caption{Schematic figure of the relevant parameter in the measurment setup.}
-\end{figure}
+The header with the settings for the post processing is available in the appendix.
 
-% formulars stake correction
-\begin{equation}
-	\Delta_{abs} = (h_{snow} + h_{antenna}) * sin(\alpha)
-\end{equation}
-
-\begin{equation}
-	\Delta_{north} = - (\Delta_{abs} * cos(\phi)) - d_{rover-stake}
-\end{equation}
-
-\begin{equation}
-	\Delta_{east} = - \Delta_{abs} * sin(\phi)
-\end{equation}
-
-\begin{equation}
-	\Delta_{elev,os} = - (h_{snow} + h_{antenna}) 
-\end{equation}
-
-\begin{equation}
-	\Delta_{elev,TBC} = - h_{snow} 
-\end{equation}
-
-\begin{equation}
-	\Delta_{ref,year} = (h_{snow} + h_{antenna} - dh_{ref,year}) * sin(\alpha)
-\end{equation}
-
-% formulars error propagation
-
-\begin{equation}
-	\delta_{\Delta_{abs}} = \sqrt{(h_{snow} + h_{antenna})^2 * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{snow}}^2 + \delta_{h_{antenna}}^2) * \sin^2(\alpha)}
-\end{equation}
-
-\begin{equation}
-	\delta_{\Delta_{north}} = \sqrt{\delta_{\Delta_{abs}}^2 * cos^2(\phi) + \Delta_{abs}^2 * \delta_{\phi}^2 * sin^2(\phi) + \delta_{d_{rover-stake}}^2}
-\end{equation}
-
-\begin{equation}
-	\delta_{\Delta_{east}} = \sqrt{\delta_{\Delta_{abs}}^2 * sin^2(\phi) + \Delta_{abs}^2 * \delta_{\phi}^2 * cos^2(\phi)}
-\end{equation}
-
-\begin{equation}
-	\delta_{\Delta_{total,north}} = \sqrt{\delta_{\Delta_{ts,north}}^2 + \delta_{\Delta_{north}}^2}
-\end{equation}
-
-\begin{equation}
-	\delta_{\Delta_{total,east}} = \sqrt{\delta_{\Delta_{ts,east}}^2 + \delta_{\Delta_{east}}^2}
-\end{equation}
-
-\begin{equation}
-	\delta_{\Delta_{total,elev}} = \sqrt{\delta_{\Delta_{ts,elev}}^2 +\delta_{\Delta_{elev}}^2}
-\end{equation}
-
-% for the referenced position
-\begin{equation}
-\delta_{\Delta_{ref,year}} = \sqrt{\left|(h_{snow} + h_{antenna} - dh_{ref,year})^2\right| * \delta_{\alpha}^2 * cos^2(\alpha)\\
-+ (\delta_{h_{snow}}^2 + \delta_{h_{antenna}}^2 + \delta_{dh_{ref,year}}^2) * \sin^2(\alpha)}
-\end{equation}
-
-\begin{equation}
-	\delta_{\Delta_{ref, elev}} = \sqrt{\delta_{h_{snow}}^2 + \delta_{h_{snow}}^2 + \delta_{h_{snow}}^2}
-\end{equation}
-
+Then it was calculated the weighted average to get one position value for every stake.
 
 % name accurancies of the final data:
 The accurancy of the post processed postions with the base station data is decreasing with a increasing distance to the base station. 
@@ -133,12 +78,83 @@ But this error is at least one order of magnitude smaller than the other errors.
 The other accurancies are determined by the quality of our measurements \ref{GPS:tab:diff_tab}.
 
 
-The raw data for our position measurements read from the controller ar given in the table in the appendix 
+The raw data for our position measurements read from the controller ar given in the table in the appendix. 
 %\ref{GPS:tab:fb_pos_tab}.
-The raw data from our measurements are given in the appendix
+The raw data from our measurements which are relevant for our stake corrections are in the appendix.
 %\ref{GPS:tab:fb_others_tab}. 
-The TBC post processed coordinates in the appendix 
+The TBC post processed coordinates are in the appendix. 
 %\ref{GPS:tab:tbc_tab}.
+The differences for nrthing, easting and elevation for every stake is displayed in a table in the appendix-
+%\ref{GPS:tab:diff_tab}.
+
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{./figs/pictures/schematic_setup.pdf}
+\caption{Schematic figure of the relevant parameter in the measurment setup.}
+\end{figure}
+
+% formulars stake correction
+\begin{equation}
+	\Delta_{\text{abs}} = (h_{\text{snow}} + h_{\text{antenna}}) * sin(\alpha)
+\end{equation}
+
+\begin{equation}
+	\Delta_{\text{north}} = - (\Delta_{\text{abs}} * cos(\phi)) - d_{\text{rover-stake}}
+\end{equation}
+
+\begin{equation}
+	\Delta_{\text{east}} = - \Delta_{\text{abs}} * sin(\phi)
+\end{equation}
+
+\begin{equation}
+	\Delta_{\text{elev,os}} = - (h_{\text{snow}} + h_{\text{antenna}}) 
+\end{equation}
+
+\begin{equation}
+	\Delta_{\text{elev,TBC}} = - h_{\text{snow}} 
+\end{equation}
+
+\begin{equation}
+	\Delta_{year,2018} = (h_{\text{snow}} + h_{\text{antenna}} - dh_{year,2018}) * sin(\alpha)
+\end{equation}
+
+% formulars error propagation
+
+\begin{equation}
+	\delta_{\Delta_{\text{abs}}} = \sqrt{(h_{\text{snow}} + h_{\text{antenna}})^2 * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2) * \sin^2(\alpha)}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{\text{north}}} = \sqrt{\delta_{\Delta_{\text{abs}}}^2 * cos^2(\phi) + \Delta_{\text{abs}}^2 * \delta_{\phi}^2 * sin^2(\phi) + \delta_{d_{\text{rover-stake}}}^2}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{\text{east}}} = \sqrt{\delta_{\Delta_{\text{abs}}}^2 * sin^2(\phi) + \Delta_{\text{abs}}^2 * \delta_{\phi}^2 * cos^2(\phi)}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{\text{total,north}}} = \sqrt{\delta_{\Delta_{\text{ts,north}}}^2 + \delta_{\Delta_{\text{north}}}^2}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{\text{total,east}}} = \sqrt{\delta_{\Delta_{\text{ts,east}}}^2 + \delta_{\Delta_{\text{east}}}^2}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{\text{total,elev}}} = \sqrt{\delta_{\Delta_{\text{ts,elev}}}^2 +\delta_{\Delta_{\text{elev}}}^2}
+\end{equation}
+
+% for the referenced position
+\begin{equation}
+\delta_{\Delta_{year,2018}} = \sqrt{\left|(h_{\text{snow}} + h_{\text{antenna}} - dh_{year,2018})^2\right| * \delta_{\alpha}^2 * cos^2(\alpha)\\
++ (\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2 + \delta_{dh_{year,2018}}^2) * \sin^2(\alpha)}
+\end{equation}
+
+\begin{equation}
+	\delta_{\Delta_{year, \text{elev}}} = \sqrt{\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{snow}}}^2}
+\end{equation}
 
 \begin{table}[h]
 	\caption{Used error values for the error propagation.}
@@ -151,7 +167,7 @@ The TBC post processed coordinates in the appendix
     $ \delta_{\phi} $ &  22.5$^{\circ}$ \\
     $ \delta_{h_{snow}}$ &  0.02 m \\
     $ \delta_{h_{antenna}} $ &  0.05 m \\
-    $ \delta_{dh_{ref,year}} $ &  0.10 m \\
+    $ \delta_{dh_{year,2018}} $ &  0.10 m \\
     $ \delta_{d_{rover-stake}} $ &  0.02 m \\
     $ \overline{\delta_{\Delta_{north}}} $ & 0.40 m \\
     $ \overline{\delta_{\Delta_{east}}} $ & 0.19 m \\
@@ -164,18 +180,10 @@ The TBC post processed coordinates in the appendix
 \begin{table}[h]
 	\caption{Final positions after the open source post processing and stake correction with the error.}
 	\centering
-	\scriptsize
 	\input{tables/os_tab.tex}
 	\label{GPS:tab:os_tab}
 \end{table}
 
-
-\begin{table}[h]
-	\caption{Difference of Northing, Easting and Elevation between the two different post processing methods.}
-	\centering
-	\input{tables/diff_tab.tex}
-	\label{GPS:tab:diff_tab}
-\end{table}
 
 \begin{figure}[H]
     \centering
