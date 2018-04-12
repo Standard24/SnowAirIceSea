@@ -1,4 +1,4 @@
-\subsection{Horizontal velocity (glacier flow)}
+\subsection{Horizontal velocity (ice flow)}
 
 \begin{figure}[H]
     \centering
@@ -11,24 +11,42 @@
 Figure~\ref{GPS:fig:stakepos} shows the positions of the currently 12 different stake locations
 on Blekumbreen and Tellbreen.
 At those locations, a total of 26 measurements has been performed in 2018.
-Additionally, all available data of stake positions since 2009 is shown on the figure.
+Additionally, all available data of the stake positions since 2009 is shown on the figure.
 
+The coarse resolution of the figure shows a rough accordance of all of this years positions with the values 
+of the last years.
 The stakes spread over about 5 kilometers in east-west direction and 1.5 kilometers in north-south direction.
-The coarse resolution of the figure shows a rough accordance of this years positions with last years values.
+
 
 Figure~\ref{GPS:fig:T1_2d} shows all available data for T1 in a higher resolution.
-The measurement of the position of T1-2017 (green) has been performed two times in order to estimate the uncertainty
-of the method.
-The two positions differ by 19\,cm and agree with each other within their uncertainties.
+The measurement of the location of T1-2017 (green) has been performed two times in order to estimate the uncertainty
+of the position.
+The two positions differ by 19\,cm and match within their uncertainties.
 
+Equation~\ref{GPS:eq:v} shows how the ice velocity $v_{year}$ has been calculated with the measured stake positions from
+Tab.~\ref{GPS:tab:os_tab}:
+The distance between this years position and the position measured in 2017, 2016 or 2015 has been divided by the time $t$
+(one, two or three years).
+$N_{year}$ and $E_{year}$ are the northing and easting of the year which has been used to calculate the distance to
+this years position.
+The positions of this year ($N_{year, 2018}$ and $E_{year, 2018}$) have been shifted by the respective distance
+$\Delta_{\text{ref}, year}$ that ablation has
+added to an inclined stake since the year $year$, as described in section~\ref{GPS:sec:Processing}.
+Equation~\ref{GPS:eq:sv} shows how the error on $v_{year}$ has been obtained.
+
+Table~\ref{GPS:tab:vel_tab} lists the calculated velocities for all stakes.
+The direction of the movements can be seen on the detailed figures for each stake in the appendix.
 
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./figs/T1_2d.pdf}
     \caption{Measured positions at the location of stake T1 from 2011 to 2018.
-    Different colors denote different stakes,
-  	the year next to the stake positions is the year of the measurement.
+    Different colors denote different stakes;
+  	the year next to each stake position is the year of the measurement.
+  	The measurements of 2018 have been corrected by the inclination of the stake and
+  	the distance between the stake and the rover, therefore the coordinates refer to the intersection point
+  	of stake and glacier surface.
     	At this location, a movement in south-east direction would be expected.
     	This is not identifiable using the data at hand.
  	Similar plots of the other 11 stake locations are situated in the appendix.}
@@ -38,30 +56,46 @@ The two positions differ by 19\,cm and agree with each other within their uncert
 
 \begin{table}[h]
 	\caption{Velocities of the stakes measured in 2018, calculated with equations~\ref{GPS:eq:v} and \ref{GPS:eq:sv}.
-	All velocities have been calculated using last years position.
-	If available, positions from 2016 and 2015 have also been used.
-	To be able to assess the uncertainty of the velocities, some measurements have been performed twice.
+	The velocity $v_{2017}$ has been calculated using last years position
+	For inclined stakes, this position has been corrected for the horizontal displacement due to ablation.
+	If available, corrected positions from 2016 and 2015 have also been used to obtain $v_{2016}$ and $v_{2015}$.
+	To be able to assess the uncertainty of the velocities, four measurements have been performed twice.
 	This is denoted by the suffices -i and -ii.}
 	\centering
-	%\scriptsize
 	\input{tables/vel_tab.tex}
-	\label{GPS:tab:os_tab}
+	\label{GPS:tab:vel_tab}
 \end{table}
 
 \begin{equation}
 \label{GPS:eq:v}
-v_\text{year} = \frac{\sqrt{(N_{2018}-N_{\text{year}})^2+(E_{2018} - E_{\text{year}})^2}}{t}
+v_{year} = \frac{\sqrt{(N_{year, 2018}-N_{year})^2+(E_{year, 2018} - E_{year})^2}}{t}
 \end{equation}
 
 \begin{equation}
 \label{GPS:eq:sv}
-\delta_{v_{\text{year}}} = \sqrt{\frac{
-(\delta_{N_{2018}}^2 + \delta_{N_{\text{year}}}^2) * (N_{2018}-N_{\text{year}})^2 +
-(\delta_{E_{2018}}^2 + \delta_{E_{\text{year}}}^2) * (E_{2018}-E_{\text{year}})^2}
-{(N_{2018} - N_{\text{year}})^2+ (E_{2018} - E_{\text{year}})^2}}
+\delta_{v_{year}} = \sqrt{\frac{
+(\delta_{N_{year, 2018}}^2 + \delta_{N_{year}}^2) * (N_{year, 2018}-N_{year})^2 +
+(\delta_{E_{year, 2018}}^2 + \delta_{E_{year}}^2) * (E_{year, 2018}-E_{year})^2}
+{(N_{year, 2018} - N_{year})^2+ (E_{year, 2018} - E_{year})^2}}
 \end{equation}
 
 
 
 
 \subsection{Vertical velocity (mass balance)}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/Elevation_Blekumbreen.pdf}
+    \caption{capt.}
+    \label{GPS:fig:elev_ble}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{./figs/Elevation_Tellbreen.pdf}
+    \caption{capt.}
+    \label{GPS:fig:elev_tel}
+\end{figure}

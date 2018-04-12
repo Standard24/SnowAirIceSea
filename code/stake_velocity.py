@@ -134,12 +134,13 @@ df_vel = pd.DataFrame(vel_dict).transpose().reset_index().rename(columns={'index
 df_vel.to_csv('../data/stake_velocities.csv', sep=' ', encoding='utf-8')    
 
 df_vel = pd.DataFrame(vel_dict).transpose().reset_index().rename(columns={'index':'Stake name', 
-'Velocity_17': 'Velocity (2017) [m/a]', 'Error_17': 'Error (2017) [m/a]', 
-'Velocity_16': 'Velocity (2016) [m/a]', 'Error_16': 'Error (2016) [m/a]', 
-'Velocity_15': 'Velocity (2015) [m/a]', 'Error_15': 'Error (2015) [m/a]' })
-df_vel = df_vel[['Stake name', 'Velocity (2017) [m/a]', 'Error (2017) [m/a]', 
-'Velocity (2016) [m/a]', 'Error (2016) [m/a]', 
-'Velocity (2015) [m/a]', 'Error (2015) [m/a]']]
+'Velocity_17': 'Velocity $v_{2017}$ [m/a]', 'Error_17': 'Error (2017) [m/a]', 
+'Velocity_16': 'Velocity $v_{2016}$ [m/a]', 'Error_16': 'Error (2016) [m/a]', 
+'Velocity_15': 'Velocity $v_{2015}$ [m/a]', 'Error_15': 'Error (2015) [m/a]' })
+df_vel = df_vel[['Stake name',
+'Velocity $v_{2017}$ [m/a]', 'Error (2017) [m/a]', 
+'Velocity $v_{2016}$ [m/a]', 'Error (2016) [m/a]', 
+'Velocity $v_{2015}$ [m/a]', 'Error (2015) [m/a]']]
 
 def nice_format(row, i):
     if row[i] != row[i]:
@@ -148,9 +149,9 @@ def nice_format(row, i):
         ret = '%.2f'%row[i] + ' $\pm$ ' + '%.2f'%row[i+1]
         return ret
 
-df_vel['Velocity (2017) [m/a]'] = df_vel.apply(lambda row: nice_format(row, 1), axis=1)
-df_vel['Velocity (2016) [m/a]'] = df_vel.apply(lambda row: nice_format(row, 3), axis=1)
-df_vel['Velocity (2015) [m/a]'] = df_vel.apply(lambda row: nice_format(row, 5), axis=1)
+df_vel['Velocity $v_{2017}$ [m/a]'] = df_vel.apply(lambda row: nice_format(row, 1), axis=1)
+df_vel['Velocity $v_{2016}$ [m/a]'] = df_vel.apply(lambda row: nice_format(row, 3), axis=1)
+df_vel['Velocity $v_{2015}$ [m/a]'] = df_vel.apply(lambda row: nice_format(row, 5), axis=1)
 df_vel = df_vel.drop('Error (2017) [m/a]', 1)
 df_vel = df_vel.drop('Error (2016) [m/a]', 1)
 df_vel = df_vel.drop('Error (2015) [m/a]', 1)
