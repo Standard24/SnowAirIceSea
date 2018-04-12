@@ -69,15 +69,17 @@ su = data_imp['sdu(m)']
 #print(np.std(east))
 #print(np.std(north))
 
-f, (ax1, ax2, ax3) = plt.subplots(3, figsize=(11.5,6))
+f, (ax1, ax2, ax3) = plt.subplots(3, sharex=True, figsize=(8,5.2))
 
-ax1.axhline(easting_tr, color='k', linewidth=.5, linestyle='--')
-ax2.axhline(northing_tr, color='k', linewidth=.5, linestyle='--')
-ax3.axhline(elevation_tr, color='k', linewidth=.5, linestyle='--')
+ax1.axhline(easting_wm, color='k', linewidth=1, label='Weighted mean')
+ax2.axhline(northing_wm, color='k', linewidth=1, label='Weighted mean')
+ax3.axhline(elevation_wm, color='k', linewidth=1, label='Weighted mean')
 
-ax1.axhline(easting_wm, color='k', linewidth=1)
-ax2.axhline(northing_wm, color='k', linewidth=1)
-ax3.axhline(elevation_wm, color='k', linewidth=1)
+ax1.axhline(easting_tr, color='k', linewidth=.5, linestyle='--', label='Value from TBC')
+ax2.axhline(northing_tr, color='k', linewidth=.5, linestyle='--', label='Value from TBC')
+ax3.axhline(elevation_tr, color='k', linewidth=.5, linestyle='--', label='Value from TBC')
+
+
 
 
 paramlist = [(ax1, east, se, 'Easting [m]'),
@@ -89,10 +91,12 @@ for ax, y, s, ylabel in paramlist:
     x=range(len(y))
 
     ax.errorbar(x, y, yerr=s, fmt='.', markersize=2,
-            ecolor='lightgrey', elinewidth=1)
+            ecolor='lightgrey', elinewidth=1, label='')
     
     ax.ticklabel_format(useOffset=False)
+    ax.tick_params(axis='both', which='both', direction='in', right=True, top=True)
     ax.set_ylabel(ylabel)
+
     
     
     # plot moving average
@@ -100,6 +104,7 @@ for ax, y, s, ylabel in paramlist:
     #    ax.plot(x[int(N/2-1):-int(N/2)],
     #            np.convolve(y, np.ones((N,))/N, mode='valid'))
 
+ax1.legend()
 ax3.set_xlabel('Time [s]')
    
 plt.savefig('../protocol/figs/timeseries/' + filename + '-' + staketitle +  
