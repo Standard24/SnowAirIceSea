@@ -342,7 +342,7 @@ for s in ss:
     s.makePlots()
 
 # make a plot of the elevation of all stakes on tellbreen
-f, axarr = plt.subplots(8, sharex=True)
+f, axarr = plt.subplots(8, sharex=True, figsize=(6, 8.5))
 
 for i, s in enumerate(ss[:8]):
     # make plotdata: drop nan from elevation, also drop matching year numbers,
@@ -374,7 +374,7 @@ f.savefig('../protocol/figs/Elevation_Tellbreen.pdf')
 
 ###############################################################################
 # make a plot of the elevation of all stakes on blekumbreen
-f, axarr = plt.subplots(4, sharex=True)
+f, axarr = plt.subplots(4, sharex=True, figsize=(7, 6))
 
 for i, s in enumerate(ss[8:]):
     # make plotdata: drop nan from elevation, also drop matching year numbers,
