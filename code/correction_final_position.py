@@ -150,7 +150,8 @@ for k in range(0, len(fieldbook['name'])):
     'Snow depth [m]': fieldbook['snow_depth'][k],
     'Inclination [deg]': fieldbook['inclination'][k],
     'Direction of Incl. [deg]': fieldbook['inc_dir'][k],
-    'Distance Rover-Stake [m]': fieldbook['distance_top'][k]}   
+    'Distance Rover-Stake [m]': fieldbook['distance_top'][k],
+    'Date': fieldbook['date'][k]}   
          
 final_tbc_dir = {}      
 final_os_dir = {}     
@@ -255,19 +256,19 @@ for key in data_tbc_dir.keys():
 #df_os_ref_final.to_csv('../data/stake_coordinates/' + filename_os + '_ref_final' + '.csv', sep=' ', encoding='utf-8')
 
 # fieldbook
-#df_fb_final = pd.DataFrame(fd_pos_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_other_final = pd.DataFrame(fd_other_dir).transpose().reset_index().rename(columns={'index':'Name'})
-#df_fb_final = df_fb_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
-#df_other_final = df_other_final[['Name', 'Antenna height [m]', 'Snow depth [m]', 'Inclination [deg]',  
-#'Direction of Incl. [deg]', 'Distance Rover-Stake [m]']]
-#tab_fb_final = df_fb_final.to_latex(index=False)
-#tab_other_final = df_other_final.to_latex(index=False)
+df_fb_final = pd.DataFrame(fd_pos_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_other_final = pd.DataFrame(fd_other_dir).transpose().reset_index().rename(columns={'index':'Name'})
+df_fb_final = df_fb_final[['Name', 'Northing [m]', 'Easting [m]', 'Elevation [m]']]
+df_other_final = df_other_final[['Name', 'Date', 'Antenna height [m]', 'Snow depth [m]', 'Inclination [deg]',  
+'Direction of Incl. [deg]', 'Distance Rover-Stake [m]']]
+tab_fb_final = df_fb_final.to_latex(index=False)
+tab_other_final = df_other_final.to_latex(index=False)
 # 
 #with open('../protocol/tables/fb_pos_tab.tex', 'w') as f:
 #    f.write(tab_fb_final.encode('utf-8'))
 #
-#with open('../protocol/tables/fb_other_tab.tex', 'w') as f:
-#    f.write(tab_other_final.encode('utf-8'))
+with open('../protocol/tables/fb_other_tab.tex', 'w') as f:
+    f.write(tab_other_final.encode('utf-8'))
 
 # mean position errors
 #sN = 0
