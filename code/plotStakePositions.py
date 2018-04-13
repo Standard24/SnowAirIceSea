@@ -130,7 +130,7 @@ limits = {'T1' : ((.3, 0), (0, 0)),
           'T8' : ((.7, .7), (0, 0)),
           'BL2' : ((0, .2), (0, 0)),
           'BL3' : ((2, 1), (0, 0)),
-          'BL5' : ((0, 0), (.3, .6))
+          'BL5' : ((0, 0), (.3, 1))
           }
 
 # list to move some year labels (dx, dy), up and right are positive
