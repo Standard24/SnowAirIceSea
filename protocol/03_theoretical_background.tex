@@ -73,7 +73,7 @@ Now that we have the horizontal surface velocity, we wonder how it evolves with 
 
 \begin{equation}\dot{\epsilon} = \left( \frac{\sigma}{B} \right)^n\end{equation}
 
-with $\sigma$ a dominant shear stress, $B$ a viscosity parameter that increases with the stiffness of the ice, and $n$ the constant creep exponent. The latter has often experimentally proven to be $n \approx 3$, but for the sake of the derivation, we'll keep the value variable.
+with $\sigma$ a dominant shear stress, $B$ an ice viscosity parameter that is temperature dependent and increases with the stiffness of the ice, and $n$ the constant creep exponent. The latter has often experimentally proven to be $n \approx 3$, but for the sake of the derivation, we'll keep the value variable.
 This law is also named after Glen's (1955 - REFERENCE), who conducted the first uniaxial compression experiments on ice.
 
 We will follow up with the assumptions of the layer we consider being parallel-sided, that there's no flow in $y$ direction and that everything is uniform in $x$, $y$, as depicted in the \textsc{Figure} \ref{velocities}. The stress rate tensor therefore comes down to :
@@ -188,13 +188,13 @@ But there is another way to measure the same rate, mainly by looking at the ice 
 
 \begin{equation}\left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{S-B} \equiv \bar{\rho} \int_A (S-B) \, \mathrm{d}A\end{equation}
 
-If the \textit{steady state} assumption happens to be true, then we'd have :
+If the ice velocity happens to be zero, then we'd have :
 
-\begin{equation}\left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{\dot{b}_i} \stackrel{\text{steady}}{=} \left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{S-B}
+\begin{equation}\left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{\dot{b}_i} \stackrel{u_s = 0}{=} \left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{S-B}
 \quad
 \Leftrightarrow
 \quad
 \boxed{\dot{b}_i = S-B}
 \end{equation}
 
-This equality would reveal an extreme slow and hence negligible velocity flux in the glacier, and correlate this observation with our experimental values.
+This equality would reveal an extremely slow and hence negligible velocity flux in the glacier, and correlate this observation with our experimental values. It would also allow us to deny the \textit{steady state} assumption as any non-zero value to be multiplied by $\bar{\rho}$ and integrated over an area $A$ would mean a mass changing rate.
