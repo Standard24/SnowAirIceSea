@@ -13,7 +13,6 @@ This method is an open source (OS) alternative which is available for different 
 The TBC is only available on a windows system and needs a licens.
 This leads to a limitation in the application. 
 We operate both methods to quantify if the TBC method can be replaced by the OS method.
-\medskip
 
 \subsection{Trimble}
 
@@ -43,7 +42,6 @@ Baselines are determined by the distance between rover and base station.
 For longer baselines the uncertainties have to be reduced with an additional approach, like a model.
 For different settings and situations the TBC used different approaches for the tropospheric and ionospheric uncertainties and choose automaticly the right combinaion \citep{Trprocess}.
 Therefore it is difficult to distinguish the settings used for the TBC post processing to compare with the open source processing.
-\medskip
 
 \subsection{Open source}
 The OS post processing requires different processing steps.
@@ -83,23 +81,32 @@ Because the UTM coordinate system is consitenly uses in our report the coordinat
 To get one position, including northing, easting an elevation value in m, the weighted mean over all time steps is calulated.
 \medskip
 
+Without the correction of the base station data the vaules for northing, easting and elevation fluctuate with a high frequency due to a lot of distrbances (compare subsection \ref{GPS:subsec:methods}). 
+Exemplary this time series is shown in figure \ref{GPS:fig:T1-i_nocorr} for the first measurement of the stake T1-2017.
 For the better understanding of the OS values it is usefull to compare timeseries of the post processed position values for two measurements at the same stake on differnet days.
-In the first measurement (figure \label{GPS:fig:T1-i_timeseries}) the values converge after a few seconds to a fixed solution.
-In the second measurement (figure \label{GPS:fig:T1-ii_timeseries}) the values vary during the hole time series without any tendency.
+In the first measurement (see figure \ref{GPS:fig:T1-i_timeseries}) the values converge after a few seconds to a fixed solution.
+In the second measurement (see figure \ref{GPS:fig:T1-ii_timeseries}) the values vary during the hole time series without any tendency.
 The properties of the second measurement leads to a bigger difference between the TBC value and the OS value.
 A comparison to the whole time series of the TBC post processing is not possible, because it is not possible to get this out of the TBC.
 
 \begin{figure}[H]
     \centering
+    \includegraphics[width=\textwidth]{./figs/timeseries/46250700_org-T1-i-2017_Timeseries-east-north-elev.pdf}
+    \caption{First of two measurements of position of stake T1-2017 without the correction by the base station data. The blue points are the open source values Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line connect the data points. The gray shadowed range shows the uncertainty area.}
+    \label{GPS:fig:T1-i_nocorr}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
     \includegraphics[width=\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
-    \caption{First of two 15 minutes measurements of position of stake T1-2017. The blue points are the open source values Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line is the weighted mean of the open source values. The dashed line is the Trimble Business Center value for the same stake.}
+    \caption{First of two measurements of position of stake T1-2017 after the open source processing. The blue points are the open source values Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line is the weighted mean of the open source values. The dashed line is the Trimble Business Center value for the same stake. The gray shadowed range shows the uncertainty area.}
     \label{GPS:fig:T1-i_timeseries}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
-    \caption{Second 15 minutes measurement of position of stake T1-2017. The blue points are the open source values Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line is the weighted mean of the open source values. The dashed line is the Trimble Business Center value for the same stake.}
+    \caption{Second measurement  of two measurements of position of stake T1-2017  after the open source processing. The blue points are the open source values Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line is the weighted mean of the open source values. The dashed line is the Trimble Business Center value for the same stake. The gray shadowed range shows the uncertainty area.}
     \label{GPS:fig:T1-ii_timeseries}
 \end{figure}
 
@@ -111,7 +118,6 @@ Also it was necessary to correct the position on the ice surface with the inclin
 For this, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.
 The measurement data which are relevant for our stake corrections are in the appendix in table \ref{GPS:tab:fb_other_tab}.
 For the better understanding all variables for the stake corrections are shown in the schematic figure \ref{GPS:fig:scheme}.
-\medskip
 
 \begin{figure}[H]
 	\centering
@@ -163,18 +169,33 @@ The height for stake correction relating to the inclination is different, becaus
 
 \subsection{Evaluation}
 For the comparison the TBC post processed coordinates are in the appendix in table \ref{GPS:tab:tbc_tab}.
-For the difference between the two different methods there is no bias.
-The average of the absolute values is in the order of centimeters with 0.09 m for the northing, 0.05 m for thehe  easting and 0.24 m for the elevation. 
-This is mainly caused by a few unclear values after the post processing (compare \ref{GPS:tab:diff_tab}). The meadian of the northing and easting difference is 0.01 m and for the elevation 0.07 m.  
+For the difference between the two different methods is no bias which is proved by a small median (see table \ref{GPS:tab:diff}).
+The direction of the differnce is randomly for between the stakes for all three parts of the positioning.
+The differnces are mainly caused by a few unclear values after the post processing (compare table \ref{GPS:tab:diff_tab}).
+Due to this the mean value for the differences is higher than the median (see table \ref{GPS:tab:diff}) 
 In order that, the OS processed values are a reasonable replacement for the TBC values and are uses in the following calculatio.
 This means also that the uncertainty propagation is done for the OS values so we can finaly determine the uncertainty of the velocity values.
+
+\begin{table}[H]
+	\caption{Mean and median for the difference of northing, easting and elevation between the open source and Trimble Business Center values.}
+	\centering
+	\begin{tabular}{lccc}
+	\toprule         
+      &  Northing [m] & Easting [m] & Elevation [m] \\
+	\midrule
+    mean difference &  0.09 & 0.05 & 0.24 \\
+    median of difference & 0.01 & 0.01 & 0.09 \\
+    \bottomrule
+	\end{tabular}
+	\label{GPS:tab:diff}
+\end{table}
 
 \subsection{Propagation of uncertainty}
 
 The calculations for the propagation of uncertainties are done by the common rule.
 The accurancy of the post processed postions with the base station data is decreasing with a increasing distance to the base station. 
 But this uncertainty is at least one order of magnitude smaller than the other uncertainties and can be neglected. 
-The other uncertaintied are determined by the quality of our measurements and first part of the processing \ref{GPS:tab:errors}.
+The other uncertaintied are determined by the quality of our measurements and first part of the processing (see table \ref{GPS:tab:errors}).
 
 \begin{table}[H]
 	\caption{Used uncertainty values for the propagation of uncertainty.}
@@ -189,9 +210,9 @@ The other uncertaintied are determined by the quality of our measurements and fi
     $ \delta_{h_{antenna}} $ &  0.05 m \\
     $ \delta_{dh_{year,2018}} $ &  0.10 m \\
     $ \delta_{d_{rover-stake}} $ &  0.02 m \\
-    $ \overline{\delta_{\Delta_{north}}} $ & 0.40 m \\
-    $ \overline{\delta_{\Delta_{east}}} $ & 0.19 m \\
-    $ \overline{\delta_{\Delta_{elev}}} $ & 0.89 m \\
+    $ \overline{\delta_{\text{N}}} $ & 0.40 m \\
+    $ \overline{\delta_{\text{E}}} $ & 0.19 m \\
+    $ \overline{\delta_{\text{H}}} $ & 0.89 m \\
     \bottomrule
 	\end{tabular}
 	\label{GPS:tab:errors}
@@ -234,6 +255,7 @@ Based on this uncertainties the total uncertainty for norting $\delta_{\Delta_{\
 \end{equation}
 
 \subsubsection*{Referenced positions}
+
 For the refenced positions only two euations differ to the previous uncertainty propagation. 
 The uncertainty of the absolute difference $\Delta_{year,2018}$ is
 \begin{equation}
@@ -254,7 +276,7 @@ The uncertainty for the elevation correction $\delta_{\Delta_{year, \text{elev}}
 The final positions are based on the open source post processing and stake correction.
 This position values decribe the position on the elevation of the ice surface. 
 The corresponding uncertainties for each value are determined by the calculation of uncertainties (eq. \ref{GPS:eq:errnorth} - \ref{GPS:eq:errnelev}). 
-This values and uncertainties are used in the next section to determine the velocities at the different stake locations. 
+This values and uncertainties in table \ref{GPS:tab:os_tab} are used in the next section to determine the velocities at the different stake locations. 
 
 \begin{table}[H]
 	\caption{Final positions with Northing, Easting and Elevation for every stake after the open source post processing and stake correction with the corresponding error.}
