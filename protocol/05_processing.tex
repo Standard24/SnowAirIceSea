@@ -134,7 +134,7 @@ First the absolut horizontal difference $\Delta_{\text{abs}}$ depending in the i
 Then the correction is different for the northing and easting. The norting correction is calculated with the cosinus of the direction of the inclination $\phi$. 
 The angle of direction is defined in a range from 0$^{\circ}$ to 359$^{\circ}$ with 0$^{\circ}$ for North, 90$^{\circ}$ for East, 180$^{\circ}$ for South and 270$^{\circ}$ for West.
 Due to geometrical reasons the sign has to be negative. 
-Additionally the the distance between the rover and the stake $d_{\text{rover-stake}}$ has to be subtracted from the original northing.
+Additionally, the the distance between the rover and the stake $d_{\text{rover-stake}}$ has to be subtracted from the original northing.
 \begin{equation}
 	\Delta_{\text{north}} = - (\Delta_{\text{abs}} * cos(\phi)) - d_{\text{rover-stake}}
 \end{equation}
@@ -145,7 +145,7 @@ The easting difference $\Delta_{\text{east}}$ is calculated with the sine of $\p
 \end{equation}
 
 The elevation correction is different between the OS and the TCS values.
-For the TBC values the elevation correction $\Delta_{\text{elev,TBC}}$ only the $h_{\text{snow}}$ need to be subtracted because the $h_{\text{antenna}}$ is already caluclated out while the measurement with the Controller.
+For the TBC values the elevation correction $\Delta_{\text{elev,TBC}}$ only the $h_{\text{snow}}$ need to be subtracted, because the $h_{\text{antenna}}$ is already caluclated out while the measurement with the Controller.
 \begin{equation}
 	\Delta_{\text{elev,TBC}} = - h_{\text{snow}} 
 \end{equation}
@@ -232,7 +232,7 @@ The uncertainty of the elevation correction $\delta_{\Delta_{\text{elev}}}$ is
 \delta_{\Delta_{\text{elev}}} = \sqrt{\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2}
 \end{equation}
 	
-Based on this uncertainties the total uncertainty for norting $\delta_{\Delta_{\text{total,north}}}$, easting $\delta_{\Delta_{\text{total,east}}}$ and eleavtion $\delta_{\Delta_{\text{total,elev}}}$ can calculated with the uncertainty of the time series of our OS post processed GPS time series $\delta_{\Delta_{\text{ts,north}}}$ for northing, $\delta_{\Delta_{\text{ts,east}}}$ for easting and $\delta_{\Delta_{\text{ts,elev}}}$ for the elevation.
+The total uncertainty for norting $\delta_{\Delta_{\text{total,north}}}$, easting $\delta_{\Delta_{\text{total,east}}}$ and eleavtion $\delta_{\Delta_{\text{total,elev}}}$ incorprate the mentioned uncertainties $\delta_{\Delta_{\text{north}}}$, $\delta_{\Delta_{\text{east}}}$ and $\delta_{\Delta_{\text{elev}}}$ in addition to the uncertainties of the time series of the OS post processed GPS time series $\delta_{\Delta_{\text{ts,north}}}$ for northing, $\delta_{\Delta_{\text{ts,east}}}$ for easting and $\delta_{\Delta_{\text{ts,elev}}}$ for the elevation.
 \begin{equation}
 	\delta_{\Delta_{\text{total,north}}} = \sqrt{\delta_{\Delta_{\text{ts,north}}}^2 + \delta_{\Delta_{\text{north}}}^2}
 	\label{GPS:eq:errnorth}
@@ -247,6 +247,8 @@ Based on this uncertainties the total uncertainty for norting $\delta_{\Delta_{\
 	\delta_{\Delta_{\text{total,elev}}} = \sqrt{\delta_{\Delta_{\text{ts,elev}}}^2 +\delta_{\Delta_{\text{elev}}}^2}
 	\label{GPS:eq:errnelev}
 \end{equation}
+
+The averaged uncertainties of the northing $ \overline{\delta_{\text{N}}} $, easting $ \overline{\delta_{\text{E}}} $ and elevation $ \overline{\delta_{\text{H}}} $ (see table \ref{GPS:tab:errors}) are calculated from the total uncertainties.
 
 \subsubsection*{Referenced positions}
 
@@ -271,6 +273,7 @@ The final positions are based on the OS post processing and stake correction.
 This position values describe the position on the elevation of the ice surface. 
 The corresponding uncertainties for each value are determined by the calculation of uncertainties (eq. \ref{GPS:eq:errnorth} - \ref{GPS:eq:errnelev}). 
 This values and uncertainties in table \ref{GPS:tab:os_tab} are used in the next section to determine the velocities at the different stake locations. 
+The refernced position can be calculated with the modified stake correction correction and error propagation on the OS post processed positions. 
 
 \begin{table}[H]
 	\caption{Final positions with Northing, Easting and Elevation for every stake after the open source post processing and stake correction with the corresponding error. The naming '-i' and '-ii' characterize the first and the second measurement at the same mass balance stake.}
