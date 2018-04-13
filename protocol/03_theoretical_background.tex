@@ -107,7 +107,7 @@ We can express $\sigma_{zx}$ as a function of $z$ by using the coordinate system
 \begin{equation}\int_{u_s}^{u(z)} \mathrm{d} u = -2 \left( \frac{\rho g \sin{\alpha}}{B}\right)^n \cdot \int_{0}^{z} z^n \mathrm{d} z\end{equation}
 
 
-The depth-averaged ice velocity appears after carrying out the integration and rearranging the terms :
+The depth-averaged ice velocity appears after carrying out the integration and rearranging the terms as conducted in \cite{Hooke2005} :
 
 \begin{equation}u(z) = u_s - \frac{2}{n + 1} \left( \frac{\rho g \sin{\alpha}}{B}\right)^n \cdot z^{n+1}\end{equation}
 
@@ -182,21 +182,12 @@ where $\bar{\rho}$ is the vertically averaged density.
 
 If we define an arbitrary planar cross-section $A$ of width $W$ around the positions where we measured $u_s$, and introduce the mass $M$ of the volume area comprised by $A \cdot H$, then the rate at which it changes would usually be defined \cite{Cuffey2010} by :
  
-\begin{equation}\left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{\dot{b}_i} \equiv \bar{\rho} \int_A \dot{b}_i \, \mathrm{d}A - \int_W q_m \, \mathrm{d} W \end{equation}
+\begin{equation} \frac{\mathrm{d} M}{\mathrm{d}t} \equiv \bar{\rho} \int_A \dot{b}_i \, \mathrm{d}A - \int_W q_m \, \mathrm{d} W \end{equation}
 
-where $\dot{b}_i$ is the ice-equivalent specific mass balance rate in $\left[ \fraction{m}{yr} \right]$.
+where $\dot{b}_i$ is the ice-equivalent specific mass balance rate in $\left[ \fraction{m}{yr} \right]$. If we know the direction of the flow, it then becomes easier to pick a arch of width $W$ across the glacier into which $A$ would flow. We shall discover later that this is particularly difficult on both Tellbreen and Blekumbreen, partly because of the small order or magnitude of the measured velocities, which is in accordance with our further theoretical computations, but also because of the quite incoherent positioning over the years of the moving stakes, which makes it impossible to pick a favorite direction for the flux.
 
-But there is another way to measure the same rate, mainly by looking at the ice thickness through measurements of the surface and bed elevations, respectively $S$ and $B$. This gives us another approach to the mass changing rate :
+Yet if we decide to set the velocity to be zero as a prolongation of our experimental observation and predictions from the theory, then we'd have :
 
-\begin{equation}\left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{S-B} \equiv \bar{\rho} \int_A (S-B) \, \mathrm{d}A\end{equation}
+\begin{equation} \frac{\mathrm{d} M}{\mathrm{d}t} \stackrel{u_s = 0}{=} \bar{\rho} \int_A \dot{b}_i \, \mathrm{d}A \end{equation}
 
-If the ice velocity happens to be zero, then we'd have :
-
-\begin{equation}\left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{\dot{b}_i} \stackrel{u_s = 0}{=} \left. \frac{\mathrm{d} M}{\mathrm{d}t} \right|_{S-B}
-\quad
-\Leftrightarrow
-\quad
-\boxed{\dot{b}_i = S-B}
-\end{equation}
-
-This equality would reveal an extremely slow and hence negligible velocity flux in the glacier, and correlate this observation with our experimental values. It would also allow us to deny the \textit{steady state} assumption as any non-zero value to be multiplied by $\bar{\rho}$ and integrated over an area $A$ would mean a mass changing rate.
+In the first order of approximation, should the right-hand side be anything else than zero, this equality would allow us to deny the \textit{steady state} assumption as any non-zero value to be multiplied by $\bar{\rho}$ and integrated over an area $A$ would mean a mass changing rate in the glacier.
