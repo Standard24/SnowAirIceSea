@@ -122,14 +122,15 @@ titles = {'T1': [[2011, 'T1-2011'], [2012, 'T1-2009'], [2013, 'T1-2009'],
 # ((left, right), (bottom, top))
 limits = {'T1' : ((.3, 0), (0, 0)),
           'T2' : ((1.5, 1.5), (0, 0)),
-          'T3' : ((0, 0), (0, .5)),
+          'T3' : ((.1, .2), (0, .9)),
           'T4' : ((.5, .5), (0, 0)),
           'T5' : ((0, .5), (0, 0)),
           'T6' : ((0, 1), (0, 0)),
           'T7' : ((0, .2), (0, 0)),
           'T8' : ((.7, .7), (0, 0)),
           'BL2' : ((0, .2), (0, 0)),
-          'BL3' : ((2, 1), (0, 0)),
+          'BL3' : ((3, 1), (0, 0)),
+          'BL4' : ((.7, 0), (0, 0)),          
           'BL5' : ((0, 0), (.3, 1))
           }
 
@@ -138,8 +139,18 @@ lu = (-.4, -.2) # left under
 ru = ( .05, -.2) # right under
 lo = (-.4,  .05) # left over
 movelabs = {'T1': {3: lo, 5: ru, 9: lu, 11:lu, 12:lo},
-            'T3': {2: lu, 3: ru, 5: ru, 6: lo, 8: ru}
-           }
+            'T2': {1: lo, 3: lu, 4: lu, 5: lo, 6: ru, 8: ru, 11:lo},
+            'T3': {2: lu, 3: ru, 5: ru, 6: lo, 8: ru},
+            'T4': {1: lu, 2: lu, 5: lo, 7: lu},
+            'T5': {0: ru, 1: ru, 2: lo, 3: ru, 5: lo},
+            'T6': {0: (.05, -.5), 5: (-1.5, .05)},
+            'T7': {3: ru, 5: lo},
+            'T8': {0: ru, 1: lu, 2: (.05, -.07), 3: lo, 5: lo, 8: lu},                                    
+            'BL2': {4: ru, 5: (.05, -.05)},
+            'BL3': {0: ru, 4: ru, 5: ru, 7: (-.2, -.35), 9: (-.5, .1)},
+            'BL4': {2: ru, 4: lo, 5: lu, 7: ru},
+            'BL5': {8: ru}                         
+             }
 
 
 stakes = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8',
@@ -236,14 +247,14 @@ class stake(object):
             try:
                 self.sN += [year['sN'].values[0]]
             except KeyError:
-                self.sN += [.2]
+                self.sN += [.4]
 
         self.sE        = []
         for year in self.data:
             try:
                 self.sE += [year['sE'].values[0]]
             except KeyError:
-                self.sE += [.2]
+                self.sE += [.19]
 
         print('Stake ' + title + ' initialized.')
 
@@ -329,6 +340,7 @@ class stake(object):
 
         plt.savefig('../protocol/figs/' + self.title + '_2d.pdf')
         plt.close(f)
+        print('Saved 2d plot of ' + self.title)
 
 #import IPython
 #IPython.embed()

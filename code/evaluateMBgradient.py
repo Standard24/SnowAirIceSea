@@ -19,7 +19,7 @@ def plotOpts(ax):
                    top=True)
 
 glacier = 'Blekumbreen'
-#glacier = 'Tellbreen'
+glacier = 'Tellbreen'
 
 if glacier == 'Blekumbreen':
     xfit = np.array([-1.9, 0.1])
@@ -48,7 +48,7 @@ plt.errorbar(x, y, xerr=sx, fmt='.', ecolor='lightgrey', label='',
 plt.gca().set_aspect(asp)
 
 plt.ylabel('Stake elevation [m]')
-plt.xlabel('Mass balance [m/y]')
+plt.xlabel('Mass balance [m/a]')
 
 
 # FIT

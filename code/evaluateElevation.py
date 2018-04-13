@@ -250,7 +250,7 @@ for i, s in enumerate(ss[:8]):
     yfit = np.array([2000, 2020])
     axarr[i].plot(yfit, pol_1st(yfit, *popt), 'r-', linewidth=1,
      color='tab:red',
-     label='$a=%1.0f\,$m, $b=%1.2f\,$m/y' % tuple(popt))
+     label='$a=%1.0f\,$m, $b=%1.2f\,$m/a' % tuple(popt))
 
     writeToFile += [[
         '%1.1f' % np.mean(ydat),
@@ -325,7 +325,7 @@ for i, s in enumerate(ss[8:]):
     yfit = np.array([2000, 2020])
     axarr[i].plot(yfit, pol_1st(yfit, *popt), 'r-', linewidth=1,
      color='tab:red',
-     label='Fit with $y=a+b x$ \n $a=%1.0f\,$m, $b=%1.2f\,$m/y' % tuple(popt))
+     label='Fit with $y=a+b x$ \n $a=%1.0f\,$m, $b=%1.2f\,$m/a' % tuple(popt))
 
     writeToFile += [[
         '%1.1f' % np.mean(ydat),
