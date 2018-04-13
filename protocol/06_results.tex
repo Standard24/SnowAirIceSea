@@ -23,7 +23,7 @@ in order to estimate the uncertainty
 of the position.
 The two positions differ by 19\,cm and match within their uncertainties.
 
-Equation~\ref{GPS:eq:v} shows how the ice velocity $v_{year}$ has been calculated from the corrected stake positions in
+Equation~\ref{GPS:eq:v} gives the realtion how the ice velocity $v_{year}$ has been calculated from the corrected stake positions in
 Tab.~\ref{GPS:tab:os_tab}:
 The distance between this years position and the position measured in 2017, 2016 or 2015 has been divided
 by the passed time $t$ (1, 2 or 3 years).
@@ -80,8 +80,6 @@ v_{year} = \frac{\sqrt{(N_{year, 2018}-N_{year})^2+(E_{year, 2018} - E_{year})^2
 \end{equation}
 
 
-
-
 \subsection{Vertical velocity (mass balance)}
 
 Besides the horizontal position, the GPS data also contain elevation.
@@ -113,7 +111,7 @@ The linear fits yield the following results for the equilibrium lines (EL) and m
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./figs/Elevation_Blekumbreen.pdf}
-    \caption{GPS measured elevation of the stakes on Blekumbreen for the past 8 years.
+    \caption{GPS measured elevation of the stakes on Blekumbreen from 2011 until 2018 (blue dots).
     Linear fits (red line) of the data have been performed to calculate the individual mass balances~$b$.}
     \label{GPS:fig:elev_ble}
 \end{figure}
@@ -122,13 +120,13 @@ The linear fits yield the following results for the equilibrium lines (EL) and m
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{./figs/Elevation_Tellbreen.pdf}
-    \caption{GPS measured elevation of the stakes on Tellbreen for the past 8 years.
+    \caption{GPS measured elevation of the stakes on Tellbreen from 2011 until 2018 (blue dots).
     Linear fits (red line) with $y = a + x*b$ have been performed to calculate the individual mass balances~$b$.}
     \label{GPS:fig:elev_tel}
 \end{figure}
 
 \begin{table}[h]
-	\caption{Results of the elevation fits from Fig.~\ref{GPS:fig:elev_ble} and
+	\caption{Mass balance as result of the elevation fits from Fig.~\ref{GPS:fig:elev_ble} and
 	mean values of the elevation measurements for all stakes on Blekumbreen.
     The data in the table is plotted in Fig.~\ref{GPS:fig:elev_ble_mbg}.}
 	\centering
@@ -137,7 +135,7 @@ The linear fits yield the following results for the equilibrium lines (EL) and m
 \end{table}
 
 \begin{table}[h]
-	\caption{Results of the elevation fits from Fig.~\ref{GPS:fig:elev_tel} and
+	\caption{Mass balance as result of the elevation fits from Fig.~\ref{GPS:fig:elev_tel} and
 	mean values of the elevation measurements for all stakes on Tellbreen.
     The data in the table is plotted in Fig.~\ref{GPS:fig:elev_tel_mbg}.}
 	\centering
@@ -154,7 +152,7 @@ The linear fits yield the following results for the equilibrium lines (EL) and m
 \end{figure}
 
 
-\begin{figure}[h]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{./figs/Elevation_Tellbreen_mbg.pdf}
     \caption{Mass balances of the stakes on Tellbreen as a function of stake elevation and linear fit of the points to obtain
@@ -164,11 +162,12 @@ The linear fits yield the following results for the equilibrium lines (EL) and m
 
 \subsection{Theoretical surface velocity}
 % Different tables for different values of B(T = 0,-5,-10,-15), \alpha = 5,6,7 and H (from the ice-radar scans) = 1 (minimal value — minimum was at 3), 33.4 (average value), 82,3 (maximum)
-Based on the shallow ice approximation is is possible to calculate a surface velocity for the glacier we did our measurements.
+Based on the shallow ice approximation is is possible to calculate a theoretical surface velocity for the glaciers we did our measurements on.
 To make the calculation (see \ref{GPS:eq:sia}) the variables slope angle, ice velocity and ice thickness has to be choosen. 
+The ice density is assumed as 917 kg/m$^3$ and the gravitational acceleration as 9.81  m/s$^2$.
 The values for the ice viscosity are displayed in table \ref{GPS:tab:iceviscosities}.
-It is not possible to determine the ice temperature.
-Because of this calculation at different temperatures were done.
+It is not possible to determine the exact ice temperature.
+Because of this, the calculation is done for viscosities for differnt ice temperatures $T$.
 
 \begin{table}[H]
 \centering
