@@ -80,7 +80,7 @@ v_{year} = \frac{\sqrt{(N_{year, 2018}-N_{year})^2+(E_{year, 2018} - E_{year})^2
 \end{equation}
 
 
-\subsection{Vertical velocity (mass balance)}
+\subsection{Vertical velocity (mass balance)} \label{GPS:subsec:maba}
 
 Besides the horizontal position, the GPS data also contain elevation.
 An analysis of the change of elevation (the vertical velocity) of the stakes over the past years offers the possibility to determine the individual average mass balances.\\
@@ -227,12 +227,27 @@ The small velocity value corresponds with the measured velocities (compare \ref{
 	\label{GPS:tab:theorytable7}
 \end{table}
 
+<<<<<<< c8a0752c910b968300d8271869d230c10e9aac24
 \begin{table}
     \centering
     \footnotesize
 	\begin{tabular}{c|c|c|c|c|c|c}
 Stake & Northing [m] & Easting [m] & Ice Thickness [m] & $u_\circledS^{T=-5}\,[m / \text{yr}]$ & $u_\circledS^{T=-10}$ [$m / \text{yr}$] & Mass balance [$m / \text{yr}$]\\
 \hline
+=======
+The theoetical calculation can be applied on the different stake locations.
+The surface velocity for the ice temperature of -5$^\circ$C and -10$^\circ$C are comparable results to the measurement values (see table \ref{GPS:tab:stakesvelocities}).
+Also the theoretical calculated mass balance confirm with overall negative values that both glaciers are completly in the ablation zone (see subsec. \ref{GPS:subsec:maba}). 
+
+\begin{table}[H]
+    \centering
+    \footnotesize
+    \caption{Theoretical surface velocity at all the stakes. "no data" translates into an absence of data for the Ice Thickness}
+	\begin{tabular}{lcccccc}
+	\toprule
+Stake & Northing [m] & Easting [m] & Ice Thickness [m] & $u_\circledS^{T=-5}\,[m / \text{a}]$ & $u_\circledS^{T=-10}$ [$m / \text{a}$] & Mass balance [$m / \text{a}$]\\
+\midrule
+>>>>>>> update results section
 BL2-2018 & 8686150 & 523051 & 66.48 & 0.40 & 0.12 & -1.1475\\
 BL3-2018 & 8686091 & 523545 & 53.46 & 0.17 & 0.05 & -0.9095\\
 BL4-2018 & 8686099 & 524181 & 34.96 & 0.03 & 0.01 & -0.6885\\
@@ -244,9 +259,17 @@ T4-2018 & 8687138 & 527125 & 47.09 & 0.10 & 0.03 & -0.731\\
 T5-2018 & 8686938 & 526691 & 61.97 & 0.30 & 0.09 & -0.646\\
 T6-2018 & 8686675 & 526247 & 69.80 & 0.48 & 0.15 & -0.323\\
 T7-2017 & 8686579 & 525858 & 55.68 & 0.20 & 0.06 & -0.221\\
+<<<<<<< c8a0752c910b968300d8271869d230c10e9aac24
 T8-2017 & 8686472 & 525524 & 27.28 & 0.01 & 0.00 & -0.5525
 	\end{tabular}
 	\caption{Theoretical surface velocity at all the stakes. "no data" translates into an absence of data for the Ice Thickness}
 	\label{stakesvelocities}
 \end{table}
 
+=======
+T8-2017 & 8686472 & 525524 & 27.28 & 0.01 & 0.00 & -0.5525\\
+\bottomrule
+	\end{tabular}
+	\label{GPS:tab:stakesvelocities}
+\end{table}
+>>>>>>> update results section
