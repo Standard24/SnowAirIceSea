@@ -26,13 +26,13 @@ After the TBC post processing the results from the are stored in a .csv-file.
 The GNSS processing in the TBC use the combination of base station and rover data.
 The goal is to “fix” the number of whole wavelengths between the rover and satellites.
 This process is done in two steps by generating a 'float' solution an and resolve an integer value, the integer ambiguity. 
-If a solution is successfully find it is defined as 'fixed'.
+If a solution is successfully found it is defined as 'fixed'.
 The transition from 'float' to 'fixed' is the initialization period.
-A slower convergence of the solution as normal is possible for longer baselines or when the signal is shield by objects in the surrounding.
+A slower convergence of the solution as normal is possible for longer baselines or when the signal is shielded by objects in the surrounding.
 After some amount of time the float solution can switch instantaneously to a fixed solution.
 There is also a disadvantage of the float and fixed approach for integer ambiguity resolution.
 At some point in time the convergence to fixed solution is hold on and impossible to change.
-By mistake a wrong fixed value can be hold, which can lead to an abnormal high position error due to an incorrect set of integer ambiguities.
+By mistake a wrong fixed value can be held, which can lead to an abnormal high position error due to an incorrect set of integer ambiguities.
 During the processing the TBC use automatically the best way to measure and correct the position data. 
 The change of the method is for example dependent on the length of the baseline.
 Baselines are determined by the distance between rover and base station.
@@ -73,13 +73,12 @@ In the OS post processing different correction methods for the tropospheric and 
 Due to missing informations from TBC the probably best method was chosen with 'broadcast' correction for the ionosphere and the 'saastamoinen' correction for optimize the accuracy due to tropospheric errors. 
 The other settings can be taken from the header information to reproduce the OS post processing. 
 The final output after the post processing is a position file (.pos). 
-The results of the OS post processing are given as a time series of latitude, longitude and elevation. where m. 
+The results of the OS post processing are given as a time series of latitude, longitude and elevation.
 Because the UTM coordinate system is consistently used in our report the horizontal components are transformed to the UTM coordinate system by a python function.
 To get one position, including northing, easting an elevation value in m, the weighted mean of the standard deviation of this time series is calculated over all time steps.
-\medskip
 
 Without the correction of the base station data the values for northing, easting and elevation fluctuate with a high frequency due to a lot of disturbances (compare subsection \ref{GPS:subsec:methods}). 
-Exemplary, this time series is shown in figure \ref{GPS:fig:T1-i_nocorr} for the first measurement of the stake T1-2017.
+Exemplary, this time series is shown in Figure \ref{GPS:fig:T1-i_nocorr} for the first measurement of the stake T1-2017.
 
 \begin{figure}[H]
     \centering
@@ -89,8 +88,8 @@ Exemplary, this time series is shown in figure \ref{GPS:fig:T1-i_nocorr} for the
 \end{figure}
 
 To show the behaviour of the OS processed results it is useful to compare timeseries of the post processed position values for two measurements at the same stake on different days.
-In the first measurement (see figure \ref{GPS:fig:T1-i_timeseries}) the values converge after a few seconds to a fixed solution.
-In the second measurement (see figure \ref{GPS:fig:T1-ii_timeseries}) the values vary during the hole time series without any tendency.
+In the first measurement (see Figure \ref{GPS:fig:T1-i_timeseries}) the values converge after a few seconds to a fixed solution.
+In the second measurement (see Figure \ref{GPS:fig:T1-ii_timeseries}) the values vary during the whole time series without any tendency.
 The properties of the second measurement leads to a bigger difference between the TBC value and the OS value.
 A comparison to the whole time series of the TBC post processing is not possible, because this software do not provide the ability to have alternative outputs.
 
@@ -111,11 +110,11 @@ A comparison to the whole time series of the TBC post processing is not possible
 \subsection{Stake correction}
 The post processed data with the base station data are not the final position data. 
 Finally, the differences due to the measurement setup has to be considered.
-For this a stake correction of every measurement includes the different aspects from our measurement setup (see sec. \ref{GPS:subsec:setup}).
+For this a stake correction of every measurement includes the different aspects from our measurement setup (see Sec. \ref{GPS:subsec:setup}).
 The distance between the rover and the stake has to be subtracted from the northing component.
 Also it was necessary to correct the position on the ice surface with the inclination of the stake. 
 For this, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.
-The measurement data which are relevant for our stake corrections are in the appendix in table \ref{GPS:tab:fb_other_tab}.
+The measurement data which are relevant for our stake corrections are in the appendix in Table \ref{GPS:tab:fb_other_tab}.
 For the better understanding all variables for the stake corrections are shown in the schematic figure \ref{GPS:fig:scheme}.
 The formulas for the stake correction are derived by the geometry of our measurement setup.
 
@@ -131,7 +130,7 @@ First the absolute horizontal difference $\Delta_{\text{abs}}$ depending in the 
 	\Delta_{\text{abs}} = (h_{\text{snow}} + h_{\text{antenna}}) * sin(\alpha)
 \end{equation}
 
-Then the correction is different for the northing and easting. The northing correction is calculated with the cosinus of the direction of the inclination $\phi$. 
+Then the correction is different for the northing and easting. The northing correction is calculated with the cosine of the direction of the inclination $\phi$. 
 The angle of direction is defined in a range from 0$^{\circ}$ to 359$^{\circ}$ with 0$^{\circ}$ for North, 90$^{\circ}$ for East, 180$^{\circ}$ for South and 270$^{\circ}$ for West.
 Due to geometrical reasons the sign has to be negative. 
 Additionally, the the distance between the rover and the stake $d_{\text{rover-stake}}$ has to be subtracted from the original northing.
@@ -190,6 +189,9 @@ Due to this the mean value for the differences is higher than the median (see ta
 
 The calculations for the propagation of uncertainties are done by the common rule.
 The other uncertainties are determined by the quality of our measurements and first part of the processing (see table \ref{GPS:tab:errors}).
+The accuracy of the dGPS is decreasing with a increasing distance to the base station and differs between the horizontal and the vertical component.
+For the Fast Static method the horizontal accuracy is $ \pm $ 3 mm + 0.1 ppm and vertical $ \pm $ 3.5 + 0.4 ppm  \citep{Trquickstart}.
+But this uncertainty is at least one order of magnitude smaller than the other uncertainties and can be neglected. 
 
 \begin{table}[H]
 	\caption{Used uncertainty values for the propagation of uncertainty with the uncertainty of inclination $ \delta_{\alpha} $, direction of the inclination $ \delta_{\phi} $, snow depth $ \delta_{h_{snow}}$, antenna height $ \delta_{h_{antenna}} $, ice surface height difference to the referenced year $ \delta_{dh_{year,2018}}$, distance between rover and stake $ \delta_{d_{rover-stake}} $ as well as the averaged uncertainties of the northing $ \overline{\delta_{\text{N}}} $, easting $ \overline{\delta_{\text{E}}} $ and elevation $ \overline{\delta_{\text{H}}} $ after the open source post processing.}
