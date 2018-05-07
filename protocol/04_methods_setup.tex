@@ -1,16 +1,12 @@
-%---Linda
-
 \subsection{Methods}\label{GPS:subsec:methods}
 
-The aim of this report is to measure the ice velocity of the two glaciers at different points. 
-The points are consistently given by the mass balance stakes as a reference to the last years.
-The velocity will be calculated by the position difference of the stakes as a function of time.
-Regarding to the results of the previous years, it is given that the ice velocity for the glaciers Tellbreen and Blekumbreen is less then one meter.
+The ice velocity will be calculated by the position difference as a function of time on two glaciers at different points.
+The reference points for the position measurements are consistently given by the mass balance stakes as a reference to the last years.
+Regarding to the results of the previous years, it is likely that the ice velocity for the glaciers Tellbreen and Blekumbreen is less then one meter.
 The position measurements during the fieldwork are made with GPS. 
 The general used GPS system has only an accuracy in the order of meters.
 By correcting the measurement data with the data from a base station, it is possible to have a more accurate positioning to the order of millimeters \citep{UGPS}. This method is named dGPS.
 \medskip
-
 % GPS theory:
 The GPS signal is broadcast with two certain frequencies L1 and L2 which belongs two different services.
 The transmission signals with L1 and L2 are the carrier component, which is one component of the Global Navigation Satellite System (GNSS) structure the GPS receivers are using.
@@ -26,54 +22,50 @@ The position of the satellite is broadcast as a ephemerides, which is a specific
 The errors from the GPS measurements that are corrected by the dGPS method are correlated in time and space.
 So the identified errors can be assumed to be the same at the receiver as at the base station.
 The disturbances can be distinguished, because the position of the base station is very well known.
-The realisation of the GPS error correlation between two receivers with a specific distance can be defined as a baseline.
+The realization of the GPS error correlation between two receivers with a specific distance can be defined as a baseline.
 Also a time correlation is meaningful, because there is always a time delay in the data transfer possible.
 Possible disturbances can be caused by satellite clock errors, ephermeris errors, tropospheric errors (variation of the speed of electromagnetic radiation), ionospheric errors (dependent on signal frequency, elevation angle and the total electron content). 
-There are also the receiver noise and multipath as a uncorrelated error source between the two receivers \citep{UGPS}.
+There are also the receiver noise and multi path as a uncorrelated error source between the two receivers \citep{UGPS}.
 For reducing the errors by different sources the receiver need a additional source with precise positions, clock offsets and good correction of atmospheric disturbances. 
 Differential positioning is used to reduce the errors by orbit and atmosphere, which are similar for both receiver as long as the distance in between is not too long \citep{Trprocess}.
 For further information it is to recommend to read in the referenced book of \citep{UGPS}.
 \medskip
-
 % methods and usings in the field
 The GPS measurements have been done with the Trimble differential Global Navigation Satellite System (GNSS). 
 The measured parameters were the northing and easting as well as the elevation. 
 The setting during our measurements included the receiver Trimble R4,
 the controller Trimble TCS2 and a carbon pole to mount the receiver properly.
-During the operation of the measuremts we followed exact the description in section 2 and 3 in \cite{Trquickstart}. 
+During the operation of the measurements we followed exact the description in section 2 and 3 in \cite{Trquickstart}. 
 The recommended Fast Static survey method is used.
 The used coordinate system is the Universal Transversal Mercator (UTM) for the zone 33X with WGS 1984 date \citep{Trquickstart}. 
 \medskip
 
-So the disturbances by the atmosphere during the measuring time can be corrected, while the measured coordinates are compare on every timestep defined by the GPS time.
-The further steps of the post processing is explained in the next section \ref{GPS:sec:Processing}.
+So the disturbances by the atmosphere during the measuring time can be corrected, while the measured coordinates are compare on every time step defined by the GPS time.
 We also did two measurements at the same stake on two different days to see how the results are effected.
 The duration for our measurements with the GPS receiver was at least 15 minutes. 
 We had to made a trade off between the quality of the result and the total number of
 measurements to measure all stakes at least one time. 
 With a longer measurement time the statistical fluctuations are better averaged out.
-\medskip
-
+The further steps of the post processing is explained in the next section \ref{GPS:sec:Processing}.\newline
 The analysis in this report is made with python.
 
 \subsection{Setup} \label{GPS:subsec:setup}
 
-
-The setup for our measurments is specifed by a guideline to insure that the measurements are consistent during the whole fieldwork.
-In the following text the mass balance stake is only named as stake and the pole with the Trimble receiver will be shortend to the name rover.
-The receiver on the carbon pole has to be positioned, in the best scenario, on the top of the mass balance stake.
+The setup for the measurements is specified by a guideline to insure that the measurements are consistent during the whole fieldwork.
+In the following text the mass balance stake is only named as stake and the pole with the Trimble receiver will be shortened to the name rover.
+The rover on the carbon pole has to be positioned, in the best scenario, on the top of the mass balance stake.
 To determine the uncertainty from a tilted stake, it is necessary to measure the inclination of the stake as well as the direction of inclination with the compass.
-The snow depth is measured with the probe which has a centimeter scale on it.
+The snow depth is measured with the probe, which has a centimeter scale on it.
 With snow depth and the antenna height the actual height over the ice surface is known. 
 When the stake is already melted out too high, it is necessary to put the pole with the rover next to the stake. 
 In this case the poles has to be positioned northwards of the stake so that the correction is only in the northing component, which makes the calculation easier. 
 Also the distance from the receiver to stake is measured.
-These two different setups are shown in photographs in the figure \ref{GPS:fig:setup}.
+These two different setups are displayed in Figure \ref{GPS:fig:setup}.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.48\linewidth]{./figs/pictures/GPS_setup.jpg}
 	\includegraphics[width=0.485\linewidth]{./figs/pictures/setup_ontop.JPG}
-	\caption{Setup while the GPS measurement next to the stake (left) and on top of the stake (right).}
+	\caption{Setup of the GPS measurement next to the stake (left) and on top of the stake (right).}
 	\label{GPS:fig:setup}
 \end{figure}
