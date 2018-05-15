@@ -18,7 +18,7 @@ The stakes spread over about 5 kilometers in east-west direction and 1.5 kilomet
 
 Figure~\ref{GPS:fig:T1_2d} shows all available data for one single stake (T1) in a higher resolution.\\
 The measurement of the location of T1-2017 (green) has been performed two times
-(Figs.~\ref{GPS:fig:T1-i_timeseries} and \ref{GPS:fig:T1-ii_timeseries})
+(see Figures~\ref{GPS:fig:T1-i_timeseries} and \ref{GPS:fig:T1-ii_timeseries})
 in order to estimate the uncertainty
 of the position.
 The two positions differ by 19\,cm and match within their uncertainties.
@@ -165,12 +165,12 @@ The linear fits yield the following results for the equilibrium lines (EL) and m
 
 \subsection{Theoretical surface velocity}
 % Different tables for different values of B(T = 0,-5,-10,-15), \alpha = 5,6,7 and H (from the ice-radar scans) = 1 (minimal value — minimum was at 3), 33.4 (average value), 82,3 (maximum)
-Based on the shallow ice approximation is is possible to calculate a theoretical surface velocity for the glaciers we did our measurements on.
-To make the calculation (see \ref{GPS:eq:sia}) the variables slope angle, ice velocity and ice thickness has to be chosen. 
+Based on the shallow ice approximation it is possible to calculate a theoretical surface velocity for the glaciers we did our measurements on.
+To make the calculation (Eq.~\ref{GPS:eq:sia}) the variables slope angle, ice velocity and ice thickness have to be chosen. 
 The ice density is assumed as 917 kg/m$^3$ and the gravitational acceleration as 9.81  m/s$^2$.
-The values for the ice viscosity are displayed in table \ref{GPS:tab:iceviscosities}.
+The values for the ice viscosity are displayed in Table \ref{GPS:tab:iceviscosities}.
 It is not possible to determine the exact ice temperature.
-Because of this, the calculation is done for viscosities for different ice temperatures $T$.
+Because of this, the calculation is done for different viscosities at specific ice temperatures $T$.
 
 \begin{table}[htb]
 \centering
@@ -185,9 +185,9 @@ Ice viscosity $\left[ P / \text{a}^{-3} \right]$ & $5,52 \cdot 10^7$ & $8,63 \cd
 \label{GPS:tab:iceviscosities}
 \end{table}
 
-The theoretical velocity is mainly influenced by the ice thickness (see tables \ref{GPS:tab:theorytable5}, \ref{GPS:tab:theorytable6} and \ref{GPS:tab:theorytable7} ).
+The theoretical velocity is mainly influenced by the ice thickness (see Tables \ref{GPS:tab:theorytable5}, \ref{GPS:tab:theorytable6} and \ref{GPS:tab:theorytable7} ).
 For the mean thickness the theoretical surface velocity of ice has the order of magnitude of centimeters. 
-The small velocity value corresponds with the measured velocities (compare \ref{GPS:tab:vel_tab}). 
+The small velocity values correspond with the measured velocities (see Table~ \ref{GPS:tab:vel_tab}). 
 
 \begin{table}[htb]
     \centering
@@ -233,17 +233,18 @@ The small velocity value corresponds with the measured velocities (compare \ref{
 	\label{GPS:tab:theorytable7}
 \end{table}
 
-The theoetical calculation can be applied on the different stake locations.
-The surface velocity for the ice temperature of -5$^\circ$C and -10$^\circ$C are comparable results to the measurement values (see table \ref{GPS:tab:stakesvelocities}).
-Also the theoretical calculated mass balance confirm with overall negative values that both glaciers are completly in the ablation zone (see subsec. \ref{GPS:subsec:maba}). 
+The theoretical calculation can be applied on the different stake locations.
+The surface velocities for the ice temperatures of -5$^\circ$C and -10$^\circ$C are comparable results to the measurement values (see Table~\ref{GPS:tab:stakesvelocities}).
+Also the calculated mass balances confirm with the negative values of both glaciers which are completely in their ablation zones (see Subsection~\ref{GPS:subsec:maba}). 
 
 \begin{table}[htb]
     \centering
+    
     \footnotesize
-    \caption{Theoretical surface velocity at all the stakes. "no data" translates into an absence of data for the Ice Thickness}
+    \caption{Theoretical surface velocity at all the stakes. "no data" translates into an absence of data for the Ice Thickness (I. T.)}
 	\begin{tabular}{lcccccc}
 	\toprule
-Stake & Northing [m] & Easting [m] & Ice Thickness [m] & $u_\circledS^{T=-5}\,[m / \text{a}]$ & $u_\circledS^{T=-10}$ [$m / \text{a}$] & Mass balance [$m / \text{a}$]\\
+Stake & Northing [m] & Easting [m] & I. T. [m] & $u_\circledS^{T=-5}\,[m / \text{a}]$ & $u_\circledS^{T=-10}$ [$m / \text{a}$] & Mass bal. [$m / \text{a}$]\\
 \midrule
 BL2-2018 & 8686150 & 523051 & 66.48 & 0.40 & 0.12 & -1.1475\\
 BL3-2018 & 8686091 & 523545 & 53.46 & 0.17 & 0.05 & -0.9095\\
@@ -261,3 +262,4 @@ T8-2017 & 8686472 & 525524 & 27.28 & 0.01 & 0.00 & -0.5525\\
 	\end{tabular}
 	\label{GPS:tab:stakesvelocities}
 \end{table}
+\FloatBarrier
