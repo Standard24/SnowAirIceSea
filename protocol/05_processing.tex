@@ -66,7 +66,7 @@ The .n18 format from the base station is a navigation file.
 To execute RTKPOST it is required to adjust the appropriate settings.
 For all stakes the settings in the post processing were the same.
 The settings are displayed in the header of the output file.
-The header with the settings for the OS post processing is available in the appendix \ref{studentxx:appendix}.
+The header with the settings for the OS post processing is available in the Appendix \ref{studentxx:appendix}.
 The settings are as similar as possible to the TBC settings.
 But due to the automatic adjustment to the best correction in the TBC it is difficult to find the same set of settings.
 In the OS post processing different correction methods for the tropospheric and ionospheric correction are available to choose. 
@@ -77,7 +77,7 @@ The results of the OS post processing are given as a time series of latitude, lo
 Because the UTM coordinate system is consistently used in this report the horizontal components are transformed to the UTM coordinate system by a python function.
 To get one position information for each stake, including northing, easting an elevation value in m, the weighted mean of the standard deviation of this time series is calculated over all time steps.
 
-Without the correction of the base station data the values for northing, easting and elevation fluctuate with a high frequency due to a lot of disturbances (see Subsec. \ref{GPS:subsec:methods}). 
+Without the correction of the base station data the values for northing, easting and elevation fluctuate with a high frequency due to a lot of disturbances (see Subsection \ref{GPS:subsec:methods}). 
 Exemplary, this time series for the first measurement of the stake T1-2017 is shown in Figure \ref{GPS:fig:T1-i_nocorr}.
 
 \begin{figure}[h]
@@ -109,7 +109,7 @@ A comparison to the complete time series of the TBC post processing is not possi
 
 \subsection{Stake correction}
 To get the final position data, the uncertainties due to the measurement setup has to be considered.
-For this a stake correction of every measurement includes the different aspects from our measurement setup (see Subsec. \ref{GPS:subsec:setup}).
+For this a stake correction of every measurement includes the different aspects from our measurement setup (see Subsection \ref{GPS:subsec:setup}).
 The distance between the rover and the stake has to be subtracted from the northing component.
 Additionally, it was necessary to correct the position on the ice surface with the inclination of the stake. 
 For this, we consider the inclination of the stake and calculate the error dependent on the height of the stake and the direction of the inclination.
@@ -221,7 +221,7 @@ The uncertainty of the absolute horizontal difference $\delta_{\Delta_{\text{abs
 	\delta_{\Delta_{\text{abs}}} = \sqrt{(h_{\text{snow}} + h_{\text{antenna}})^2 * \delta_{\alpha}^2 * cos^2(\alpha) + (\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2) * \sin^2(\alpha)}
 \end{equation}
 
-This uncertainty goes into the calculation of the uncertainties of the northing correction $\delta_{\Delta_{\text{north}}}$, easting correction $\delta_{\Delta_{\text{east}}}$ and elevation correction $\delta_{\Delta_{\text{elev}}}$ (eq. \ref{GPS:eq:un_nc} - \ref{GPS:eq:un_uc}). 
+This uncertainty goes into the calculation of the uncertainties of the northing correction $\delta_{\Delta_{\text{north}}}$, easting correction $\delta_{\Delta_{\text{east}}}$ and elevation correction $\delta_{\Delta_{\text{elev}}}$ (Eq.~\ref{GPS:eq:un_nc} - \ref{GPS:eq:un_uc}). 
 \begin{equation} \label{GPS:eq:un_nc}
 	\delta_{\Delta_{\text{north}}} = \sqrt{\delta_{\Delta_{\text{abs}}}^2 * cos^2(\phi) + \Delta_{\text{abs}}^2 * \delta_{\phi}^2 * sin^2(\phi) + \delta_{d_{\text{rover-stake}}}^2}
 \end{equation}
@@ -232,7 +232,7 @@ This uncertainty goes into the calculation of the uncertainties of the northing 
 \delta_{\Delta_{\text{elev}}} = \sqrt{\delta_{h_{\text{snow}}}^2 + \delta_{h_{\text{antenna}}}^2}
 \end{equation}
 	
-The total uncertainty for northing $\delta_{\Delta_{\text{total,north}}}$, easting $\delta_{\Delta_{\text{total,east}}}$ and elevation $\delta_{\Delta_{\text{total,elev}}}$ (eq. \ref{GPS:eq:errnorth} - \ref{GPS:eq:errnelev}) incorporate the mentioned uncertainties $\delta_{\Delta_{\text{north}}}$, $\delta_{\Delta_{\text{east}}}$ and $\delta_{\Delta_{\text{elev}}}$ in addition to the uncertainties of the time series of the OS post processed GPS time series $\delta_{\Delta_{\text{ts,north}}}$ for northing, $\delta_{\Delta_{\text{ts,east}}}$ for easting and $\delta_{\Delta_{\text{ts,elev}}}$ for the elevation.
+The total uncertainty for northing $\delta_{\Delta_{\text{total,north}}}$, easting $\delta_{\Delta_{\text{total,east}}}$ and elevation $\delta_{\Delta_{\text{total,elev}}}$ (Eq.~\ref{GPS:eq:errnorth} - \ref{GPS:eq:errnelev}) incorporate the mentioned uncertainties $\delta_{\Delta_{\text{north}}}$, $\delta_{\Delta_{\text{east}}}$ and $\delta_{\Delta_{\text{elev}}}$ in addition to the uncertainties of the time series of the OS post processed GPS time series $\delta_{\Delta_{\text{ts,north}}}$ for northing, $\delta_{\Delta_{\text{ts,east}}}$ for easting and $\delta_{\Delta_{\text{ts,elev}}}$ for the elevation.
 \begin{equation}
 	\delta_{\Delta_{\text{total,north}}} = \sqrt{\delta_{\Delta_{\text{ts,north}}}^2 + \delta_{\Delta_{\text{north}}}^2}
 	\label{GPS:eq:errnorth}
@@ -268,7 +268,7 @@ The uncertainty for the elevation correction $\delta_{\Delta_{year, \text{elev}}
 
 The final positions are based on the OS post processing and stake correction.
 This position values describe the position at the elevation of the ice surface. 
-The corresponding uncertainties for each value are determined by the calculation of uncertainties (eq. \ref{GPS:eq:errnorth} - \ref{GPS:eq:errnelev}). 
+The corresponding uncertainties for each value are determined by the calculation of uncertainties (Eq.~\ref{GPS:eq:errnorth} - \ref{GPS:eq:errnelev}). 
 The position values and uncertainties in Table \ref{GPS:tab:os_tab} are used in the next section to determine the velocities at the different stake locations. 
 
 \begin{table}[H]
