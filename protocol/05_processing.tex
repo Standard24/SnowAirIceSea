@@ -80,9 +80,9 @@ To get one position information for each stake, including northing, easting an e
 Without the correction of the base station data the values for northing, easting and elevation fluctuate with a high frequency due to a lot of disturbances (see Subsec. \ref{GPS:subsec:methods}). 
 Exemplary, this time series for the first measurement of the stake T1-2017 is shown in Figure \ref{GPS:fig:T1-i_nocorr}.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{./figs/timeseries/46250700_org-T1-i-2017_Timeseries-east-north-elev.pdf}
+    \includegraphics[width=.9\textwidth]{./figs/timeseries/46250700_org-T1-i-2017_Timeseries-east-north-elev.pdf}
     \caption{First of two measurements of position of stake T1-2017 without the correction by the base station data. The blue points are the open source values of Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line connect the data points. The gray shadowed range shows the uncertainty area.}
     \label{GPS:fig:T1-i_nocorr}
 \end{figure}
@@ -93,16 +93,16 @@ In the second measurement (see Figure \ref{GPS:fig:T1-ii_timeseries}) the values
 The properties of the second measurement leads to a bigger difference between the TBC value and the OS value.
 A comparison to the complete time series of the TBC post processing is not possible, because this software does not provide the ability to have a time series output.
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
+    \includegraphics[width=.9\textwidth]{./figs/timeseries/46250700_corr-T1-i-2017_Timeseries-east-north-elev.pdf}
     \caption{First of two measurements of position of stake T1-2017 after the open source processing. The blue points are the open source values of Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line is the weighted mean of the open source values. The dashed line is the Trimble Business Center value for the same measurement. The gray shadowed range shows the uncertainty area.}
     \label{GPS:fig:T1-i_timeseries}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
+    \includegraphics[width=.9\textwidth]{./figs/timeseries/46250723_corr-T1-ii-2017_Timeseries-east-north-elev.pdf}
     \caption{Second of two measurements of position of stake T1-2017  after the open source processing. The blue points are the open source values of Northing, Easting and Elevation in m in respect to the measurement time in s. The solid black line is the weighted mean of the open source values. The dashed line is the Trimble Business Center value for the same measurement. The gray shadowed range shows the uncertainty area.}
     \label{GPS:fig:T1-ii_timeseries}
 \end{figure}
@@ -117,9 +117,9 @@ The measurement data which are relevant for our stake corrections are in the app
 For the better understanding all variables for the stake corrections are shown in the schematic Figure \ref{GPS:fig:scheme}.
 The formulas for the stake correction are derived by the geometry of our measurement setup.
 
-\begin{figure}[H]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=0.9\linewidth]{./figs/pictures/schematic_setup.pdf}
+	\includegraphics[width=0.7\linewidth]{./figs/pictures/schematic_setup.pdf}
 	\caption{Schematic figure with the setup and the relevant parameter for the stake correction and velocity calculation. The thick tilted line is the mass balance stake and the oval object is the rover. The dashed line shows the ice surface for the referenced year. The dotted line shows the snow surface and the solid line the ice surface of this year. The colored distances are the snow height $h_{\text{snow}}$ (blue), antenna height $h_{\text{antenna}}$ (green) and the ice surface height difference to the referenced year (red). Also the distance between rover and stake $dh_{year,2018}$ and the calculated absolute horizontal difference $\Delta_{\text{abs}}$ as well as the absolute horizontal absolute difference to the referenced year $\Delta_{year,2018}$ are displayed in the scheme.}
 	\label{GPS:fig:scheme}
 \end{figure}
@@ -172,7 +172,7 @@ The direction of the difference is randomly for every stake in all three parts o
 The differences are mainly caused by a few big discrepancies (see Table \ref{GPS:tab:diff_tab}).
 Due to this the mean value for the differences is higher than the median (see Table \ref{GPS:tab:diff}) 
 
-\begin{table}[H]
+\begin{table}[h]
 	\caption{Mean and median for the difference of northing, easting and elevation between the open source and Trimble Business Center values.}
 	\centering
 	\begin{tabular}{lccc}
@@ -195,7 +195,7 @@ For the Fast Static method the horizontal accuracy is $ \pm $ 3 mm + 0.1 ppm and
 But this uncertainty is at least one order of magnitude smaller than the other uncertainties and can be neglected. 
 The averaged uncertainties of the northing $ \overline{\delta_{\text{N}}} $, easting $ \overline{\delta_{\text{E}}} $ and elevation $ \overline{\delta_{\text{H}}} $ (see Table \ref{GPS:tab:errors}) are calculated from the total uncertainties.
 
-\begin{table}[H]
+\begin{table}[h]
 	\caption{Used uncertainty values for the propagation of uncertainty with the uncertainty of inclination $ \delta_{\alpha} $, direction of the inclination $ \delta_{\phi} $, snow depth $ \delta_{h_{snow}}$, antenna height $ \delta_{h_{antenna}} $, ice surface height difference to the referenced year $ \delta_{dh_{year,2018}}$, distance between rover and stake $ \delta_{d_{rover-stake}} $ as well as the averaged uncertainties of the northing $ \overline{\delta_{\text{N}}} $, easting $ \overline{\delta_{\text{E}}} $ and elevation $ \overline{\delta_{\text{H}}} $ after the open source post processing.}
 	\centering
 	\begin{tabular}{lc}
